@@ -5,11 +5,12 @@
 
 # ./project-compare.sh | sort
 
-for dir in ../reactpy*
+# for dir in ../reactpy*
+for dir in  `ls .. | grep 'reactpy'`
 do
-    if [ -d "$dir" ]; then
-        if [ -d "$dir/utils" ]; then
-            ls -tl  ${dir}/utils/*.py | head -n1
+    if [ -d "../$dir" ]; then
+        if [ -d "../$dir/utils" ]; then
+            ls -tl  ../${dir}/utils/*.py | head -n1
         fi
 
     fi
