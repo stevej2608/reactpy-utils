@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "reactpy-utils"
+version = "0.0.2"
+description = ""
+authors = ["Steve Jones <jonesst2608@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/stevej2608/reactpy_tailwind/blob/master/README.md"
+repository = "https://github.com/stevej2608/reactpy_tailwind"
+packages = [{include = "reactpy_utils", from="src"}]
+
+
+[tool.poetry.dependencies]
+python = ">=3.11.4,<4.0.0"
+reactpy = "^1.0.2"
+pydantic = "^2.7.3"
+
+[tool.poetry.group.dev.dependencies]
+colorlover = "^0.3.0"
+fastapi = "^0.109.0"
+playwright = "1.41.1"
+plotly = "^5.19.0"
+pydantic = "^2.5.3"
+pytest = "^7.4.4"
+pytest-asyncio = "^0.23.3"
+reactpy-router = "^0.1.1"
+starlette = ">=0.13.6"
+trio = "^0.24.0"
+twine = "^4.0.2"
+uvicorn = {extras = ["standard"], version = ">=0.19.0"}
+
+
+[[tool.poetry.source]]
+name = "pypicloud"
+url = "http://debian-server:6543/simple/"
+priority = "supplemental"
+
+[tool.ruff]
+# https://docs.astral.sh/ruff/configuration/
+# https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
+
+line-length = 120
+
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md#sample-pyprojecttoml-file
+typeCheckingMode = "standard"
+pythonVersion = "3.12"
+reportMissingTypeStubs = false
+source = ['src']
+ignore = ["tmp", ".venv"]
+
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = "tests"
+
+log_cli_level = "INFO"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::trio.TrioDeprecationWarning"
+]
+addopts = "-rsxX -vv"
+# asyncio_mode = "auto"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
