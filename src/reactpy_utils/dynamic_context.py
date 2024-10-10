@@ -1,6 +1,8 @@
-from typing import cast, Callable, TypeVar, Type
+from __future__ import annotations
+from typing import TypeVar, cast, Callable, Type
 from pydantic import BaseModel
 from reactpy import create_context as reactpy_create_context
+
 
 DataModel = TypeVar('DataModel', bound='DynamicContextModel')
 
@@ -27,12 +29,12 @@ def create_dynamic_context(model: Type[DataModel]):
 
     @component
     def ThemeButton(theme_color: ButtonColor):
-        theme, set_theme = use_context(AppContext)
+        context, set_context = use_context(AppContext)
 
         def on_click(event: EventArgs):
-            set_theme(theme.update(theme=theme_color.value))
+            set_context(lambda ctx: ctx.update(theme=theme_color))
 
-        return Button(f"Set {theme_color.value} theme", on_click=on_click, color=theme_color)
+        return Button(f"Set {theme_color} theme", on_click=on_click, color=theme_color)
 
     @component
     def Layout():
@@ -44,8 +46,9 @@ def create_dynamic_context(model: Type[DataModel]):
                 value=(state, set_state)
             )
 
-
-
     ```
     """
-    return reactpy_create_context(cast(tuple[DataModel, Callable[[DataModel], None]], None))
+
+    context = reactpy_create_context(cast(tuple[DataModel, Callable[[DataModel | Callable[[DataModel], DataModel]], None]                ], None))
+
+    return context
