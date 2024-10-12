@@ -1,7 +1,7 @@
 # pyright: reportUnusedImport=false
 # ruff: noqa: F401
 
-__version__ = "0.0.7"
+__version__ = "0.0.8"
 
 from .child_list import ChildList
 from .when import When
