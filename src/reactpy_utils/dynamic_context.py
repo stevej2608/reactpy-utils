@@ -9,8 +9,11 @@ class DynamicContextModel(BaseModel):
     """Base component for dynamic context models"""
 
     def update(self: DataModel , **kwargs) -> DataModel:
-        model = self.model_copy(update=kwargs)
+        """Return a new model instance based on the current model with the field changes defined in **kwargs"""
+        values = {**self.model_dump(), **kwargs}
+        model = type(self)(**values)
         return model
+
 
 def create_dynamic_context(model: Type[DataModel]):
     """Create a context that is settable from child components
