@@ -1,18 +1,36 @@
 from __future__ import annotations
+import json
 from typing import TypeVar, cast, Callable, Type
 from pydantic import BaseModel
 from reactpy import create_context as reactpy_create_context
 
 DataModel = TypeVar('DataModel', bound='DynamicContextModel')
 
+DataModelSetter = Callable[[DataModel | Callable[[DataModel], DataModel]], None]
+
+IDataModel = tuple[DataModel, DataModelSetter]
+
 class DynamicContextModel(BaseModel):
     """Base component for dynamic context models"""
+
+    _update_count: int = 0
+
+    @property
+    def is_valid(self):
+        """Return True if the context values have been updated. A False value indicates that the 
+        values are the default values"""
+
+        return self._update_count > 0
 
     def update(self: DataModel , **kwargs) -> DataModel:
         """Return a new model instance based on the current model with the field changes defined in **kwargs"""
         values = {**self.model_dump(), **kwargs}
         model = type(self)(**values)
+        model._update_count = self._update_count + 1
         return model
+    
+    def dumps(self, sort_keys=True):
+        return json.dumps(self.model_dump(), sort_keys=sort_keys)
 
 
 def create_dynamic_context(model: Type[DataModel]):
@@ -51,6 +69,5 @@ def create_dynamic_context(model: Type[DataModel]):
     ```
     """
 
-    context = reactpy_create_context(cast(tuple[DataModel, Callable[[DataModel | Callable[[DataModel], DataModel]], None]                ], None))
-
+    context = reactpy_create_context(cast(IDataModel, None))
     return context
