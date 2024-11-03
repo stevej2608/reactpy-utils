@@ -31,6 +31,21 @@ class DynamicContextModel(BaseModel):
     
     def dumps(self, sort_keys=True):
         return json.dumps(self.model_dump(), sort_keys=sort_keys)
+    
+
+    def template_replace(self, template: str, fix_bools=True) -> str:
+        """Replace all instances of {key} in tmplate with value"""
+
+        for k,v in self.model_dump().items():
+
+            if isinstance(v, bool) and fix_bools:
+                v = str(v).lower()
+
+            template = template.replace(f"{{{k}}}", str(v))
+
+        return template
+
+
 
 
 def create_dynamic_context(model: Type[DataModel]):
