@@ -1,3 +1,4 @@
+from typing import cast
 import json
 from reactpy import component, event, html, use_context
 
@@ -11,29 +12,16 @@ from .dynamic_context import DynamicContextModel
 LOCAL_STORAGE_READ_JS = """
     (function() {
 
-        const storage = document.querySelector('#local-storage-reader');
+        const storage = document.querySelector('#{local_storage_id}');
         
         if (!storage) {
             console.error('Local storage reader element not found');
             return;
         }
 
-        const values = Object.create(null);
-
-        // Iterate through localStorage keys
-
-        for (let i = 0; i < localStorage.length; i++) {
-            const storageKey = localStorage.key(i);
-            
-            // Only add if key exists
-            if (storageKey) {
-                values[storageKey] = localStorage.getItem(storageKey);
-            }
-        }
-
         // Set the value of the storage element
 
-        storage.value = JSON.stringify(values);
+        storage.value = localStorage.getItem('{local_storage_id}') || "{}";
         
         console.log('Storage read:', storage.value);
         
@@ -45,32 +33,27 @@ LOCAL_STORAGE_READ_JS = """
 
 LOCAL_STORAGE_WRITE_JS = """
     (function() {
-        // Initial values object
-        const values = {values}
 
-        // Log the initial values
-
-        console.log('Storage write:', JSON.stringify(values));
 
         // Write values to localStorage
 
         try {
-            // Use Object.entries to iterate through key-value pairs
-            for (const [key, value] of Object.entries(values)) {
-                localStorage.setItem(key, value);
-            }
+            localStorage.setItem('{local_storage_id}', '{values}');
+
         } catch (error) {
             // Handle potential localStorage errors (e.g., storage quota exceeded, private browsing)
-            console.error('Error writing to localStorage:', error);
+            console.error('Error writing to localStorage({local_storage_id}):', error);
         }
     })();
 """
 
 @component
-def LocalStorgeReader(ctx):
+def LocalStorgeReader(ctx, id:str):
     """Read the browsers local storage and update LocalStorageContext"""
 
     storage, set_storage = use_context(ctx)
+
+    storage = cast(DynamicContextModel, storage)
 
     # log.info('LSReader storage=[%s]', storage)
 
@@ -80,18 +63,20 @@ def LocalStorgeReader(ctx):
         # log.info('on_click data=[%s]', data)
 
         data = json.dumps(json.loads(data))
-        if data != storage.dumps() or storage.update_count == 0:
+        if data != storage.dumps() or not storage.is_valid:
             # log.info('update storage')
             values = json.loads(data)
             set_storage(storage.update(**values))
 
+    script = LOCAL_STORAGE_READ_JS.replace('{local_storage_id}', id)
+
     return html._(
-        html.textarea({"class_name": "hidden", "id": "local-storage-reader", "value": storage.dumps(),"on_click": on_click}),
-        html.script(LOCAL_STORAGE_READ_JS)
+        html.textarea({"class_name": "hidden", "id": id, "value": storage.dumps(),"on_click": on_click}),
+        html.script(script)
     )
 
 @component
-def LocalStorgeWriter(ctx):
+def LocalStorgeWriter(ctx, id:str):
     storage, _ = use_context(ctx)
 
     # log.info('LSWriter storage=[%s]', storage)
@@ -101,7 +86,7 @@ def LocalStorgeWriter(ctx):
 
         if state.is_valid:
             # log.info('LSWriter update storage=[%s]', state.dumps())
-            script = LOCAL_STORAGE_WRITE_JS
+            script = LOCAL_STORAGE_WRITE_JS.replace(f'{{local_storage_id}}', id)
             script = script.replace("{values}", state.dumps())
             return html.script(script)
 
@@ -111,8 +96,18 @@ def LocalStorgeWriter(ctx):
 
 
 @component
-def LocalStorageAgent(ctx):
+def LocalStorageAgent(ctx: DynamicContextModel, storage_key:str):
+    """Browser local storage agent. Syncronises the given modle 
+    with the browser local storage
+
+    Args:
+        ctx (DynamicContextModel): The values to be stored
+        storage_key (str): local storage key
+
+    Returns:
+        _type_: _description_
+    """
     return html._(
-        LocalStorgeReader(ctx),
-        LocalStorgeWriter(ctx),
+        LocalStorgeReader(ctx, storage_key),
+        LocalStorgeWriter(ctx, storage_key),
     )
