@@ -4,47 +4,41 @@ from reactpy import component, event, html, use_context
 
 from .types import EventArgs
 from .dynamic_context import DynamicContextModel
+from .iffy_script import IffyScript
 
 
 # https://stackoverflow.com/questions/24278469/click-a-button-programmatically-js
 # https://stackoverflow.com/questions/47240315/how-to-update-input-from-a-programmatically-set-textarea
 
 LOCAL_STORAGE_READ_JS = """
-    (function() {
+    const storage = document.querySelector('#{local_storage_id}');
+    
+    if (!storage) {
+        console.error('Local storage reader element not found');
+        return;
+    }
 
-        const storage = document.querySelector('#{local_storage_id}');
-        
-        if (!storage) {
-            console.error('Local storage reader element not found');
-            return;
-        }
+    // Set the value of the storage element
 
-        // Set the value of the storage element
+    storage.value = localStorage.getItem('{local_storage_id}') || "{}";
+    
+    console.log('Storage read:', storage.value);
+    
+    // Trigger click event
 
-        storage.value = localStorage.getItem('{local_storage_id}') || "{}";
-        
-        console.log('Storage read:', storage.value);
-        
-        // Trigger click event
-
-        storage.click();
-    })();
+    storage.click();
 """
 
 LOCAL_STORAGE_WRITE_JS = """
-    (function() {
+    // Write values to localStorage
 
+    try {
+        localStorage.setItem('{local_storage_id}', '{values}');
 
-        // Write values to localStorage
-
-        try {
-            localStorage.setItem('{local_storage_id}', '{values}');
-
-        } catch (error) {
-            // Handle potential localStorage errors (e.g., storage quota exceeded, private browsing)
-            console.error('Error writing to localStorage({local_storage_id}):', error);
-        }
-    })();
+    } catch (error) {
+        // Handle potential localStorage errors (e.g., storage quota exceeded, private browsing)
+        console.error('Error writing to localStorage({local_storage_id}):', error);
+    }
 """
 
 @component
@@ -68,11 +62,9 @@ def LocalStorgeReader(ctx, id:str):
             values = json.loads(data)
             set_storage(storage.update(**values))
 
-    script = LOCAL_STORAGE_READ_JS.replace('{local_storage_id}', id)
-
     return html._(
         html.textarea({"class_name": "hidden", "id": id, "value": storage.dumps(),"on_click": on_click}),
-        html.script(script)
+        IffyScript(LOCAL_STORAGE_READ_JS, {'{local_storage_id}', id})
     )
 
 @component
@@ -83,12 +75,8 @@ def LocalStorgeWriter(ctx, id:str):
 
     @component
     def write_script(state: DynamicContextModel):
-
         if state.is_valid:
-            # log.info('LSWriter update storage=[%s]', state.dumps())
-            script = LOCAL_STORAGE_WRITE_JS.replace(f'{{local_storage_id}}', id)
-            script = script.replace("{values}", state.dumps())
-            return html.script(script)
+            return IffyScript(LOCAL_STORAGE_WRITE_JS, {'{local_storage_id}' :id,'{values}' : state.dumps()})
 
     return html._(
         write_script(storage)
