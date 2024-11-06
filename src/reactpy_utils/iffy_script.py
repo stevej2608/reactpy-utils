@@ -7,7 +7,7 @@ __SCRIPT__
 """
 
 @component
-def IffyScript(script:str, ctx: dict):
+def IffyScript(script:str, ctx: dict, fix_bools=True):
     """Minimal template engine that replaces values in given script template, wrapping the 
     script in an iffy. The script is returned as a html.script() element
     
@@ -32,6 +32,10 @@ def IffyScript(script:str, ctx: dict):
         ctx = ctx.model_dump() # type: ignore
 
     for k,v in ctx.items():
+
+        if isinstance(v, bool) and fix_bools:
+            v = str(v).lower()
+
         script = script.replace(f"{{{k}}}", str(v))
 
     script = IFFY_WRAPPER_JS.replace('__SCRIPT__', "\n    ".join(script.split('\n')))
