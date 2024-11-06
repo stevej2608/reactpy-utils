@@ -62,7 +62,7 @@ def LocalStorgeReader(ctx, id:str):
 
     return html._(
         html.textarea({"class_name": "hidden", "id": id, "values": storage.dumps(),"on_click": on_click}),
-        IffyScript(LOCAL_STORAGE_READ_JS, {'local_storage_id': id})
+        IffyScript(LOCAL_STORAGE_READ_JS, {'local_storage_id': id}, minify=False)
     )
 
 @component
@@ -74,7 +74,8 @@ def LocalStorgeWriter(ctx, id:str):
     @component
     def write_script(state: DynamicContextModel):
         if state.is_valid:
-            return IffyScript(LOCAL_STORAGE_WRITE_JS, {'local_storage_id' :id,'values' : state.dumps()})
+            ctx = {'local_storage_id' :id,'values' : state.dumps()}
+            return IffyScript(LOCAL_STORAGE_WRITE_JS,ctx,minify=False)
 
     return html._(
         write_script(storage)
