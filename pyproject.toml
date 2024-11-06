@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reactpy-utils"
-version = "0.0.15"
+version = "0.0.16"
 description = ""
 authors = ["Steve Jones <jonesst2608@gmail.com>"]
 readme = "README.md"

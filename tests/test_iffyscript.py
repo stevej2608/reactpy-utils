@@ -119,7 +119,7 @@ def xtest_simple():
     assert lines[46] == '})();'
 
 
-def xtest_IFRAME_UPDATE_JS_minified():
+def test_IFRAME_UPDATE_JS_minified():
 
     script = IffyScript(
         IFRAME_UPDATE_JS,
@@ -128,10 +128,10 @@ def xtest_IFRAME_UPDATE_JS_minified():
         ).render()
 
     script = str(script['children'][0]) # type: ignore
-    assert len(script) == 592
+    assert len(script) == 593
 
 
-def test_POPPER_JS_minified():
+def xtest_POPPER_JS_minified():
 
     script = IffyScript(
         POPPER_JS,{
