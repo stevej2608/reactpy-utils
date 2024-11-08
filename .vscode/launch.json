@@ -6,7 +6,7 @@
     "configurations": [
 
       {
-        "name": "2a. PyTest (test_dropdown.py)",
+        "name": "2a. PyTest (ALL)",
         "type": "debugpy",
         "request": "launch",
         "stopOnEntry": false,
@@ -18,6 +18,22 @@
         "internalConsoleOptions": "openOnSessionStart",
         "justMyCode": false
       },
-  
+
+      {
+        "name": "2b. PyTest (tests/test_script.py)",
+        "type": "debugpy",
+        "request": "launch",
+        "stopOnEntry": false,
+        "module": "pytest",
+        "cwd": "${workspaceRoot}",
+        "env": {},
+        "args": ["tests/test_script.py"],
+        "envFile": "${workspaceRoot}/.env",
+        "console": "internalConsole",
+        "internalConsoleOptions": "openOnSessionStart",
+        "justMyCode": false
+      },
+
+        
     ]
   }
