@@ -1,14 +1,6 @@
 import re
 from reactpy import html, component
 
-
-IFFY_WRAPPER_JS = """
-(function() {
-__SCRIPT__
-})();
-"""
-
-
 def minify_javascript(source_code):
     """
     Minifies JavaScript source code by removing unnecessary whitespace, comments, and newlines.
@@ -47,36 +39,9 @@ def minify_javascript(source_code):
     return source_code
 
 
-
 @component
-def IffyScript(script:str, ctx: dict, fix_bools=True, minify=False):
-    """Minimal template engine that replaces values in given script template, wrapping the 
-    script in an iffy. The script is returned as a html.script() element
-    
-    Example:
-    ```
-    localStorage.setItem('{local_storage_id}', '{value}');
-    ```
-
-    Is converted to
-
-    ```
-    (function() {
-
-        localStorage.setItem('theme', 'dark');
-
-    })();
-    ```
-    
-    """
-
-    def indent(text:str):
-        lines = []
-        for line in text.split('\n'):
-            line = line if line == "" else "    " + line
-            lines.append(line.rstrip())
-        return '\n'.join(lines)
-
+def Script(script:str, ctx: dict, fix_bools=True, minify=False):
+    """Minimal script wrapper with template engine that replaces values in given script template"""
 
     if hasattr(ctx, 'model_dump'):
         ctx = ctx.model_dump() # type: ignore
@@ -88,11 +53,7 @@ def IffyScript(script:str, ctx: dict, fix_bools=True, minify=False):
 
         script = script.replace(f"{{{k}}}", str(v))
 
-    if not minify:
-        script = indent(script)
-        script = IFFY_WRAPPER_JS.replace('__SCRIPT__', script)
-    else:
-        script = IFFY_WRAPPER_JS.replace('__SCRIPT__', script)
+    if minify:
         script = minify_javascript(script)
-        print(f"\n\n\n{script}")
+
     return html.script(script)
