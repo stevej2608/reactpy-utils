@@ -1,5 +1,8 @@
 import re
+import logging
 from reactpy import html, component
+
+log = logging.getLogger(__name__)
 
 def minify_javascript(source_code):
     """
@@ -52,6 +55,28 @@ def Script(script:str, ctx: dict, fix_bools=True, minify=False):
             v = str(v).lower()
 
         script = script.replace(f"{{{k}}}", str(v))
+
+    if minify:
+        script = minify_javascript(script)
+
+    return html.script(script)
+
+
+@component
+def TestScript(script:str, ctx: dict, fix_bools=True, minify=False):
+    """Minimal script wrapper with template engine that replaces values in given script template"""
+
+    if hasattr(ctx, 'model_dump'):
+        ctx = ctx.model_dump() # type: ignore
+
+    for k,v in ctx.items():
+
+        if isinstance(v, bool) and fix_bools:
+            v = str(v).lower()
+
+        script = script.replace(f"{{{k}}}", str(v))
+
+    log.info("Script Update")
 
     if minify:
         script = minify_javascript(script)

@@ -1,4 +1,4 @@
-from reactpy_utils.iffy_script import IffyScript
+from reactpy_utils import Script
 
 IFRAME_UPDATE_JS = """
     var iFrame = document.getElementsByClassName('{iframe_code}')[0];
@@ -111,7 +111,7 @@ hideEvents.forEach((event) => {
 
 def xtest_simple():
 
-    script = IffyScript(IFRAME_UPDATE_JS, {"dark_mode":True,"iframe_code":"iframe-code-100","tw_class":"dark"}).render()
+    script = Script(IFRAME_UPDATE_JS, {"dark_mode":True,"iframe_code":"iframe-code-100","tw_class":"dark"}).render()
 
     lines = script['children'][0].split('\n') # type: ignore
 
@@ -121,19 +121,19 @@ def xtest_simple():
 
 def test_IFRAME_UPDATE_JS_minified():
 
-    script = IffyScript(
+    script = Script(
         IFRAME_UPDATE_JS,
         {"dark_mode":True,"iframe_code":"iframe-code-100","tw_class":"dark"},
         minify=True
         ).render()
 
     script = str(script['children'][0]) # type: ignore
-    assert len(script) == 593
+    assert len(script) == 576
 
 
 def xtest_POPPER_JS_minified():
 
-    script = IffyScript(
+    script = Script(
         POPPER_JS,{
             "tid":"tooltip-aba8f7f7",
             "placement":"top",

@@ -34,6 +34,21 @@
         "justMyCode": false
       },
 
+      {
+        "name": "2c. PyTest (tests/test_local_storage.py)",
+        "type": "debugpy",
+        "request": "launch",
+        "stopOnEntry": false,
+        "module": "pytest",
+        "cwd": "${workspaceRoot}",
+        "env": {},
+        "args": ["--headed", "tests/test_local_storage.py"],
+        "envFile": "${workspaceRoot}/.env",
+        "console": "internalConsole",
+        "internalConsoleOptions": "openOnSessionStart",
+        "justMyCode": false
+      },
+
         
     ]
   }

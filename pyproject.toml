@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reactpy-utils"
-version = "0.0.16"
+version = "0.0.18"
 description = ""
 authors = ["Steve Jones <jonesst2608@gmail.com>"]
 readme = "README.md"
@@ -53,14 +53,11 @@ ignore = ["tmp", ".venv"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = "tests"
-
+log_cli = true
 log_cli_level = "INFO"
-filterwarnings = [
-    "ignore::DeprecationWarning",
-    "ignore::trio.TrioDeprecationWarning"
-]
+filterwarnings = "ignore::DeprecationWarning"
 addopts = "-rsxX -vv"
-# asyncio_mode = "auto"
+
 
 [build-system]
 requires = ["poetry-core"]
