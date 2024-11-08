@@ -1,14 +1,11 @@
 from __future__ import annotations
 import json
-from typing import TypeVar, cast, Callable, Type
+from typing import TypeVar, cast, Callable, Type, Tuple
 from pydantic import BaseModel
 from reactpy import create_context as reactpy_create_context
+from reactpy.types import Context
 
 DataModel = TypeVar('DataModel', bound='DynamicContextModel')
-
-DataModelSetter = Callable[[DataModel | Callable[[DataModel], DataModel]], None]
-
-IDataModel = tuple[DataModel, DataModelSetter]
 
 class DynamicContextModel(BaseModel):
     """Base component for dynamic context models"""
@@ -26,17 +23,21 @@ class DynamicContextModel(BaseModel):
         """Return a new model instance based on the current model with the field changes defined in **kwargs"""
         values = {**self.model_dump(), **kwargs}
         model = type(self)(**values)
-        model._update_count = self._update_count + 1
+        model._update_count = self._update_count + 1 # pylint: disable=protected-access
         return model
-    
+
     def dumps(self, sort_keys=True):
         return json.dumps(self.model_dump(), sort_keys=sort_keys)
-    
+
     def __str__(self):
         return self.dumps()
 
+_Type = TypeVar("_Type", bound=DynamicContextModel)
 
-def create_dynamic_context(model: Type[DataModel]):
+_ReturnType = Tuple[_Type, Callable[[_Type | Callable[[_Type], _Type]], None]]
+
+
+def create_dynamic_context(model: Type[_Type]) ->  Context[_ReturnType[_Type]]:
     """Create a context that is settable from child components
 
     Usage:
@@ -72,5 +73,5 @@ def create_dynamic_context(model: Type[DataModel]):
     ```
     """
 
-    context = reactpy_create_context(cast(IDataModel, None))
+    context = reactpy_create_context(cast(_ReturnType[_Type], None))
     return context

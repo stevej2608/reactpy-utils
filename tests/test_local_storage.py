@@ -13,9 +13,6 @@ class AppState(DynamicContextModel):
 
 AppContext = create_dynamic_context(AppState)
 
-
-
-
 @pytest.mark.anyio
 async def test_local_storage(display: DisplayFixture):
 
