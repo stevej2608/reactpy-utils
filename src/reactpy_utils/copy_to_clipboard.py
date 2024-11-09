@@ -14,7 +14,7 @@ COPY_TO_CLIPBOARD_JS = """
 
             if (element) {
 
-                console.log('click: btn-{button_id}, copy to clipboard #{text_id}');
+                // console.log('click: btn-{button_id}, copy to clipboard #{text_id}');
 
                 // Select the text field
 
@@ -25,7 +25,7 @@ COPY_TO_CLIPBOARD_JS = """
                 navigator.clipboard.writeText(value);
             }
             else {
-                console.log('click: btn-{button_id}, error  #{text_id} missing');
+                console.error('click: btn-{button_id}, error  #{text_id} missing');
             }
         } 
 
@@ -41,7 +41,7 @@ COPY_TO_CLIPBOARD_JS = """
 
 @component
 def CopyToClipboard(button_id: str, text:str):
-    """Attach copy-t-clipboard' action to button of given 'button_id' that, when clicked, will copy the given text to the clipboard.
+    """Attach copy-to-clipboard' action to button of given 'button_id' that, when clicked, will copy the given text to the clipboard.
 
     Args:
         button_id (str): The button to be listened to

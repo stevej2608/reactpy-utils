@@ -9,8 +9,6 @@ from reactpy_utils import CopyToClipboard
 
 log = logging.getLogger(__name__)
 
-
-
 @pytest.mark.anyio
 async def test_copy_to_clipboard(display: DisplayFixture):
 
@@ -30,5 +28,4 @@ async def test_copy_to_clipboard(display: DisplayFixture):
     await btn.click()
 
     text = await display.page.evaluate("() => navigator.clipboard.readText()")
-
     assert text == TEXT

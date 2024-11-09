@@ -33,8 +33,6 @@ async def server():
 async def page(browser: Browser):
     context = await browser.new_context( permissions=['clipboard-read', 'clipboard-write'])
     pg = await context.new_page()
-
-    #  pg = await browser.new_page()
     pg.set_default_timeout(REACTPY_TESTING_DEFAULT_TIMEOUT.current * 1000)
     try:
         yield pg

@@ -24,16 +24,16 @@ LOCAL_STORAGE_READ_JS = """
 
         const value = localStorage.getItem('{local_storage_id}') || "undefined";
 
-        console.log('{local_storage_id} localStorage.value: %s', value);
-        console.log('{local_storage_id} storage.value:      %s', storage.value);
+        // console.log('{local_storage_id} localStorage.value: %s', value);
+        // console.log('{local_storage_id} storage.value:      %s', storage.value);
 
         if (value == "undefined") {
-            console.log('{local_storage_id} initialise {local_storage_id}');
+            // console.log('{local_storage_id} initialise {local_storage_id}');
             localStorage.setItem('{local_storage_id}', storage.value);
         }
         else if (value != storage.value) {
             storage.value = value;
-            console.log('{local_storage_id} storage.click()');
+            // console.log('{local_storage_id} storage.click()');
             storage.click();
         }
     }
@@ -44,7 +44,7 @@ LOCAL_STORAGE_WRITE_JS = """
         // Write values to localStorage
 
         try {
-            console.log('write {local_storage_id} values: {values}');
+            // console.log('write {local_storage_id} values: {values}');
             localStorage.setItem('{local_storage_id}', '{values}');
 
         } catch (error) {
