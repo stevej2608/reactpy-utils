@@ -96,7 +96,7 @@ def LocalStorgeReader(ctx, id:str):
 
     return html._(
         html.textarea({"hidden": True, "id": id, "value": storage.dumps(),"on_click": on_click}),
-        Script(LOCAL_STORAGE_READ_JS, {'local_storage_id': id}, minify=False)
+        Script(LOCAL_STORAGE_READ_JS, {'local_storage_id': id}, minify=True)
     )
 
 @component
@@ -109,7 +109,7 @@ def LocalStorgeWriter(ctx, id:str):
         if state.is_valid:
             # log.info('Write id=%s, ctx=%s', id, state.dumps())
             ctx = {'local_storage_id' :id,'values' : state.dumps()}
-            return Script(LOCAL_STORAGE_WRITE_JS,ctx,minify=False)
+            return Script(LOCAL_STORAGE_WRITE_JS,ctx,minify=True)
 
     return html._(
         write_script(storage)

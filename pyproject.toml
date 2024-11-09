@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reactpy-utils"
-version = "0.0.18"
+version = "0.0.19"
 description = ""
 authors = ["Steve Jones <jonesst2608@gmail.com>"]
 readme = "README.md"
@@ -28,6 +28,7 @@ starlette = ">=0.13.6"
 trio = "^0.24.0"
 twine = "^4.0.2"
 uvicorn = {extras = ["standard"], version = ">=0.19.0"}
+lorem = "^0.1.1"
 
 
 [[tool.poetry.source]]

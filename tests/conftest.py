@@ -31,7 +31,10 @@ async def server():
 
 @pytest.fixture(scope="session")
 async def page(browser: Browser):
-    pg = await browser.new_page()
+    context = await browser.new_context( permissions=['clipboard-read', 'clipboard-write'])
+    pg = await context.new_page()
+
+    #  pg = await browser.new_page()
     pg.set_default_timeout(REACTPY_TESTING_DEFAULT_TIMEOUT.current * 1000)
     try:
         yield pg
@@ -41,4 +44,6 @@ async def page(browser: Browser):
 @pytest.fixture(scope="session")
 async def browser(pytestconfig: pytest.Config):
     async with async_playwright() as pw:
-        yield await pw.chromium.launch(headless=not bool(pytestconfig.option.headed))
+        yield await pw.chromium.launch(
+            headless=not bool(pytestconfig.option.headed)
+            )

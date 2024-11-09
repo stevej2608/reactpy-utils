@@ -1,7 +1,7 @@
 # pyright: reportUnusedImport=false
 # ruff: noqa: F401
 
-__version__ = "0.0.18"
+__version__ = "0.0.19"
 
 from .child_list import ChildList
 from .when import When
@@ -13,3 +13,4 @@ from .document_title import DocumentTitle
 from .script import Script
 from .dynamic_context import DynamicContextModel, create_dynamic_context
 from .local_storage import LocalStorageAgent
+from .copy_to_clipboard import CopyToClipboard

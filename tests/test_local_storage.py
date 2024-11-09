@@ -1,12 +1,13 @@
 
+import logging
 import pytest
 from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
 from reactpy_utils import EventArgs, DynamicContextModel, create_dynamic_context, LocalStorageAgent
-
-from utils.logger import log
 from .tooling import wait_page_stable, read_local_storage
+
+log = logging.getLogger(__name__)
 
 class AppState(DynamicContextModel):
     dark_mode: bool = True
@@ -15,9 +16,11 @@ AppContext = create_dynamic_context(AppState)
 
 @pytest.mark.anyio
 async def test_local_storage(display: DisplayFixture):
+    render_count = 0
 
     @component
     def TestApp():
+        nonlocal render_count
         app_state, set_app_state = use_state(AppState())
 
         # log.info('********** TestApp app_state=%s ****************', app_state)
@@ -25,6 +28,8 @@ async def test_local_storage(display: DisplayFixture):
         @event
         def on_click(event:EventArgs):
             set_app_state(app_state.update(dark_mode = not app_state.dark_mode))
+
+        render_count += 1
 
         return AppContext(
             html._(
@@ -59,6 +64,8 @@ async def test_local_storage(display: DisplayFixture):
     local_storage = await read_local_storage(display.page, "local-storage-test")
     assert local_storage == '{"dark_mode": false}'
 
+    assert render_count == 2
+
     # log.info('********** PAGE REALOD ****************')
 
     await display.page.reload()
@@ -69,3 +76,5 @@ async def test_local_storage(display: DisplayFixture):
 
     text = await display.page.locator('id=h2').all_inner_texts()
     assert text == ['dark_mode=False']
+
+    assert render_count == 4

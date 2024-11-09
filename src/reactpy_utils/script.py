@@ -59,6 +59,9 @@ def Script(script:str, ctx: dict, fix_bools=True, minify=False):
     if minify:
         script = minify_javascript(script)
 
+
+    print(script)
+
     return html.script(script)
 
 
