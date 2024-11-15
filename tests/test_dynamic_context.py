@@ -18,7 +18,6 @@ async def test_dynamic_context(display: DisplayFixture):
     test_app_render_count = 0
     child_render_count = 0
 
-
     @component
     def Child():
         nonlocal child_render_count
@@ -46,8 +45,10 @@ async def test_dynamic_context(display: DisplayFixture):
 
     await display.show(TestApp)
 
-    btn = display.page.locator('id=toggle_btn')
+    assert test_app_render_count == 1
+    assert child_render_count == 1
 
+    btn = display.page.locator('id=toggle_btn')
     text = await btn.all_inner_texts()
     assert text == ['dark_mode=True']
 
