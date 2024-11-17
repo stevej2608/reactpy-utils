@@ -79,6 +79,22 @@
         "justMyCode": false
       },
 
+      {
+        "name": "2f. PyTest (tests/test_document_title.py)",
+        "type": "debugpy",
+        "request": "launch",
+        "stopOnEntry": false,
+        "module": "pytest",
+        "cwd": "${workspaceRoot}",
+        "env": {},
+        "args": ["--headed", "tests/test_document_title.py"],
+        "envFile": "${workspaceRoot}/.env",
+        "console": "internalConsole",
+        "internalConsoleOptions": "openOnSessionStart",
+        "justMyCode": false
+      },
+
+
         
     ]
   }

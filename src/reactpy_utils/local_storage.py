@@ -1,12 +1,13 @@
 from typing import cast
 import logging
 import json
+from pkginfo import Wheel
 from reactpy import component, event, html, use_context
 
 from .types import EventArgs
 from .dynamic_context import DynamicContextModel
 from .script import Script
-
+from .when import When
 
 log = logging.getLogger(__name__)
 
@@ -24,38 +25,20 @@ LOCAL_STORAGE_READ_JS = """
 
         const value = localStorage.getItem('{local_storage_id}') || "undefined";
 
-        // console.log('{local_storage_id} localStorage.value: %s', value);
-        // console.log('{local_storage_id} storage.value:      %s', storage.value);
-
         if (value == "undefined") {
-            // console.log('{local_storage_id} initialise {local_storage_id}');
             localStorage.setItem('{local_storage_id}', storage.value);
         }
-        else if (value != storage.value) {
+        else {
             storage.value = value;
-            // console.log('{local_storage_id} storage.click()');
-            storage.click();
         }
-    }
-"""
 
-LOCAL_STORAGE_WRITE_JS = """
-    () => {
-        // Write values to localStorage
+        storage.click();
 
-        try {
-            // console.log('write {local_storage_id} values: {values}');
-            localStorage.setItem('{local_storage_id}', '{values}');
-
-        } catch (error) {
-            // Handle potential localStorage errors (e.g., storage quota exceeded, private browsing)
-            console.error('Error writing to localStorage({local_storage_id}):', error);
-        }
     }
 """
 
 @component
-def LocalStorgeReader(ctx, id:str):
+def LocalStorageReader(ctx, id:str):
     """Read the browsers local storage and update LocalStorageContext"""
 
     # The value attribute of a hidden <textarea> element is used as a buffer to
@@ -67,40 +50,47 @@ def LocalStorgeReader(ctx, id:str):
     # The localStorage JSON values are available to the reactpy on_click()
     # event handler. These values are used to update the given context.
 
-    # The on_click() update will only occure once during start-up. During
+    # The on_click() update will only occur once during start-up. During
     # normal operation the the browser localStorage is kept in sync by
-    # LocalStorgeWriter(), see below.
+    # LocalStorageWriter(), see below.
 
     storage, set_storage = use_context(ctx)
 
     storage = cast(DynamicContextModel, storage)
 
-    # log.info('LSReader storage=[%s]', storage)
+    # log.info('LSReader storage=[%s]', storage.__repr__())
 
     @event(stop_propagation=True, prevent_default=True)
     def on_click(event:EventArgs):
         data = event["target"]["value"].replace('-', '_')
-
         data = json.dumps(json.loads(data))
+        values = json.loads(data)
+        set_storage(storage.update(**values))
 
-        # log.info('**** LocalStorgeReader.on_click %s ****', id)
-        # log.info('browser=[%s]', data)
-        # log.info('context=[%s]', storage.dumps())
-
-        if data != storage.dumps():
-            # log.info('Read id=%s ctx=[%s]', id, data)
-            values = json.loads(data)
-            set_storage(storage.update(**values))
-
-    # log.info('LocalStorgeReader.render() %s', id)
+    # log.info('LocalStorageReader.render() %s', id)
 
     return html._(
         html.textarea({"hidden": True, "id": id, "value": storage.dumps(),"on_click": on_click}),
-        Script(LOCAL_STORAGE_READ_JS, {'local_storage_id': id}, minify=True)
+        When( not storage.is_valid, Script(LOCAL_STORAGE_READ_JS, {'local_storage_id': id}, minify=True))
     )
 
+LOCAL_STORAGE_WRITE_JS = """
+    () => {
+        // Write values to localStorage
+
+        try {
+            //  console.log('write {local_storage_id} values: {values}');
+            localStorage.setItem('{local_storage_id}', '{values}');
+
+        } catch (error) {
+            // Handle potential localStorage errors (e.g., storage quota exceeded, private browsing)
+            console.error('Error writing to localStorage({local_storage_id}):', error);
+        }
+    }
+"""
+
 @component
-def LocalStorgeWriter(ctx, id:str):
+def LocalStorageWriter(ctx, id:str):
 
     storage, _ = use_context(ctx)
 
@@ -118,7 +108,7 @@ def LocalStorgeWriter(ctx, id:str):
 
 @component
 def LocalStorageAgent(ctx: DynamicContextModel, storage_key:str):
-    """Browser local storage agent. Syncronises the given modle 
+    """Browser local storage agent. Synchronies the given model
     with the browser local storage
 
     Args:
@@ -129,6 +119,6 @@ def LocalStorageAgent(ctx: DynamicContextModel, storage_key:str):
         _type_: _description_
     """
     return html._(
-        LocalStorgeWriter(ctx, storage_key),
-        LocalStorgeReader(ctx, storage_key),
+        LocalStorageWriter(ctx, storage_key),
+        LocalStorageReader(ctx, storage_key),
     )

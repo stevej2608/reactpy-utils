@@ -28,9 +28,13 @@ class DynamicContextModel(BaseModel):
 
     def dumps(self, sort_keys=True):
         return json.dumps(self.model_dump(), sort_keys=sort_keys)
+    
+    def __repr__(self):
+        name = self.__class__.__name__
+        return f"{name}, {self.__str__()}"
 
     def __str__(self):
-        return self.dumps()
+        return json.dumps({"is_valid": self.is_valid, "state": self.model_dump()}, sort_keys=True)
 
 _Type = TypeVar("_Type", bound=DynamicContextModel)
 

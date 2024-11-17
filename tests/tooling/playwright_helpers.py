@@ -18,3 +18,13 @@ async def read_local_storage(page, key:str):
 
     data = json.dumps(json.loads(local_storage_data))
     return data
+
+
+
+async def get_document_title(page):
+
+    title = await page.evaluate("""() => {
+        return document.title;
+    }""")
+
+    return title

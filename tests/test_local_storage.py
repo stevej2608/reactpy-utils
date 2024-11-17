@@ -5,7 +5,7 @@ from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
 from reactpy_utils import EventArgs, DynamicContextModel, create_dynamic_context, LocalStorageAgent
-from .tooling import wait_page_stable, read_local_storage
+from .tooling import page_stable, read_local_storage
 
 log = logging.getLogger(__name__)
 
@@ -16,6 +16,10 @@ AppContext = create_dynamic_context(AppState)
 
 @pytest.mark.anyio
 async def test_local_storage(display: DisplayFixture):
+    """Test the the AppContext is synchronized with the browser local
+    storage and that the context is re-loaded from local storage on a
+    page reload."""
+
     render_count = 0
 
     @component
@@ -42,17 +46,28 @@ async def test_local_storage(display: DisplayFixture):
 
     await display.show(TestApp)
 
-    # Confirm the dark_mode has been rendered by the h2 element
+    # Confirm the dark_mode has been rendered by the h2 element to the default value
 
     text = await display.page.locator('id=h2').all_inner_texts()
     assert text == ['dark_mode=True']
 
-    # Confirm the value is in local storage
+    # Confirm we have the initial render and a second render due to
+    # local storage synchronization of the context
+
+    assert render_count == 2
+
+    # Confirm, via playwright, that the default value is in local storage
 
     local_storage = await read_local_storage(display.page, "local-storage-test")
     assert local_storage == '{"dark_mode": true}'
 
+    # Toggle the dark mode button
+
     await display.page.locator('id=toggle_btn').click()
+
+    # Confirm additional render after button click
+
+    assert render_count == 3
 
     # Confirm dark_mode has been toggled in the h2 element (to False)
 
@@ -64,17 +79,18 @@ async def test_local_storage(display: DisplayFixture):
     local_storage = await read_local_storage(display.page, "local-storage-test")
     assert local_storage == '{"dark_mode": false}'
 
-    assert render_count == 2
-
-    # log.info('********** PAGE REALOD ****************')
+    # Force a page reload
 
     await display.page.reload()
-    await wait_page_stable(display.page)
+    await page_stable(display.page)
 
-    # Confirm the dark_mode has been the h2 element has taken the saved
+    # Confirm the reload has force a re-render and a second render due to
+    # local storage synchronization of the context
+
+    assert render_count == 5
+
+    # Confirm the dark_mode of the h2 element has taken the saved
     # value from localStorage (False)
 
     text = await display.page.locator('id=h2').all_inner_texts()
     assert text == ['dark_mode=False']
-
-    assert render_count == 4

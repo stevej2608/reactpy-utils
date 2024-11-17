@@ -14,7 +14,7 @@ COPY_TO_CLIPBOARD_JS = """
 
             if (element) {
 
-                // console.log('click: btn-{button_id}, copy to clipboard #{text_id}');
+                //  console.log('click: btn-{button_id}, copy to clipboard #{text_id}');
 
                 // Select the text field
 
@@ -27,12 +27,15 @@ COPY_TO_CLIPBOARD_JS = """
             else {
                 console.error('click: btn-{button_id}, error  #{text_id} missing');
             }
-        } 
+        }
+
+        //  console.log("btn-{button_id} add listener");
 
         const button = document.getElementById('{button_id}');
         button.addEventListener('click', copy_to_clipboard);
 
         return () => {
+            //  console.log("btn-{button_id} exit");
             button.removeEventListener('click', copy_to_clipboard);
         }    
 
@@ -63,8 +66,6 @@ def CopyToClipboard(button_id: str, text:str):
         )
 
     ```
-
-
     """
 
     ctx = {
@@ -72,11 +73,8 @@ def CopyToClipboard(button_id: str, text:str):
         'text_id' : f"{button_id}-text"
     }
 
-    @component
-    def CopyScript(ctx: dict):
-        return Script(COPY_TO_CLIPBOARD_JS, ctx, minify=True)
 
     return html._ (
         html.div({'id': ctx['text_id'], 'data-clipboard-content': text, "hidden": True}),
-        CopyScript(ctx)
+        Script(COPY_TO_CLIPBOARD_JS, ctx, minify=False)
     )

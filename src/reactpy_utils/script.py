@@ -59,9 +59,6 @@ def Script(script:str, ctx: dict, fix_bools=True, minify=False):
     if minify:
         script = minify_javascript(script)
 
-
-    print(script)
-
     return html.script(script)
 
 
@@ -79,7 +76,7 @@ def TestScript(script:str, ctx: dict, fix_bools=True, minify=False):
 
         script = script.replace(f"{{{k}}}", str(v))
 
-    log.info("Script Update")
+    log.info("Script Update %s", script)
 
     if minify:
         script = minify_javascript(script)
