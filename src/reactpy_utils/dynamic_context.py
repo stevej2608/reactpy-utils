@@ -28,7 +28,7 @@ class DynamicContextModel(BaseModel):
 
     def dumps(self, sort_keys=True):
         return json.dumps(self.model_dump(), sort_keys=sort_keys)
-    
+
     def __repr__(self):
         name = self.__class__.__name__
         return f"{name}, {self.__str__()}"

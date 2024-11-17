@@ -69,9 +69,8 @@ def MyApp():
         set_app_state(app_state.update(dark_mode = not app_state.dark_mode))
 
     return html.div(
-        html.h2({'id': "h2"}, f"dark_mode={app_state.dark_mode}"),
-        html.button({'id': "toggle_btn", 'on_click': on_click }, "Toggle Dark Mode"),
-
+        html.h2(f"dark_mode={app_state.dark_mode}"),
+        html.button({'on_click': on_click }, "Toggle Dark Mode"),
     )
 
 
