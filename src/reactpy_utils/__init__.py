@@ -12,4 +12,5 @@ from reactpy_utils.props import props
 from reactpy_utils.script import Script, TestScript
 from reactpy_utils.types import Action, EventArgs, EventHandler
 from reactpy_utils.unique_sequence import UID
+from reactpy_utils.use_query import use_params, use_search_params
 from reactpy_utils.when import When

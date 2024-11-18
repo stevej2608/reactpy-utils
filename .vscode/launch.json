@@ -95,6 +95,20 @@
       },
 
 
+      {
+        "name": "2g. PyTest (tests/test_use_query.py)",
+        "type": "debugpy",
+        "request": "launch",
+        "stopOnEntry": false,
+        "module": "pytest",
+        "cwd": "${workspaceRoot}",
+        "env": {},
+        "args": ["--headed", "tests/test_use_query.py"],
+        "envFile": "${workspaceRoot}/.env",
+        "console": "internalConsole",
+        "internalConsoleOptions": "openOnSessionStart",
+        "justMyCode": false
+      },
         
     ]
   }
