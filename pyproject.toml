@@ -1,65 +1,124 @@
-[tool.poetry]
-name = "reactpy-utils"
-version = "0.0.19"
-description = ""
-authors = ["Steve Jones <jonesst2608@gmail.com>"]
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[project]
+name = "reactpy_utils"
+description = "A collection of utilities for ReactPy."
 readme = "README.md"
+keywords = ["React", "ReactJS", "ReactPy", "components"]
 license = "MIT"
-homepage = "https://github.com/stevej2608/reactpy_tailwind/blob/master/README.md"
-repository = "https://github.com/stevej2608/reactpy_tailwind"
+authors = [{ name = "Steve Jones", email = "jonesst2608@gmail.com" }]
+requires-python = ">=3.9"
+classifiers = [
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Topic :: Multimedia :: Graphics",
+  "Topic :: Software Development :: Widget Sets",
+  "Topic :: Software Development :: User Interfaces",
+  "Environment :: Web Environment",
+  "Typing :: Typed",
+]
+dependencies = ["reactpy>=1.0.0", "typing_extensions", "pydantic"]
+dynamic = ["version"]
+urls.Changelog = "https://jonesst2608.github.io/reactpy-utils/latest/about/changelog/"
+urls.Documentation = "https://jonesst2608.github.io/reactpy-utils/latest/"
+urls.Source = "https://github.com/jonesst2608/reactpy-utils"
 packages = [{include = "reactpy_utils", from="src"}]
 
+[tool.hatch.version]
+path = "src/reactpy_utils/__init__.py"
 
-[tool.poetry.dependencies]
-python = ">=3.11.4,<4.0.0"
-reactpy = "^1.0.2"
-pydantic = "^2.7.3"
+[tool.hatch.build.targets.sdist]
+include = ["/src"]
 
-[tool.poetry.group.dev.dependencies]
-colorlover = "^0.3.0"
-fastapi = "^0.109.0"
-playwright = "1.41.1"
-plotly = "^5.19.0"
-pydantic = "^2.5.3"
-pytest = "^7.4.4"
-pytest-asyncio = "^0.23.3"
-reactpy-router = "^0.1.1"
-starlette = ">=0.13.6"
-trio = "^0.24.0"
-twine = "^4.0.2"
-uvicorn = {extras = ["standard"], version = ">=0.19.0"}
-lorem = "^0.1.1"
+[tool.hatch.build.targets.wheel]
 
+[tool.hatch.metadata]
+license-files = { paths = ["LICENSE.md"] }
 
-[[tool.poetry.source]]
-name = "pypicloud"
-url = "http://debian-server:6543/simple/"
-priority = "supplemental"
+[tool.hatch.envs.default]
+installer = "uv"
+
+# >>> Hatch Tests <<<
+
+[tool.hatch.envs.hatch-test]
+extra-dependencies = ["pytest-sugar", "anyio", "reactpy[testing,starlette]", "lorem"]
+randomize = true
+matrix-name-format = "{variable}-{value}"
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.9", "3.10", "3.11", "3.12"]
+
+# >>> Hatch Documentation Scripts <<<
+
+[tool.hatch.envs.docs]
+template = "docs"
+detached = true
+dependencies = [
+  "mkdocs",
+  "mkdocs-git-revision-date-localized-plugin",
+  "mkdocs-material==9.4.0",
+  "mkdocs-include-markdown-plugin",
+  "linkcheckmd",
+  "mkdocs-spellcheck[all]",
+  "mkdocs-git-authors-plugin",
+  "mkdocs-minify-plugin",
+  "mike",
+  "mkdocstrings[python]",
+  "black",
+  "reactpy_utils @ {root:uri}",
+]
+
+[tool.hatch.envs.docs.scripts]
+serve = ["cd docs && mkdocs serve"]
+build = ["cd docs && mkdocs build --strict"]
+linkcheck = [
+  "linkcheckMarkdown docs/ -v -r",
+  "linkcheckMarkdown README.md -v -r",
+  "linkcheckMarkdown CHANGELOG.md -v -r",
+]
+deploy_latest = ["cd docs && mike deploy --push --update-aliases {args} latest"]
+deploy_develop = ["cd docs && mike deploy --push develop"]
+
+# >>> Generic Tools <<<
 
 [tool.ruff]
-# https://docs.astral.sh/ruff/configuration/
-# https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
-
 line-length = 120
-
-[tool.pyright]
-# https://github.com/microsoft/pyright/blob/main/docs/configuration.md#sample-pyprojecttoml-file
-typeCheckingMode = "standard"
-pythonVersion = "3.12"
-reportMissingTypeStubs = false
-source = ['src']
-ignore = ["tmp", ".venv"]
-
+format.preview = true
+lint.extend-ignore = [
+  "ARG001",  # Unused function argument
+  "ARG002",  # Unused method argument
+  "ARG004",  # Unused static method argument
+  "FBT001",  # Boolean-typed positional argument in function definition
+  "FBT002",  # Boolean default positional argument in function definition
+  "PLR2004", # Magic value used in comparison
+  "SIM115",  # Use context handler for opening files
+  "SLF001",  # Private member accessed
+]
+lint.preview = true
+extend-exclude = [".venv/*", ".eggs/*", "build/*"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
-testpaths = "tests"
-log_cli = true
-log_cli_level = "INFO"
+addopts = """\
+    --strict-config
+    --strict-markers
+    """
 filterwarnings = "ignore::DeprecationWarning"
-addopts = "-rsxX -vv"
 
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["src/", "tests/"]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.coverage.paths]
+source = ["src/"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = ["pragma: no cover", "...", "raise NotImplementedError"]
