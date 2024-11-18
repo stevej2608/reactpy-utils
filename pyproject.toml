@@ -114,6 +114,7 @@ init-hook = 'import sys; sys.path.append(".")'
 disable = [
     "C0114", # missing-module-docstring
     "C0103", #invalid-name
+    "C0116", #missing-function-docstring
 ]
 
 [tool.pytest.ini_options]
