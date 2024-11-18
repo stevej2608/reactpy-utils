@@ -93,6 +93,7 @@ line-length = 120
 format.preview = true
 lint.extend-ignore = [
   "A001",    # Variable is shadowing a Python builtin
+  "A002",    # Argument is shadowing a Python builtin
   "ARG001",  # Unused function argument
   "ARG002",  # Unused method argument
   "ARG004",  # Unused static method argument
@@ -116,6 +117,7 @@ disable = [
     "C0103", # invalid-name
     "C0115", # missing-class-docstring
     "C0116", # missing-function-docstring
+    "W0622", # redefined-builtin"
 ]
 
 [tool.pytest.ini_options]

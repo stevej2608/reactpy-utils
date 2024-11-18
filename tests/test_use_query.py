@@ -1,9 +1,9 @@
 from typing import cast
+
 import pytest
 from pydantic import BaseModel
 from reactpy import component, html
 from reactpy.testing import DisplayFixture
-
 from reactpy_router import browser_router, route
 
 from reactpy_utils import use_params, use_search_params
@@ -12,13 +12,12 @@ pytestmark = pytest.mark.anyio
 
 
 async def test_use_params(display: DisplayFixture):
-
     class MyParams(BaseModel):
-        first: int = cast(int,None)
-        second: int = cast(int,None)
-        third: int = cast(int,None)
+        first: int = cast(int, None)
+        second: int = cast(int, None)
+        third: int = cast(int, None)
 
-    expected_params: MyParams = cast(MyParams,None)
+    expected_params: MyParams = cast(MyParams, None)
 
     @component
     def check_params():
@@ -55,10 +54,9 @@ async def test_use_params(display: DisplayFixture):
 
 
 async def test_search_params(display: DisplayFixture):
-
     class MyParams(BaseModel):
-        hello: str = cast(str,None)
-        thing: list[int] = cast(list[int],None)
+        hello: str = cast(str, None)
+        thing: list[int] = cast(list[int], None)
 
     expected_query: MyParams = MyParams()
 
@@ -73,7 +71,6 @@ async def test_search_params(display: DisplayFixture):
 
     await display.show(sample)
 
-    expected_query = MyParams(**{"hello": "world", "thing": [1, 2]})
+    expected_query = MyParams(hello="world", thing=[1, 2])
     await display.goto("?hello=world&thing=1&thing=2")
     await display.page.wait_for_selector("#success")
-
