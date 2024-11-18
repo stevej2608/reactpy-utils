@@ -3,14 +3,14 @@
 
 __version__ = "0.0.19"
 
-from .child_list import ChildList
-from .when import When
-from .props import props
-from .types import EventArgs, EventHandler, Action
-from .unique_sequence import UID
-from .component_class import class_component, ComponentClass
-from .document_title import DocumentTitle
-from .script import Script, TestScript
-from .dynamic_context import DynamicContextModel, create_dynamic_context
-from .local_storage import LocalStorageAgent
-from .copy_to_clipboard import CopyToClipboard
+from reactpy_utils.child_list import ChildList
+from reactpy_utils.component_class import ComponentClass, class_component
+from reactpy_utils.copy_to_clipboard import CopyToClipboard
+from reactpy_utils.document_title import DocumentTitle
+from reactpy_utils.dynamic_context import DynamicContextModel, create_dynamic_context
+from reactpy_utils.local_storage import LocalStorageAgent
+from reactpy_utils.props import props
+from reactpy_utils.script import Script, TestScript
+from reactpy_utils.types import Action, EventArgs, EventHandler
+from reactpy_utils.unique_sequence import UID
+from reactpy_utils.when import When

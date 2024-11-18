@@ -1,0 +1,9 @@
+{
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.typeCheckingMode": "standard",
+    "python.analysis.exclude": [
+        "tmp/**/*.py",
+        ".venv/**/*.py",
+        ".venv/**/*.pyi"
+    ],
+}

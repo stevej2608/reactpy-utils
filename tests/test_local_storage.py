@@ -1,18 +1,22 @@
-
 import logging
+
 import pytest
 from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
-from reactpy_utils import EventArgs, DynamicContextModel, create_dynamic_context, LocalStorageAgent
+from reactpy_utils import DynamicContextModel, EventArgs, LocalStorageAgent, create_dynamic_context
+
 from .tooling import page_stable, read_local_storage
 
 log = logging.getLogger(__name__)
 
+
 class AppState(DynamicContextModel):
     dark_mode: bool = True
 
+
 AppContext = create_dynamic_context(AppState)
+
 
 @pytest.mark.anyio
 async def test_local_storage(display: DisplayFixture):
@@ -30,26 +34,26 @@ async def test_local_storage(display: DisplayFixture):
         # log.info('********** TestApp app_state=%s ****************', app_state)
 
         @event
-        def on_click(event:EventArgs):
-            set_app_state(app_state.update(dark_mode = not app_state.dark_mode))
+        def on_click(event: EventArgs):
+            set_app_state(app_state.update(dark_mode=not app_state.dark_mode))
 
         render_count += 1
 
         return AppContext(
             html._(
-                html.h2({'id': "h2"}, f"dark_mode={app_state.dark_mode}"),
-                html.button({'id': "toggle_btn", 'on_click': on_click }, "Toggle Dark Mode"),
+                html.h2({"id": "h2"}, f"dark_mode={app_state.dark_mode}"),
+                html.button({"id": "toggle_btn", "on_click": on_click}, "Toggle Dark Mode"),
                 LocalStorageAgent(ctx=AppContext, storage_key="local-storage-test"),
             ),
-            value = (app_state, set_app_state)
+            value=(app_state, set_app_state),
         )
 
     await display.show(TestApp)
 
     # Confirm the dark_mode has been rendered by the h2 element to the default value
 
-    text = await display.page.locator('id=h2').all_inner_texts()
-    assert text == ['dark_mode=True']
+    text = await display.page.locator("id=h2").all_inner_texts()
+    assert text == ["dark_mode=True"]
 
     # Confirm we have the initial render and a second render due to
     # local storage synchronization of the context
@@ -63,7 +67,8 @@ async def test_local_storage(display: DisplayFixture):
 
     # Toggle the dark mode button
 
-    await display.page.locator('id=toggle_btn').click()
+    await display.page.locator("id=toggle_btn").click()
+    await page_stable(display.page)
 
     # Confirm additional render after button click
 
@@ -71,8 +76,8 @@ async def test_local_storage(display: DisplayFixture):
 
     # Confirm dark_mode has been toggled in the h2 element (to False)
 
-    text = await display.page.locator('id=h2').all_inner_texts()
-    assert text == ['dark_mode=False']
+    text = await display.page.locator("id=h2").all_inner_texts()
+    assert text == ["dark_mode=False"]
 
     # Confirm dark_mode in local storage has been toggled (to False)
 
@@ -92,5 +97,5 @@ async def test_local_storage(display: DisplayFixture):
     # Confirm the dark_mode of the h2 element has taken the saved
     # value from localStorage (False)
 
-    text = await display.page.locator('id=h2').all_inner_texts()
-    assert text == ['dark_mode=False']
+    text = await display.page.locator("id=h2").all_inner_texts()
+    assert text == ["dark_mode=False"]

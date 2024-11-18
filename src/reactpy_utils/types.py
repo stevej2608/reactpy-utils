@@ -1,14 +1,16 @@
-from typing import Dict, Any, Callable
+from typing import Any, Callable
 
-EventArgs = Dict[str, Any]
+EventArgs = dict[str, Any]
 
-EventHandler  = Callable[[EventArgs], None]
+EventHandler = Callable[[EventArgs], None]
 
 Action = Callable[..., None]
 
-Props = Dict[str, Any]
+Props = dict[str, Any]
 
-def NO_PROPS() -> Dict[str, Any]:
+
+def NO_PROPS() -> dict[str, Any]:
     return {}
 
-PropsFunc = Callable[...,Dict[str, Any]]
+
+PropsFunc = Callable[..., dict[str, Any]]

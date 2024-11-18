@@ -1,13 +1,13 @@
-from typing import cast
-import logging
 import json
-from pkginfo import Wheel
+import logging
+from typing import cast
+
 from reactpy import component, event, html, use_context
 
-from .types import EventArgs
-from .dynamic_context import DynamicContextModel
-from .script import Script
-from .when import When
+from reactpy_utils.dynamic_context import DynamicContextModel
+from reactpy_utils.script import Script
+from reactpy_utils.types import EventArgs
+from reactpy_utils.when import When
 
 log = logging.getLogger(__name__)
 
@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 LOCAL_STORAGE_READ_JS = """
     () => {
         const storage = document.querySelector('#{local_storage_id}');
-        
+
         if (!storage) {
             console.error('Local storage reader element not found');
             return;
@@ -37,8 +37,9 @@ LOCAL_STORAGE_READ_JS = """
     }
 """
 
+
 @component
-def LocalStorageReader(ctx, id:str):
+def _LocalStorageReader(ctx, storage_id: str):
     """Read the browsers local storage and update LocalStorageContext"""
 
     # The value attribute of a hidden <textarea> element is used as a buffer to
@@ -61,8 +62,8 @@ def LocalStorageReader(ctx, id:str):
     # log.info('LSReader storage=[%s]', storage.__repr__())
 
     @event(stop_propagation=True, prevent_default=True)
-    def on_click(event:EventArgs):
-        data = event["target"]["value"].replace('-', '_')
+    def on_click(event: EventArgs):
+        data = event["target"]["value"].replace("-", "_")
         data = json.dumps(json.loads(data))
         values = json.loads(data)
         set_storage(storage.update(**values))
@@ -70,9 +71,10 @@ def LocalStorageReader(ctx, id:str):
     # log.info('LocalStorageReader.render() %s', id)
 
     return html._(
-        html.textarea({"hidden": True, "id": id, "value": storage.dumps(),"on_click": on_click}),
-        When( not storage.is_valid, Script(LOCAL_STORAGE_READ_JS, {'local_storage_id': id}, minify=True))
+        html.textarea({"hidden": True, "id": storage_id, "value": storage.dumps(), "on_click": on_click}),
+        When(not storage.is_valid, Script(LOCAL_STORAGE_READ_JS, {"local_storage_id": storage_id}, minify=True)),
     )
+
 
 LOCAL_STORAGE_WRITE_JS = """
     () => {
@@ -89,25 +91,24 @@ LOCAL_STORAGE_WRITE_JS = """
     }
 """
 
-@component
-def LocalStorageWriter(ctx, id:str):
 
+@component
+def _LocalStorageWriter(ctx, storage_id: str):
     storage, _ = use_context(ctx)
 
     @component
     def write_script(state: DynamicContextModel):
         if state.is_valid:
             # log.info('Write id=%s, ctx=%s', id, state.dumps())
-            ctx = {'local_storage_id' :id,'values' : state.dumps()}
-            return Script(LOCAL_STORAGE_WRITE_JS,ctx,minify=True)
+            ctx = {"local_storage_id": storage_id, "values": state.dumps()}
+            return Script(LOCAL_STORAGE_WRITE_JS, ctx, minify=True)
+        return None
 
-    return html._(
-        write_script(storage)
-    )
+    return html._(write_script(storage))
 
 
 @component
-def LocalStorageAgent(ctx: DynamicContextModel, storage_key:str):
+def LocalStorageAgent(ctx: DynamicContextModel, storage_key: str):
     """Browser local storage agent. Synchronies the given model
     with the browser local storage
 
@@ -119,6 +120,6 @@ def LocalStorageAgent(ctx: DynamicContextModel, storage_key:str):
         _type_: _description_
     """
     return html._(
-        LocalStorageWriter(ctx, storage_key),
-        LocalStorageReader(ctx, storage_key),
+        _LocalStorageWriter(ctx, storage_key),
+        _LocalStorageReader(ctx, storage_key),
     )

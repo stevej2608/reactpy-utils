@@ -1,28 +1,25 @@
-
 import pytest
 from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
-from reactpy_utils import EventArgs, DocumentTitle
+from reactpy_utils import DocumentTitle, EventArgs
+
 from .tooling import get_document_title, page_stable
 
 
 @pytest.mark.anyio
 async def test_document_title(display: DisplayFixture):
-
-
     @component
     def TestApp():
         title, set_title = use_state("Hello Earth")
 
         @event
-        def on_click(event:EventArgs):
+        def on_click(event: EventArgs):
             t = "Hello Earth" if title != "Hello Earth" else "Hello Mars"
             set_title(t)
 
         return html._(
-            DocumentTitle(title),
-            html.button({'id': "toggle_btn", 'on_click': on_click }, "Toggle Document Title")
+            DocumentTitle(title), html.button({"id": "toggle_btn", "on_click": on_click}, "Toggle Document Title")
         )
 
     await display.show(TestApp)
@@ -35,7 +32,7 @@ async def test_document_title(display: DisplayFixture):
 
     # Toggle the title
 
-    await display.page.locator('id=toggle_btn').click()
+    await display.page.locator("id=toggle_btn").click()
     await page_stable(display.page)
 
     # Confirm the new title

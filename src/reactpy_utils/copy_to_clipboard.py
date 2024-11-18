@@ -1,7 +1,6 @@
-from reactpy import html, component
+from reactpy import component, html
 
-from reactpy_utils import Script
-
+from reactpy_utils.script import Script
 
 COPY_TO_CLIPBOARD_JS = """
     () => {
@@ -32,13 +31,14 @@ COPY_TO_CLIPBOARD_JS = """
 
         return () => {
             button.removeEventListener('click', copy_to_clipboard);
-        }    
+        }
 
     }
 """
 
+
 @component
-def CopyToClipboard(button_id: str, text:str):
+def CopyToClipboard(button_id: str, text: str):
     """Attach copy-to-clipboard' action to button of given 'button_id' that, when clicked, will copy the given text to the clipboard.
 
     Args:
@@ -53,23 +53,19 @@ def CopyToClipboard(button_id: str, text:str):
     BUTTON_ID = "copy-btn"
     TEXT = lorem.paragraph()
 
+
     @component
     def App():
         return html._(
-            html.button({'id': BUTTON_ID}, "Copy to Clipboard"),
-            CopyToClipboard(button_id=BUTTON_ID, text=TEXT)
+            html.button({"id": BUTTON_ID}, "Copy to Clipboard"),
+            CopyToClipboard(button_id=BUTTON_ID, text=TEXT),
         )
-
     ```
     """
 
-    ctx = {
-        'button_id' : f"{button_id}",
-        'text_id' : f"{button_id}-text"
-    }
+    ctx = {"button_id": f"{button_id}", "text_id": f"{button_id}-text"}
 
-
-    return html._ (
-        html.div({'id': ctx['text_id'], 'data-clipboard-content': text, "hidden": True}),
-        Script(COPY_TO_CLIPBOARD_JS, ctx, minify=True)
+    return html._(
+        html.div({"id": ctx["text_id"], "data-clipboard-content": text, "hidden": True}),
+        Script(COPY_TO_CLIPBOARD_JS, ctx, minify=True),
     )

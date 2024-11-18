@@ -24,7 +24,7 @@ classifiers = [
   "Environment :: Web Environment",
   "Typing :: Typed",
 ]
-dependencies = ["reactpy>=1.0.0", "typing_extensions", "pydantic"]
+dependencies = ["reactpy>=1.0.0", "reactpy_router>=1.0.2", "typing_extensions", "pydantic"]
 dynamic = ["version"]
 urls.Changelog = "https://jonesst2608.github.io/reactpy-utils/latest/about/changelog/"
 urls.Documentation = "https://jonesst2608.github.io/reactpy-utils/latest/"
@@ -48,7 +48,7 @@ installer = "uv"
 # >>> Hatch Tests <<<
 
 [tool.hatch.envs.hatch-test]
-extra-dependencies = ["pytest-sugar", "anyio", "reactpy[testing,starlette]", "lorem"]
+extra-dependencies = ["pytest-sugar", "pytest-cov", "anyio", "reactpy[testing,starlette]", "lorem"]
 randomize = true
 matrix-name-format = "{variable}-{value}"
 
@@ -92,17 +92,29 @@ deploy_develop = ["cd docs && mike deploy --push develop"]
 line-length = 120
 format.preview = true
 lint.extend-ignore = [
+  "A001",    # Variable is shadowing a Python builtin
   "ARG001",  # Unused function argument
   "ARG002",  # Unused method argument
   "ARG004",  # Unused static method argument
   "FBT001",  # Boolean-typed positional argument in function definition
   "FBT002",  # Boolean default positional argument in function definition
+  "FURB116", # Replace `hex` call with f-string
+  "N802",    # Function name should be lowercase
+  "N806",    # Variable  in function should be lowercase
   "PLR2004", # Magic value used in comparison
   "SIM115",  # Use context handler for opening files
   "SLF001",  # Private member accessed
+  "PLW2901", # for loop variableoverwritten by assignment target
 ]
 lint.preview = true
 extend-exclude = [".venv/*", ".eggs/*", "build/*"]
+
+[tool.pylint.master]
+init-hook = 'import sys; sys.path.append(".")'
+disable = [
+    "C0114", # missing-module-docstring
+    "C0103", #invalid-name
+]
 
 [tool.pytest.ini_options]
 addopts = """\

@@ -1,8 +1,8 @@
 import pytest
-from playwright.async_api import Browser
-from playwright.async_api import async_playwright, Page
-from reactpy.testing import DisplayFixture, BackendFixture
+from playwright.async_api import Browser, Page, async_playwright
 from reactpy.config import REACTPY_TESTING_DEFAULT_TIMEOUT
+from reactpy.testing import BackendFixture, DisplayFixture
+
 
 @pytest.fixture(scope="session")
 def anyio_backend():
@@ -29,9 +29,10 @@ async def server():
     async with BackendFixture() as server:
         yield server
 
+
 @pytest.fixture(scope="session")
 async def page(browser: Browser):
-    context = await browser.new_context( permissions=['clipboard-read', 'clipboard-write'])
+    context = await browser.new_context(permissions=["clipboard-read", "clipboard-write"])
     pg = await context.new_page()
     pg.set_default_timeout(REACTPY_TESTING_DEFAULT_TIMEOUT.current * 1000)
     try:
@@ -39,9 +40,8 @@ async def page(browser: Browser):
     finally:
         await pg.close()
 
+
 @pytest.fixture(scope="session")
 async def browser(pytestconfig: pytest.Config):
     async with async_playwright() as pw:
-        yield await pw.chromium.launch(
-            headless=not bool(pytestconfig.option.headed)
-            )
+        yield await pw.chromium.launch(headless=not bool(pytestconfig.option.headed))

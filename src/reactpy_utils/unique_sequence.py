@@ -2,6 +2,7 @@ import random
 
 # https://stackoverflow.com/a/1210632/489239
 
+
 def unique_id():
     seed = random.getrandbits(32)
     while True:
@@ -11,6 +12,7 @@ def unique_id():
 
 unique_sequence = unique_id()
 
-def UID(prefix:str=''):
+
+def UID(prefix: str = ""):
     prefix = f"{prefix}-" if prefix else "I"
     return f"{prefix}{hex(next(unique_sequence))[2:]}"

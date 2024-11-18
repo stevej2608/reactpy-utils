@@ -1,24 +1,26 @@
-from reactpy import component, event, html, use_state, use_context, run
+from reactpy import component, event, html, run, use_context, use_state
 
-from reactpy_utils import EventArgs, DynamicContextModel, create_dynamic_context, LocalStorageAgent, When
+from reactpy_utils import DynamicContextModel, EventArgs, LocalStorageAgent, When, create_dynamic_context
+
 
 class AppState(DynamicContextModel):
     dark_mode: bool = True
 
+
 AppContext = create_dynamic_context(AppState)
+
 
 @component
 def MyApp():
     app_state, set_app_state = use_context(AppContext)
 
     @event
-    def on_click(event:EventArgs):
-        set_app_state(app_state.update(dark_mode = not app_state.dark_mode))
+    def on_click(event: EventArgs):
+        set_app_state(app_state.update(dark_mode=not app_state.dark_mode))
 
     return html.div(
-        html.h2({'id': "h2"}, f"dark_mode={app_state.dark_mode}"),
-        html.button({'id': "toggle_btn", 'on_click': on_click }, "Toggle Dark Mode"),
-
+        html.h2({"id": "h2"}, f"dark_mode={app_state.dark_mode}"),
+        html.button({"id": "toggle_btn", "on_click": on_click}, "Toggle Dark Mode"),
     )
 
 
@@ -31,8 +33,9 @@ def AppMain():
             When(app_state.is_valid, MyApp()),
             LocalStorageAgent(ctx=AppContext, storage_key="local-storage-test"),
         ),
-        value = (app_state, set_app_state)
+        value=(app_state, set_app_state),
     )
+
 
 # python -m examples.local_storage_example
 

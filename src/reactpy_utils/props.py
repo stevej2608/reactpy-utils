@@ -1,10 +1,11 @@
-from typing import Dict, Any, Union, cast
-from types import FrameType
+from __future__ import annotations
+
 import inspect
+from types import FrameType
+from typing import Any, cast
 
 
-
-def props(include:str='', exclude:str='') -> Dict[str, Any]:
+def props(include: str = "", exclude: str = "") -> dict[str, Any]:
     """Convert the caller functions arguments into a props dict
 
     Args:
@@ -15,19 +16,21 @@ def props(include:str='', exclude:str='') -> Dict[str, Any]:
         Dict[str, Any]: The props
     """
 
-    frame: Union[FrameType, None] = cast(FrameType, inspect.currentframe()).f_back
-    assert frame
+    frame: FrameType | None = cast(FrameType, inspect.currentframe()).f_back
+
+    if not frame:
+        err = "Unable to resolve calling function"
+        raise TypeError(err)
 
     all_args = frame.f_locals.copy()
-    _props: Dict[str, Any] = {}
 
-    for name, value in all_args.items():
-        if include=='' or name in include and value is not None:
-            _props[name] = value
+    _props: dict[str, Any] = {
+        name: value for name, value in all_args.items() if not include or (name in include and value is not None)
+    }
 
     if exclude:
         for name in list(_props):
-            if name in exclude :
+            if name in exclude:
                 _props.pop(name)
 
     return _props

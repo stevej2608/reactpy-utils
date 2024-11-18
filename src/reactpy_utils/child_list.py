@@ -1,9 +1,9 @@
-from typing import Tuple
 from reactpy import component, html
 from reactpy.core.component import Component
 
+
 @component
-def ChildList(*children: Tuple[Component]):
+def ChildList(*children: tuple[Component]):
     """Assign the child index to the key field
 
     Returns:
@@ -11,7 +11,7 @@ def ChildList(*children: Tuple[Component]):
     """
 
     for index, child in enumerate(children):
-        if not (isinstance(child, dict) or isinstance(child, str)):
-            child.key = index # type: ignore
+        if not isinstance(child, (dict, str)):
+            child.key = index  # type: ignore
 
     return html._(*children)

@@ -1,3 +1,5 @@
+import operator
+
 from reactpy.core.hooks import current_hook, use_state
 
 
@@ -7,7 +9,7 @@ def use_force_render():
 
 def use_toggle(init=False):
     state, set_state = use_state(init)
-    return state, lambda: set_state(lambda old: not old)
+    return state, lambda: set_state(operator.not_)
 
 
 def use_counter(initial_value):

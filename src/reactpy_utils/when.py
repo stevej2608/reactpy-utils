@@ -1,9 +1,9 @@
-from typing import Tuple
 from reactpy import component, html
 from reactpy.core.component import Component
 
+
 @component
-def When(test:bool, *children: Tuple[Component]):
+def When(test: bool, *children: tuple[Component]):
     """Show children when test is true
 
     Returns:
@@ -12,5 +12,4 @@ def When(test:bool, *children: Tuple[Component]):
 
     if test:
         return html._(*children)
-    else:
-        return None
+    return None

@@ -1,4 +1,4 @@
-from reactpy import html, component
+from reactpy import component, html
 
 
 @component

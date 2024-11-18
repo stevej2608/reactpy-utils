@@ -1,4 +1,4 @@
-from typing import Callable, Any, TypeVar
+from typing import Any, Callable, TypeVar
 
 # pylint: disable=E1101
 
@@ -16,5 +16,5 @@ def static_vars(**kwargs: Any) -> Callable[[T], T]:
 
 @static_vars(counter=0)
 def id() -> int:
-    id.counter += 1 # type: ignore
-    return id.counter # type: ignore
+    id.counter += 1  # type: ignore
+    return id.counter  # type: ignore
