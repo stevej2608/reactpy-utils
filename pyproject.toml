@@ -10,7 +10,9 @@ keywords = ["React", "ReactJS", "ReactPy", "components"]
 license = "MIT"
 authors = [{ name = "Steve Jones", email = "jonesst2608@gmail.com" }]
 requires-python = ">=3.9"
+
 classifiers = [
+  "Development Status :: 4 - Beta",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
@@ -24,12 +26,14 @@ classifiers = [
   "Environment :: Web Environment",
   "Typing :: Typed",
 ]
+
 dependencies = ["reactpy>=1.0.0", "reactpy_router>=1.0.2", "typing_extensions", "pydantic"]
 dynamic = ["version"]
-urls.Changelog = "https://jonesst2608.github.io/reactpy-utils/latest/about/changelog/"
-urls.Documentation = "https://jonesst2608.github.io/reactpy-utils/latest/"
-urls.Source = "https://github.com/jonesst2608/reactpy-utils"
-packages = [{include = "reactpy_utils", from="src"}]
+
+[project.urls]
+Changelog = "https://jonesst2608.github.io/reactpy-utils/latest/about/changelog/"
+Documentation = "https://github.com/jonesst2609/reactpy-utils#readme"
+Source = "https://github.com/jonesst2609/reactpy-utils"
 
 [tool.hatch.version]
 path = "src/reactpy_utils/__init__.py"
@@ -37,7 +41,13 @@ path = "src/reactpy_utils/__init__.py"
 [tool.hatch.build.targets.sdist]
 include = ["/src"]
 
-[tool.hatch.build.targets.wheel]
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/reactpy_utils tests}"
 
 [tool.hatch.metadata]
 license-files = { paths = ["LICENSE.md"] }
@@ -110,6 +120,7 @@ lint.extend-ignore = [
 lint.preview = true
 extend-exclude = [".venv/*", ".eggs/*", "build/*"]
 
+
 [tool.pylint.master]
 init-hook = 'import sys; sys.path.append(".")'
 disable = [
@@ -119,6 +130,7 @@ disable = [
     "C0116", # missing-function-docstring
     "W0622", # redefined-builtin"
 ]
+max-line-length=120
 
 [tool.pytest.ini_options]
 addopts = """\
@@ -136,5 +148,8 @@ source = ["src/", "tests/"]
 source = ["src/"]
 
 [tool.coverage.report]
-show_missing = true
-exclude_lines = ["pragma: no cover", "...", "raise NotImplementedError"]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
