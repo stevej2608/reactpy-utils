@@ -6,6 +6,13 @@ T = TypeVar("T")
 
 
 def static_vars(**kwargs: Any) -> Callable[[T], T]:
+    """Add the given kwargs to the given function. This, in effect, assigns
+    static values to the function
+
+    Returns:
+        Callable[[T], T]: The function with static variables added
+    """
+
     def decorate(func: T) -> T:
         for k, v in kwargs.items():
             setattr(func, k, v)
@@ -16,5 +23,10 @@ def static_vars(**kwargs: Any) -> Callable[[T], T]:
 
 @static_vars(counter=0)
 def id() -> int:
+    """An immutable counter. Returns  0, 1, 2 ... on each successive call
+
+    Returns:
+        int: count 0, 1, 2 ...
+    """
     id.counter += 1  # type: ignore
     return id.counter  # type: ignore

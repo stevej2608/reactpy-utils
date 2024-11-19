@@ -41,14 +41,6 @@ path = "src/reactpy_utils/__init__.py"
 [tool.hatch.build.targets.sdist]
 include = ["/src"]
 
-[tool.hatch.envs.types]
-extra-dependencies = [
-  "mypy>=1.0.0",
-]
-
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/reactpy_utils tests}"
-
 [tool.hatch.metadata]
 license-files = { paths = ["LICENSE.md"] }
 

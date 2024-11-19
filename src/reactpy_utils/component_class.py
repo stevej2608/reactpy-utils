@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from reactpy.core.component import Component
 
 if TYPE_CHECKING:
-    from reactpy.core.types import ComponentType
+    from reactpy.core.types import ComponentType, VdomDict
 
 NONE = cast(Any, None)
 
@@ -15,7 +15,7 @@ class ComponentClass(Component):
     def __init__(self, *args: tuple[Any, ...], **kwargs: dict[str, Any]):
         super().__init__(function=self.render, key=NONE, args=args, kwargs=kwargs, sig=NONE)
 
-    def render(self) -> Component:
+    def render(self) -> VdomDict:
         raise NotImplementedError
 
 

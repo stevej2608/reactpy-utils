@@ -124,6 +124,39 @@
         "internalConsoleOptions": "openOnSessionStart",
         "justMyCode": false
       },
+
+      {
+        "name": "2i. PyTest (tests/test_script.py)",
+        "type": "debugpy",
+        "request": "launch",
+        "stopOnEntry": false,
+        "module": "pytest",
+        "cwd": "${workspaceRoot}",
+        "env": {},
+        "args": ["--headed", "tests/test_script.py"],
+        "envFile": "${workspaceRoot}/.env",
+        "console": "internalConsole",
+        "internalConsoleOptions": "openOnSessionStart",
+        "justMyCode": false
+      },
+
+      {
+        "name": "2j. PyTest (tests/test_component_class.py)",
+        "type": "debugpy",
+        "request": "launch",
+        "stopOnEntry": false,
+        "module": "pytest",
+        "cwd": "${workspaceRoot}",
+        "env": {},
+        "args": ["--headed", "tests/test_component_class.py"],
+        "envFile": "${workspaceRoot}/.env",
+        "console": "internalConsole",
+        "internalConsoleOptions": "openOnSessionStart",
+        "justMyCode": false
+      },
         
+
+
+      
     ]
   }

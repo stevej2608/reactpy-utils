@@ -9,7 +9,7 @@ from reactpy_utils.document_title import DocumentTitle
 from reactpy_utils.dynamic_context import DynamicContextModel, create_dynamic_context
 from reactpy_utils.local_storage import LocalStorageAgent
 from reactpy_utils.props import props
-from reactpy_utils.script import Script, TestScript
+from reactpy_utils.script import Script
 from reactpy_utils.types import Action, EventArgs, EventHandler
 from reactpy_utils.unique_sequence import UID
 from reactpy_utils.use_query import use_params, use_search_params

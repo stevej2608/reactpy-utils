@@ -13,6 +13,14 @@ def unique_id():
 unique_sequence = unique_id()
 
 
-def UID(prefix: str = ""):
+def UID(prefix: str = "") -> str:
+    """Generator method that returns unique IDs prepended with the given prefix
+
+    Args:
+        prefix (str, optional): The ID prefix Defaults to "".
+
+    Returns:
+        str: The unique ID, eg (user-da80b519)
+    """
     prefix = f"{prefix}-" if prefix else "I"
     return f"{prefix}{hex(next(unique_sequence))[2:]}"
