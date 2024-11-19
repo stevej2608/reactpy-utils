@@ -21,4 +21,4 @@ def test_simple():
 
     result = Input(id="search", name="search", placeholder="Search", label="Search", value="").render()
 
-    assert result["attributes"] == {"id": "search", "name": "search", "placeholder": "Search", "value": ""} # type: ignore
+    assert result["attributes"] == {"id": "search", "name": "search", "placeholder": "Search", "value": ""}  # type: ignore

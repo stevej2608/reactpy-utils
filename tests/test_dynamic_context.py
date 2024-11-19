@@ -27,7 +27,7 @@ async def test_dynamic_context(display: DisplayFixture):
         context, set_context = use_context(AppContext)
 
         @event
-        def on_click(event: EventArgs):
+        def on_click(_evt: EventArgs):
             set_context(context.update(dark_mode=not context.dark_mode))
 
         child_render_count += 1

@@ -14,7 +14,7 @@ async def test_document_title(display: DisplayFixture):
         title, set_title = use_state("Hello Earth")
 
         @event
-        def on_click(event: EventArgs):
+        def on_click(_evt: EventArgs):
             t = "Hello Earth" if title != "Hello Earth" else "Hello Mars"
             set_title(t)
 
