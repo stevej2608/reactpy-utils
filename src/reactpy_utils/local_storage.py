@@ -3,6 +3,7 @@ import logging
 from typing import cast
 
 from reactpy import component, event, html, use_context
+from reactpy.core.component import Component
 
 from reactpy_utils.dynamic_context import DynamicContextModel
 from reactpy_utils.script import Script
@@ -62,8 +63,8 @@ def _LocalStorageReader(ctx, storage_id: str):
     # log.info('LSReader storage=[%s]', storage.__repr__())
 
     @event(stop_propagation=True, prevent_default=True)
-    def on_click(event: EventArgs):
-        data = event["target"]["value"].replace("-", "_")
+    def on_click(_evt: EventArgs):
+        data = _evt["target"]["value"].replace("-", "_")
         data = json.dumps(json.loads(data))
         values = json.loads(data)
         set_storage(storage.update(**values))
@@ -114,12 +115,31 @@ def LocalStorageAgent(ctx: DynamicContextModel, storage_key: str):
 
     Args:
         ctx (DynamicContextModel): The values to be stored
-        storage_key (str): local storage key
+        storage_key (str): The browser local storage key
 
     Returns:
-        _type_: _description_
+        Component: The local storage agent
     """
     return html._(
         _LocalStorageWriter(ctx, storage_key),
         _LocalStorageReader(ctx, storage_key),
+    )
+
+
+@component
+def LocalStorageProvider(*children: tuple[Component], ctx: DynamicContextModel, storage_key: str):
+    """Wrapper for LocalStorageAgent component. Children are not rendered until the 
+    given context has been synchronized with the browser local storage.
+
+    Args:
+        ctx (DynamicContextModel): The model to be synchronized with local storage
+        storage_key (str): The browser local storage key
+
+    Returns:
+        Component: The local storage provider
+    """
+    storage, _ = use_context(ctx)  # type: ignore
+    return html._(
+        LocalStorageAgent(ctx=ctx, storage_key=storage_key),
+        When(storage.is_valid, *children),
     )

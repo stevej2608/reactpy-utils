@@ -3,7 +3,7 @@ from reactpy import component, html
 
 from reactpy_utils import CopyToClipboard
 
-BUTTON_ID = "copy-btn"
+BUTTON_ID = "test-copy-btn"
 TEXT = lorem.paragraph()
 
 @component

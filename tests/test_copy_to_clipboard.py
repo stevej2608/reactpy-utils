@@ -1,4 +1,3 @@
-import logging
 
 import lorem
 import pytest
@@ -8,6 +7,9 @@ from reactpy.testing import DisplayFixture
 from reactpy_utils import CopyToClipboard
 
 from docs.examples.clipboard import App, TEXT
+
+from .tooling import page_stable
+
 
 @pytest.mark.anyio
 async def test_copy_to_clipboard(display: DisplayFixture):
@@ -32,5 +34,6 @@ async def test_copy_to_clipboard(display: DisplayFixture):
 @pytest.mark.anyio
 async def test_example(display: DisplayFixture):
     await display.show(App)
+    await page_stable(display.page)
     text = await display.page.evaluate("() => navigator.clipboard.readText()")
     assert text == TEXT

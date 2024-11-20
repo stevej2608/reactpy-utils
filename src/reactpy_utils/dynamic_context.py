@@ -47,7 +47,7 @@ _Type = TypeVar("_Type", bound=DynamicContextModel)
 _ReturnType = tuple[_Type, Callable[[_Type | Callable[[_Type], _Type]], None]]
 
 
-def create_dynamic_context(model: type[_Type]) -> Context[_ReturnType[_Type]]:
+def create_dynamic_context(_model: type[_Type]) -> Context[_ReturnType[_Type]]:
     """Create a context that is settable from child components
 
     Usage:
