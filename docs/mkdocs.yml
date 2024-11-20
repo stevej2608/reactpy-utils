@@ -1,5 +1,11 @@
 ---
 nav:
+  - Get Started:
+      - Overview: index.md
+  - Components:
+      - Clipboard: components/clipboard.md
+      - Document Title: components/document_title.md
+      - Local Storage: components/local_storage.md
   - About:
       - Changelog: about/changelog.md
       - Contributor Guide: about/contributing.md
@@ -34,8 +40,8 @@ theme:
     repo: fontawesome/brands/github
     admonition:
       note: fontawesome/solid/note-sticky
-  logo: https://raw.githubusercontent.com/reactive-python/reactpy/main/branding/svg/reactpy-logo-square.svg
-  favicon: https://raw.githubusercontent.com/reactive-python/reactpy/main/branding/svg/reactpy-logo-square.svg
+  logo: assets/image/logo-toolbox.svg
+  favicon: assets/image/logo-toolbox.svg
 
 markdown_extensions:
   - toc:
@@ -123,12 +129,12 @@ watch:
   - ../LICENSE.md
   - "../src"
 
-site_name: ReactPy Router
-site_author: Archmonger
+site_name: ReactPy Utils
+site_author: Steve Jones
 site_description: It's React-Router, but in Python.
 copyright: '&copy;<div id="year"> </div> <script> document.getElementById("year").innerHTML = new Date().getFullYear(); </script>Reactive Python and affiliates.<div class="legal-footer-right">This project has no affiliation to ReactJS or Meta Platforms, Inc.</div>'
-repo_url: https://github.com/reactive-python/reactpy-router
-site_url: https://reactive-python.github.io/reactpy-router
+repo_url: https://github.com/jonesst2608/reactpy-utils
+site_url: https://jonesst2608.github.io/reactpy-utils
 repo_name: ReactPy Utils (GitHub)
 edit_uri: edit/main/docs/src/
 docs_dir: src
