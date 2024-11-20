@@ -15,7 +15,7 @@ def App():
 
     return AppContext(
         html._(
-            LocalStorageAgent(ctx=AppContext, storage_key="local-storage-test"),
+            LocalStorageAgent(ctx=AppContext, storage_key="local-storage-example"),
         ),
         value=(app_state, set_app_state),
     )

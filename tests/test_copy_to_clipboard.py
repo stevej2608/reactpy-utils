@@ -7,24 +7,30 @@ from reactpy.testing import DisplayFixture
 
 from reactpy_utils import CopyToClipboard
 
-log = logging.getLogger(__name__)
-
+from docs.examples.clipboard import App, TEXT
 
 @pytest.mark.anyio
 async def test_copy_to_clipboard(display: DisplayFixture):
-    BUTTON_ID = "copy-btn"
-    TEXT = lorem.paragraph()
+    _BUTTON_ID = "copy-btn"
+    _TEXT = lorem.paragraph()
 
     @component
     def TestApp():
         return html._(
-            html.button({"id": BUTTON_ID}, "Copy to Clipboard"), CopyToClipboard(button_id=BUTTON_ID, text=TEXT)
+            html.button({"id": _BUTTON_ID}, "Copy to Clipboard"), CopyToClipboard(button_id=_BUTTON_ID, text=_TEXT)
         )
 
     await display.show(TestApp)
 
-    btn = display.page.locator(f"id={BUTTON_ID}")
+    btn = display.page.locator(f"id={_BUTTON_ID}")
     await btn.click()
 
+    text = await display.page.evaluate("() => navigator.clipboard.readText()")
+    assert text == _TEXT
+
+
+@pytest.mark.anyio
+async def test_example(display: DisplayFixture):
+    await display.show(App)
     text = await display.page.evaluate("() => navigator.clipboard.readText()")
     assert text == TEXT
