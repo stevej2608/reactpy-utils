@@ -57,7 +57,7 @@ SCRIPT_WITH_CLEAN_UP_JS = """
 
 Scripts can be debugged using the Browser debugger (or directly in VSCODE). To locate
 the code add a `console.log("My Code Loaded")` message to the script. This will appear
-in the debugger console window. Clicking on it will take yoy directly to your code. Add
+in the debugger console window. Clicking on it will take you directly to your code. Add
 brake points as required.
 
 

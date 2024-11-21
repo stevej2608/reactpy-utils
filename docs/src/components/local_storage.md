@@ -1,16 +1,16 @@
-Browser local storage provider. Synchronizes the given context model with the browser local storage. The
+A browser local storage provider. Synchronizes the given context model with the browser local storage. The
 provider blocks the rendering of any child components until the the model has been 
 synchronized with the browser.
 
 The context model is stored in the browser's local storage as unencrypted stringified json.
 
-=== "docs/examples/local_storage.py"
+=== "local_storage.py"
 
     ```python
     {% include "../../examples/python/local_storage.py" %}
     ```
 
-=== "docs/examples/app_context.py"
+=== "app_context.py"
 
     ```python
     {% include "../../examples/python/app_context.py" %}

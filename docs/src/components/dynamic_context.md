@@ -1,5 +1,5 @@
 The *dynamic context model* is an enhanced version of the ReactPy [use-context] hook. In addition
-to providing application state that can be easily accessed by child components 
+to providing application state that can be easily accessed by child components the 
 *dynamic context model* allows the child components to change the state. Any changes
 made by a child component will update the context and will force the parent component
 and children to be re-rendered.
@@ -9,13 +9,13 @@ a complex nested navigation component say, needs to update some element in
 the main application state. 
 
 
-=== "docs/examples/python/dynamic_context.py"
+=== "dynamic_context.py"
 
     ```python hl_lines="8 9 12 17 30 34"
     {% include "../../examples/python/dynamic_context.py" %}
     ```
 
-=== "docs/examples/app_context.py"
+=== "app_context.py"
 
     ```python
     {% include "../../examples/python/app_context.py" %}

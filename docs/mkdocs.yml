@@ -105,9 +105,7 @@ extra:
   generator: false
   version:
     provider: mike
-  analytics:
-    provider: google
-    property: G-XRLQYZBG00
+
 
 extra_javascript:
   - assets/js/main.js
