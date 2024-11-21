@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING, Callable, TypeVar, cast
+from typing import TYPE_CHECKING, Callable, TypeVar, cast, Protocol, Any
 
 from pydantic import BaseModel
 from reactpy import create_context as reactpy_create_context
@@ -9,7 +9,8 @@ from reactpy import create_context as reactpy_create_context
 if TYPE_CHECKING:
     from reactpy.types import Context
 
-DataModel = TypeVar("DataModel", bound="DynamicContextModel")
+
+DataModel = TypeVar("DataModel", bound="DynamicContextModel | IBaseModel")
 
 
 class DynamicContextModel(BaseModel):
@@ -43,7 +44,6 @@ class DynamicContextModel(BaseModel):
 
 
 _Type = TypeVar("_Type", bound=DynamicContextModel)
-
 _ReturnType = tuple[_Type, Callable[[_Type | Callable[[_Type], _Type]], None]]
 
 

@@ -4,7 +4,7 @@ from reactpy.testing import DisplayFixture
 
 from reactpy_utils import DocumentTitle, EventArgs
 
-from docs.examples.document_title import App
+from docs.examples.python.document_title import App
 
 from .tooling import get_document_title, page_stable
 

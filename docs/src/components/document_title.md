@@ -6,5 +6,5 @@ In multi-page applications in each page can have it's own `DocumentTitle` compon
 === "docs/examples/document_title.py"
 
     ```python
-    {% include "../../examples/document_title.py" %}
+    {% include "../../examples/python/document_title.py" %}
     ```

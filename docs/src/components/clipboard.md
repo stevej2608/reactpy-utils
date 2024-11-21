@@ -6,5 +6,5 @@ When clicked the given text to the browser's clipboard.
 === "docs/examples/clipboard.py"
 
     ```python
-    {% include "../../examples/clipboard.py" %}
+    {% include "../../examples/python/clipboard.py" %}
     ```
