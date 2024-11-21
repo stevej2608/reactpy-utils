@@ -2,7 +2,7 @@ from reactpy import component, event, html, use_context, use_state
 
 from reactpy_utils import EventArgs, LocalStorageProvider
 
-from .app_context import AppState, AppContext
+from .app_context import AppContext, AppState
 
 
 @component

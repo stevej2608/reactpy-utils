@@ -22,3 +22,30 @@ the main application state.
     ```
 
 [use-context]: https://reactpy.dev/docs/reference/hooks-api.html#use-context
+
+
+## Custom Context Models
+
+By default context models are defined by sub-classing *DynamicContextModel* which
+itself is a subclass of the [Pydantic], [BaseModel]. As an alternative you can also
+subclass the none-pydantic *CustomDynamicContextModel* or implement the protocol
+interface *IDynamicContextModel*
+
+
+```python
+from reactpy_utils import CustomDynamicContextModel, create_dynamic_context
+
+class CurrentUserState(CustomDynamicContextModel):
+
+    def __init__(self, user_name: str, password:str, dark_mode: bool = True):
+        super().__init__()
+        self.user_name = user_name
+        self.password = password
+        self.dark_mode = dark_mode
+
+
+AppContext = create_dynamic_context(CurrentUserState)
+```
+
+[Pydantic]: https://docs.pydantic.dev/latest/
+[BaseModel]: https://docs.pydantic.dev/latest/api/base_model/

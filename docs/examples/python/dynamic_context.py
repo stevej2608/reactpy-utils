@@ -1,7 +1,9 @@
 from reactpy import component, event, html, use_context, use_state
+
 from reactpy_utils import EventArgs
 
-from .app_context import AppState, AppContext
+from .app_context import AppContext, AppState
+
 
 @component
 def App():
@@ -12,6 +14,7 @@ def App():
         value=(app_state, set_app_state),
     )
 
+
 @component
 def Content():
     app_state, _ = use_context(AppContext)
@@ -19,11 +22,11 @@ def Content():
         html.h2(f"dark_mode={app_state.dark_mode}"),
     )
 
+
 @component
 def NavBar():
-    return html.div(
-        DarkModeButton()
-    )
+    return html.div(DarkModeButton())
+
 
 @component
 def DarkModeButton():

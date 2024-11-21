@@ -36,7 +36,7 @@ for missing semicolons.
 
 Scripts are injected and run when the associated page is loaded. If the script hooks into event 
 listeners or other state-related aspects of the DOM then these must be un-hooked when the page
-is destroyed. The can be achieved by returning a *page-unload* function reference when the script is first
+is destroyed. This can be achieved by returning a *page-unload* function reference when the script is first
 loaded. To do this define a script with the following pattern:
 
 ```python

@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 DataModel = TypeVar("DataModel", bound="DynamicContextModel")
 
+
 class DynamicContextModel(BaseModel):
     """Base component for dynamic context models"""
 
@@ -31,7 +32,8 @@ class DynamicContextModel(BaseModel):
         model._update_count = self._update_count + 1  # pylint: disable=protected-access
         return model
 
-    def dumps(self, sort_keys=True):
+    def dumps(self, sort_keys=True) -> str:
+        """Convert model to json string"""
         return json.dumps(self.model_dump(), sort_keys=sort_keys)
 
     def __repr__(self):
@@ -45,9 +47,38 @@ class DynamicContextModel(BaseModel):
 class IDynamicContextModel(Protocol):
     """Define protocol to allow DynamicContextModel to be duck typed"""
 
-    def dumps(self, sort_keys=True): ...
-    def update(self: Self, **kwargs) -> Self: ...
+    @property
+    def is_valid(self):
+        """Return True if the context values have been updated. A False value indicates that the
+        values are the default values"""
 
+    def dumps(self, sort_keys=True) -> str:  # type: ignore
+        """Convert model to json string"""
+
+    def update(self: Self, **kwargs) -> Self:  # type: ignore
+        """Return a new model instance based on the current model with the field changes defined in **kwargs"""
+
+
+class CustomDynamicContextModel(IDynamicContextModel):
+    """Alternative, non-pydantic, base class from which to sub-class context models"""
+
+    def __init__(self):
+        self._update_count = 0
+
+    @property
+    def is_valid(self) -> bool: # type: ignore
+        return self._update_count > 0
+
+    def dumps(self, sort_keys=True) -> str:
+        values = self.__dict__.copy()
+        values.pop("_update_count")
+        return json.dumps(values, sort_keys=sort_keys)
+
+    def update(self: Self, **kwargs) -> Self:
+        values = json.loads(self.dumps())
+        model = type(self)(**{**values, **kwargs})
+        model._update_count = self._update_count + 1  # pylint: disable=protected-access
+        return model
 
 
 _Type = TypeVar("_Type", bound=DynamicContextModel | IDynamicContextModel)

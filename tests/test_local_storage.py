@@ -101,4 +101,5 @@ async def test_example(display: DisplayFixture):
     await display.show(App)
 
     local_storage = await read_local_storage(display.page, "local-storage-example")
+    await page_stable(display.page)
     assert local_storage == '{"dark_mode": true}'
