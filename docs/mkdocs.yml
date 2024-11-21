@@ -5,7 +5,9 @@ nav:
   - Components:
       - Clipboard: components/clipboard.md
       - Document Title: components/document_title.md
+      - Dynamic Context: components/dynamic_context.md
       - Local Storage: components/local_storage.md
+      - Script Templates: components/script.md
   - About:
       - Changelog: about/changelog.md
       - Contributor Guide: about/contributing.md

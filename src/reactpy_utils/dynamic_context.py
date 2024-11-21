@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING, Callable, TypeVar, cast
+from typing import TYPE_CHECKING, Callable, Protocol, Self, TypeVar, cast
 
 from pydantic import BaseModel
 from reactpy import create_context as reactpy_create_context
@@ -11,7 +11,6 @@ if TYPE_CHECKING:
 
 
 DataModel = TypeVar("DataModel", bound="DynamicContextModel")
-
 
 class DynamicContextModel(BaseModel):
     """Base component for dynamic context models"""
@@ -25,7 +24,7 @@ class DynamicContextModel(BaseModel):
 
         return self._update_count > 0
 
-    def update(self: DataModel, **kwargs) -> DataModel:
+    def update(self: Self, **kwargs) -> Self:
         """Return a new model instance based on the current model with the field changes defined in **kwargs"""
         values = {**self.model_dump(), **kwargs}
         model = type(self)(**values)
@@ -43,7 +42,15 @@ class DynamicContextModel(BaseModel):
         return json.dumps({"is_valid": self.is_valid, "state": self.model_dump()}, sort_keys=True)
 
 
-_Type = TypeVar("_Type", bound=DynamicContextModel)
+class IDynamicContextModel(Protocol):
+    """Define protocol to allow DynamicContextModel to be duck typed"""
+
+    def dumps(self, sort_keys=True): ...
+    def update(self: Self, **kwargs) -> Self: ...
+
+
+
+_Type = TypeVar("_Type", bound=DynamicContextModel | IDynamicContextModel)
 _ReturnType = tuple[_Type, Callable[[_Type | Callable[[_Type], _Type]], None]]
 
 

@@ -10,6 +10,12 @@ The context model is stored in the browser's local storage as unencrypted string
     {% include "../../examples/python/local_storage.py" %}
     ```
 
+=== "docs/examples/app_context.py"
+
+    ```python
+    {% include "../../examples/python/app_context.py" %}
+    ```
+
 ## Encrypting the data
 
 The local storage provider expects the context model to be derived 
