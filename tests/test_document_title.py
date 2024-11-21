@@ -2,9 +2,8 @@ import pytest
 from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
-from reactpy_utils import DocumentTitle, EventArgs
-
 from docs.examples.python.document_title import App
+from reactpy_utils import DocumentTitle, EventArgs
 
 from .tooling import get_document_title, page_stable
 
@@ -45,7 +44,6 @@ async def test_document_title(display: DisplayFixture):
 
 @pytest.mark.anyio
 async def test_example(display: DisplayFixture):
-
     await display.show(App)
     await page_stable(display.page)
     title = await get_document_title(display.page)

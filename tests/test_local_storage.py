@@ -2,9 +2,8 @@ import pytest
 from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
-from reactpy_utils import DynamicContextModel, EventArgs, LocalStorageAgent, create_dynamic_context
-
 from docs.examples.python.local_storage import App
+from reactpy_utils import DynamicContextModel, EventArgs, LocalStorageAgent, create_dynamic_context
 
 from .tooling import page_stable, read_local_storage
 
@@ -14,6 +13,7 @@ class AppState(DynamicContextModel):
 
 
 AppContext = create_dynamic_context(AppState)
+
 
 @pytest.mark.anyio
 async def test_local_storage(display: DisplayFixture):
@@ -98,7 +98,6 @@ async def test_local_storage(display: DisplayFixture):
 
 @pytest.mark.anyio
 async def test_example(display: DisplayFixture):
-
     await display.show(App)
 
     local_storage = await read_local_storage(display.page, "local-storage-example")

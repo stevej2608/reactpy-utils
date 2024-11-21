@@ -1,7 +1,7 @@
 import pytest
 from reactpy.testing import DisplayFixture
 
-from docs.examples.python.clipboard import App, TEXT, BUTTON_ID
+from docs.examples.python.clipboard import BUTTON_ID, TEXT, App
 
 
 @pytest.mark.anyio

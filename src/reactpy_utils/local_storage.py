@@ -128,7 +128,7 @@ def LocalStorageAgent(ctx: DynamicContextModel, storage_key: str):
 
 @component
 def LocalStorageProvider(*children: tuple[Component], ctx: DynamicContextModel, storage_key: str):
-    """Wrapper for LocalStorageAgent component. Children are not rendered until the 
+    """Wrapper for LocalStorageAgent component. Children are not rendered until the
     given context has been synchronized with the browser local storage.
 
     Args:
