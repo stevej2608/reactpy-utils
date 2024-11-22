@@ -44,6 +44,7 @@ async def test_local_storage(display: DisplayFixture):
         )
 
     await display.show(TestApp)
+    await page_stable(display.page)
 
     # Confirm the dark_mode has been rendered by the h2 element to the default value
 
@@ -100,7 +101,7 @@ async def test_local_storage(display: DisplayFixture):
 async def test_example(display: DisplayFixture):
     """Just confirm that the docs example builds & runs"""
     await display.show(App)
+    await page_stable(display.page)
 
     local_storage = await read_local_storage(display.page, "local-storage-example")
-    await page_stable(display.page)
     assert local_storage == '{"dark_mode": true}'

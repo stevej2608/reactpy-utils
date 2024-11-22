@@ -1,8 +1,8 @@
 import base64
 import json
-from typing import Self
 
 from cryptography.fernet import Fernet
+from typing_extensions import Self
 
 from reactpy_utils import DynamicContextModel, create_dynamic_context
 
