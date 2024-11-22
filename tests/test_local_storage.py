@@ -98,6 +98,7 @@ async def test_local_storage(display: DisplayFixture):
 
 @pytest.mark.anyio
 async def test_example(display: DisplayFixture):
+    """Just confirm that the docs example builds & runs"""
     await display.show(App)
 
     local_storage = await read_local_storage(display.page, "local-storage-example")

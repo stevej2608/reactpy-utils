@@ -6,6 +6,7 @@ from docs.examples.python.clipboard import BUTTON_ID, TEXT, App
 
 @pytest.mark.anyio
 async def test_example(display: DisplayFixture):
+    """Just confirm that the docs example builds & runs"""
     await display.show(App)
 
     btn = display.page.locator(f"id={BUTTON_ID}")

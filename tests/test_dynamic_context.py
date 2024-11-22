@@ -56,8 +56,8 @@ async def test_dynamic_context(display: DisplayFixture):
 @pytest.mark.anyio
 async def test_nested_dynamic_context(display: DisplayFixture):
     """Confirm the same context can be instantiated at several levels in the
-    component tree. A context update should only force a re-rendering of the context
-    owner and it's child components.
+    component tree. A context update should only update & force a re-rendering of 
+    the context owner and it's child components.
     """
 
     test_app_render_count = 0
