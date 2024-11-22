@@ -1,11 +1,11 @@
 import json
+
 import pytest
 from reactpy import component, html, use_context, use_state
 from reactpy.testing import DisplayFixture
 
+from docs.examples.python.encrypted_app_context import AppContext, CurrentUserState, decode
 from reactpy_utils import LocalStorageProvider
-
-from docs.examples.python.encrypted_app_context import CurrentUserState, AppContext, decode
 
 from .tooling import page_stable, read_local_storage
 
@@ -18,6 +18,7 @@ def App():
         LocalStorageProvider(ExamplePage(), ctx=AppContext, storage_key="encrypted-local-storage-example"),
         value=(app_state, set_app_state),
     )
+
 
 @component
 def ExamplePage():
@@ -43,6 +44,6 @@ async def test_example(display: DisplayFixture):
     # Decrypt it and validate it
 
     local_storage = decode(**json.loads(local_storage))
-    assert local_storage == {'password': '123', 'user_name': 'steve'}
+    assert local_storage == {"password": "123", "user_name": "steve"}
 
     assert True

@@ -66,7 +66,7 @@ class CustomDynamicContextModel(IDynamicContextModel):
         self._update_count = 0
 
     @property
-    def is_valid(self) -> bool: # type: ignore
+    def is_valid(self) -> bool:  # type: ignore
         return self._update_count > 0
 
     def dumps(self, sort_keys=True) -> str:

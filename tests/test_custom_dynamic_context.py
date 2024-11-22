@@ -32,16 +32,12 @@ async def test_custom_dynamic_context(display: DisplayFixture):
 
         child_render_count += 1
 
-        return html.button(
-            {"id": "toggle_btn", "on_click": on_click}, f"dark_mode={context.dark_mode}"
-        )
+        return html.button({"id": "toggle_btn", "on_click": on_click}, f"dark_mode={context.dark_mode}")
 
     @component
     def TestApp():
         nonlocal test_app_render_count
-        state, set_state = use_state(
-            CurrentUserState(user_name="steve", password="123")
-        )
+        state, set_state = use_state(CurrentUserState(user_name="steve", password="123"))
 
         test_app_render_count += 1
 

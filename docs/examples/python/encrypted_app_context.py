@@ -1,26 +1,28 @@
-from typing import Self
-import json
 import base64
+import json
+from typing import Self
+
 from cryptography.fernet import Fernet
 
 from reactpy_utils import DynamicContextModel, create_dynamic_context
 
-# Use Fernet.generate_key() to create keys. The key remains on 
-# the server, only encrypted data is sent to the browser. 
+# Use Fernet.generate_key() to create keys. The key remains on
+# the server, only encrypted data is sent to the browser.
 
-fernet = Fernet(b'3qgHqyfztBTIDpPc1AFYt9vPXQ1Ni5lF4vwfhaMzWBs=')
+fernet = Fernet(b"3qgHqyfztBTIDpPc1AFYt9vPXQ1Ni5lF4vwfhaMzWBs=")
 
-def decode(data:str) -> dict:
+
+def decode(data: str) -> dict:
     """Decode encrypted json data to a json object"""
     encMessage = base64.b64decode(data)
     plane = fernet.decrypt(encMessage).decode()
     return json.loads(plane)
 
 
-def encode(plain_text:str) -> str:
+def encode(plain_text: str) -> str:
     """Encode the plain_text stringified json object to an encrypted, base64, stringified json object"""
     encMessage = fernet.encrypt(plain_text.encode())
-    encMessage64 = base64.b64encode(encMessage).decode('utf-8')
+    encMessage64 = base64.b64encode(encMessage).decode("utf-8")
     return json.dumps({"data": encMessage64})
 
 
@@ -37,10 +39,9 @@ class EncryptedDynamicContextBase(DynamicContextModel):
         return encode(plane_text)
 
 
-
 class CurrentUserState(EncryptedDynamicContextBase):
-    user_name :str
-    password : str
+    user_name: str
+    password: str
 
 
 AppContext = create_dynamic_context(CurrentUserState)
