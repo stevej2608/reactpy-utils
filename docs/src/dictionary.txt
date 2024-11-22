@@ -9,6 +9,8 @@ changelog
 contravariant
 document_title
 dynamic_context
+encrypted_app_context
+fernet
 formatters
 frontend
 frontends
@@ -36,6 +38,7 @@ prefetching
 preloader
 preprocessor
 py
+pydantic
 pytest
 reactpy
 refetch

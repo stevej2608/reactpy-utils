@@ -16,9 +16,20 @@ The context model is stored in the browser's local storage as unencrypted string
     {% include "../../examples/python/app_context.py" %}
     ```
 
-## Encrypting the data
+## Encrypting Local Storage Data
 
-The local storage provider expects the context model to be derived 
-from *DynamicContextModel*.
+The data stored in the browser can easily be encoded by sub-classing *DynamicContextModel*. The 
+following example uses [Fernet] symmetric encryption. 
 
-TODO: Example of Encrypting the data
+Use *Fernet.generate_key()* to create keys. The key remains on the server, only encrypted 
+data is sent to the browser.
+
+=== "encrypted_app_context.py"
+
+    ```python
+    {% include "../../examples/python/encrypted_app_context.py" %}
+    ```
+
+The same pattern can be applied to any desired encryption.
+
+[Fernet]: https://cryptography.io/en/latest/fernet/
