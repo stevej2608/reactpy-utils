@@ -4,7 +4,7 @@ import pytest
 from reactpy import component, html, use_context, use_state
 from reactpy.testing import DisplayFixture
 
-from docs.examples.python.encrypted_app_context import AppContext, CurrentUserState, decode
+from docs.examples.python.encrypted_app_context import UserContext, UserState, decode
 from reactpy_utils import LocalStorageProvider
 
 from .tooling import page_stable, read_local_storage
@@ -12,17 +12,17 @@ from .tooling import page_stable, read_local_storage
 
 @component
 def App():
-    app_state, set_app_state = use_state(CurrentUserState(user_name="steve", password="123"))
+    app_state, set_app_state = use_state(UserState(user_name="steve", password="123"))
 
-    return AppContext(
-        LocalStorageProvider(ExamplePage(), ctx=AppContext, storage_key="encrypted-local-storage-example"),
+    return UserContext(
+        LocalStorageProvider(ExamplePage(), ctx=UserContext, storage_key="encrypted-local-storage-example"),
         value=(app_state, set_app_state),
     )
 
 
 @component
 def ExamplePage():
-    app_state, _ = use_context(AppContext)
+    app_state, _ = use_context(UserContext)
 
     return html.div(
         html.h2({"id": "user_name"}, f"user : {app_state.user_name}"),

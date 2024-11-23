@@ -1,5 +1,6 @@
-import pytest
 import subprocess
+
+import pytest
 from playwright.async_api import Browser, Page, async_playwright
 from reactpy.config import REACTPY_TESTING_DEFAULT_TIMEOUT
 from reactpy.testing import BackendFixture, DisplayFixture

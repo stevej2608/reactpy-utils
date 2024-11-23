@@ -39,9 +39,12 @@ class EncryptedDynamicContextBase(DynamicContextModel):
         return encode(plane_text)
 
 
-class CurrentUserState(EncryptedDynamicContextBase):
+# Example usage of defining an encrypted user model & context
+
+
+class UserState(EncryptedDynamicContextBase):
     user_name: str
     password: str
 
 
-AppContext = create_dynamic_context(CurrentUserState)
+UserContext = create_dynamic_context(UserState)

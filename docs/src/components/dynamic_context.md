@@ -11,7 +11,7 @@ the main application state.
 
 === "dynamic_context.py"
 
-    ```python hl_lines="8 9 12 17 30 34"
+    ```python hl_lines="11 14 20 33 37"
     {% include "../../examples/python/dynamic_context.py" %}
     ```
 
