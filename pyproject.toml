@@ -27,7 +27,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 
-dependencies = ["reactpy>=1.0.0", "reactpy_router>=1.0.2", "typing_extensions", "pydantic"]
+dependencies = ["reactpy>=1.0.0", "reactpy_router>=1.0.3", "typing_extensions", "pydantic"]
 dynamic = ["version"]
 
 [project.urls]
