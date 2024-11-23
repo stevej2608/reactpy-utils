@@ -1,5 +1,5 @@
 :root {
-	--code-max-height: 17.25rem;
+	--code-max-height: 100rem;
 	--md-code-backdrop: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
 		rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.03) 0px 0.8px 2px 0px,
 		rgba(0, 0, 0, 0.047) 0px 2.7px 6.7px 0px,
