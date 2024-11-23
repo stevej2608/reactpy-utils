@@ -1,4 +1,5 @@
 import pytest
+import subprocess
 from playwright.async_api import Browser, Page, async_playwright
 from reactpy.config import REACTPY_TESTING_DEFAULT_TIMEOUT
 from reactpy.testing import BackendFixture, DisplayFixture
@@ -16,6 +17,12 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         action="store_true",
         help="Open a browser window when running web-based tests",
     )
+
+
+def pytest_sessionstart(session):
+    """Rebuild the project before running the tests to get the latest JavaScript"""
+    subprocess.run(["hatch", "build", "--clean"], check=True)
+    subprocess.run(["playwright", "install", "chromium"], check=True)
 
 
 @pytest.fixture(scope="session")
