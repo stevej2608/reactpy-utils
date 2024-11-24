@@ -1,8 +1,5 @@
 # --- JAVASCRIPT BUNDLES ---
 
-reactpy_select/bundle.min.js
-reactpy_select/bundle.dev.js
-
 # --- PYTHON IGNORE FILES ----
 
 # Byte-compiled / optimized / DLL files

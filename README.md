@@ -1,6 +1,6 @@
 # <img src="docs/src/assets/image/logo-toolbox.svg" align="left" height="45"/> ReactPy Utils
 
-The **[reactpy-utils]*- [X] project is a collection of utilities and components that target the more obscure aspects
+The **[reactpy-utils]** project is a collection of utilities and components that target the more obscure aspects
 of website design with [RectPy]. 
 
 The following list gives a flavour of the type features that are available:
@@ -18,9 +18,14 @@ Run the following command to install [reactpy-utils] in your Python environment.
 pip install reactpy-utils
 ```
 
-More information about this package can be found on [the documentation](https://jonesst2608.github.io/reactpy-router).
+More information about this package can be found on [the documentation](https://jonesst2608.github.io/reactpy-utils).
 
+## 🙏 Credits
 
+In order to maintain consistency within the [ReactPy] ecosystem, the Hatch build and GitHub workflow 
+configurations and the project documentation layout conform those of the [reactpy-router]. Many thanks to 
+all those involved.
 
 [reactpy-utils]: https://pypi.org/jonesst2608/reactpy-utils/
 [RectPy]: https://reactpy.dev/docs/index.html
+
