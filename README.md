@@ -1,9 +1,9 @@
 # <img src="docs/src/assets/image/logo-toolbox.svg" align="left" height="45"/> ReactPy Utils
 
 The **[reactpy-utils]** project is a collection of utilities and components that target the more obscure aspects
-of website design with [RectPy]. 
+of website design with [ReactPy]. 
 
-The following list gives a flavour of the type features that are available:
+The following list gives a flavour of the type of features that are available:
 
 - [X] Copy to clipboard
 - [X] Set the page title
@@ -27,5 +27,6 @@ configurations and the project documentation layout conform those of the [reactp
 all those involved.
 
 [reactpy-utils]: https://pypi.org/jonesst2608/reactpy-utils/
-[RectPy]: https://reactpy.dev/docs/index.html
+[reactpy-router]: https://github.com/reactive-python/reactpy-router
+[ReactPy]: https://reactpy.dev/docs/index.html
 
