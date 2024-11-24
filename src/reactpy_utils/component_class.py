@@ -31,7 +31,7 @@ def class_component(comp: type[ClassComponent]):
     Usage:
     ```
         from reactpy import html, run
-        from utils.component_class import class_component, ComponentClass
+        from reactpy_utils  import class_component, ComponentClass
 
         @class_component
         class HelloWorld(ComponentClass):

@@ -8,6 +8,8 @@ nav:
       - Dynamic Context: components/dynamic_context.md
       - Local Storage: components/local_storage.md
       - Script Templates: components/script.md
+  - Reference:
+      - Helpers: reference/helpers.md
   - About:
       - Changelog: about/changelog.md
       - Contributor Guide: about/contributing.md
