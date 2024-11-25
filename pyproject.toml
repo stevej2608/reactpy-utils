@@ -50,7 +50,7 @@ installer = "uv"
 # >>> Hatch Tests <<<
 
 [tool.hatch.envs.hatch-test]
-extra-dependencies = ["pytest-sugar", "pytest-cov", "anyio", "reactpy[testing,starlette]", "cryptography", "lorem"]
+extra-dependencies = ["pytest-sugar", "pytest-cov", "anyio", "reactpy[testing,starlette]", "cryptography", "python-dotenv", "lorem"]
 randomize = true
 matrix-name-format = "{variable}-{value}"
 
@@ -130,6 +130,8 @@ addopts = """\
     --strict-config
     --strict-markers
     """
+# log_cli = true
+# log_cli_level = "INFO"
 filterwarnings = "ignore::DeprecationWarning"
 
 [tool.coverage.run]

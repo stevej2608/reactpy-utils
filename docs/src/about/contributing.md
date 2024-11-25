@@ -68,3 +68,13 @@ By utilizing `hatch`, the following commands are available to manage the develop
     This documentation only covers commonly used commands.
 
     You can type `hatch --help` to see all available commands.
+
+### VSCODE Debugging
+
+Launch scripts are available to allow all/any of the pytest tests to be 
+debugged. In order to launch the tests in the same environment 
+as hatch in the VSCODE/Debugger the PATH entry in the local .env is 
+used. 
+
+You must run the **hatch test** command once, before running the VSCODE 
+debugger. This will ensure the .env PATH entry is set correctly.

@@ -4,6 +4,8 @@ from playwright.async_api import Browser, Page, async_playwright
 from reactpy.config import REACTPY_TESTING_DEFAULT_TIMEOUT
 from reactpy.testing import BackendFixture, DisplayFixture
 
+from .tooling import update_vscode_env
+
 
 @pytest.fixture(scope="session")
 def anyio_backend():
@@ -21,7 +23,10 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 
 def pytest_sessionstart(session):
     """Rebuild the project before running the tests to get the latest JavaScript"""
+
     # subprocess.run(["hatch", "build", "--clean"], check=True)
+
+    update_vscode_env('.env')
     subprocess.run(["playwright", "install", "chromium"], check=True)
 
 
