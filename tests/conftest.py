@@ -1,4 +1,5 @@
 import subprocess
+
 import pytest
 from playwright.async_api import Browser, Page, async_playwright
 from reactpy.config import REACTPY_TESTING_DEFAULT_TIMEOUT
@@ -26,7 +27,7 @@ def pytest_sessionstart(session):
 
     # subprocess.run(["hatch", "build", "--clean"], check=True)
 
-    update_vscode_env('.env')
+    update_vscode_env(".env")
     subprocess.run(["playwright", "install", "chromium"], check=True)
 
 

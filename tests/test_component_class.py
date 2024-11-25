@@ -9,7 +9,7 @@ from reactpy_utils import ComponentClass, class_component
 @class_component
 class UsersTable(ComponentClass):
     def render(self) -> VdomDict:
-        return html.h2('Hello World!')
+        return html.h2("Hello World!")
 
 
 @pytest.mark.anyio
