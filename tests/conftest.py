@@ -1,5 +1,4 @@
 import subprocess
-
 import pytest
 from playwright.async_api import Browser, Page, async_playwright
 from reactpy.config import REACTPY_TESTING_DEFAULT_TIMEOUT
@@ -22,7 +21,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 
 def pytest_sessionstart(session):
     """Rebuild the project before running the tests to get the latest JavaScript"""
-    subprocess.run(["hatch", "build", "--clean"], check=True)
+    # subprocess.run(["hatch", "build", "--clean"], check=True)
     subprocess.run(["playwright", "install", "chromium"], check=True)
 
 

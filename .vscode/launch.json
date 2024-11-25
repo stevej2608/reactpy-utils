@@ -12,14 +12,15 @@
       "console": "integratedTerminal"
     },
 
+    // PYTEST launch configs
+
     {
-      "name": "1b. Debug Current PyTest file",
+      "name": "2a. Debug Current PyTest file",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
         "${file}"
@@ -31,27 +32,30 @@
     },
 
     {
-      "name": "2a. PyTest (ALL)",
+      "name": "2b. PyTest (ALL)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
+      "args": [
+        "--headed",
+        "tests"
+      ],
       "envFile": "${workspaceRoot}/.env",
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "justMyCode": false
     },
     {
-      "name": "2b. PyTest (tests/test_script.py)",
+      "name": "2c. PyTest (tests/test_script.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
+        "--headed",
         "tests/test_script.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -60,30 +64,29 @@
       "justMyCode": false
     },
     {
-      "name": "2c. PyTest (tests/test_local_storage.py)",
+      "name": "2d. PyTest (tests/test_local_storage.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
+      "envFile": "${workspaceRoot}/.env",
       "args": [
         "--headed",
         "tests/test_local_storage.py"
       ],
-      "envFile": "${workspaceRoot}/.env",
+      // "envFile": "${workspaceRoot}/.env",
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "justMyCode": false
     },
     {
-      "name": "2d. PyTest (tests/test_dynamic_context.py)",
+      "name": "2e. PyTest (tests/test_dynamic_context.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
         "tests/test_dynamic_context.py"
@@ -100,7 +103,6 @@
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
         "tests/test_copy_to_clipboard.py"
@@ -111,13 +113,12 @@
       "justMyCode": false
     },
     {
-      "name": "2f. PyTest (tests/test_document_title.py)",
+      "name": "2g. PyTest (tests/test_document_title.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
         "tests/test_document_title.py"
@@ -128,13 +129,12 @@
       "justMyCode": false
     },
     {
-      "name": "2g. PyTest (tests/test_use_query.py)",
+      "name": "2h. PyTest (tests/test_use_query.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
         "tests/test_use_query.py"
@@ -145,13 +145,12 @@
       "justMyCode": false
     },
     {
-      "name": "2h. PyTest (tests/test_props.py)",
+      "name": "2i. PyTest (tests/test_props.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
         "tests/test_props.py"
@@ -161,23 +160,7 @@
       "internalConsoleOptions": "openOnSessionStart",
       "justMyCode": false
     },
-    {
-      "name": "2i. PyTest (tests/test_script.py)",
-      "type": "debugpy",
-      "request": "launch",
-      "stopOnEntry": false,
-      "module": "pytest",
-      "cwd": "${workspaceRoot}",
-      "env": {},
-      "args": [
-        "--headed",
-        "tests/test_script.py"
-      ],
-      "envFile": "${workspaceRoot}/.env",
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "justMyCode": false
-    },
+
     {
       "name": "2j. PyTest (tests/test_component_class.py)",
       "type": "debugpy",
@@ -185,7 +168,6 @@
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
         "tests/test_component_class.py"
@@ -202,7 +184,6 @@
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
         "tests/test_dynamic_context.py"
@@ -213,16 +194,15 @@
       "justMyCode": false
     },
     {
-      "name": "2l. PyTest (tests/test_encrypted_context.py)",
+      "name": "2l. PyTest (tests/test_encrypted_local_storage.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "cwd": "${workspaceRoot}",
-      "env": {},
       "args": [
         "--headed",
-        "tests/test_encrypted_context.py"
+        "tests/test_encrypted_local_storage.py"
       ],
       "envFile": "${workspaceRoot}/.env",
       "console": "internalConsole",
