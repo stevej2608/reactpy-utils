@@ -1,17 +1,19 @@
 from __future__ import annotations
 
 import inspect
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, cast
 
 from reactpy.core.component import Component
 
 if TYPE_CHECKING:
-    from reactpy.core.types import ComponentType, VdomDict
+    from reactpy.core.types import VdomDict
 
 NONE = cast(Any, None)
 
 
-class ComponentClass(Component):
+class _ComponentClass(Component):
+    """Base class for all ComponentClass implementations"""
+
     def __init__(self, *args: tuple[Any, ...], **kwargs: dict[str, Any]):
         super().__init__(function=self.render, key=NONE, args=args, kwargs=kwargs, sig=NONE)
 
@@ -19,22 +21,19 @@ class ComponentClass(Component):
         raise NotImplementedError
 
 
-ClassComponent = TypeVar("ClassComponent", bound=ComponentClass)
-
-
-def class_component(comp: type[ClassComponent]):
+def class_component(comp: type):
     """ReactPy ComponentClass decorator
 
     Args:
-        comp (ComponentClass): Class to be wrapped
+        comp (Type): Class to be wrapped
 
     Usage:
     ```
         from reactpy import html, run
-        from reactpy_utils  import class_component, ComponentClass
+        from reactpy_utils  import class_component
 
         @class_component
-        class HelloWorld(ComponentClass):
+        class HelloWorld:
 
             def render(self):
                 return html.h2('Hello World!')
@@ -43,9 +42,10 @@ def class_component(comp: type[ClassComponent]):
     ```
     """
 
+    comp = type(comp.__name__, (comp, _ComponentClass), {})
     sig = inspect.signature(comp)
 
-    def create_component(*args: Any, key: Any | None = None, **kwargs: Any) -> ComponentType:
+    def create_component(*args: Any, key: Any | None = None, **kwargs: Any) -> Component:
         _comp = comp(*args, **kwargs)
         _comp._sig = sig  # pylint: disable=protected-access
         _comp.key = key
