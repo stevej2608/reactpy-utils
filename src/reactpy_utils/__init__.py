@@ -3,7 +3,7 @@
 
 __version__ = "0.0.23"
 
-from reactpy_utils.component_class import ComponentClass, class_component
+from reactpy_utils.component_class import class_component
 from reactpy_utils.copy_to_clipboard import CopyToClipboard
 from reactpy_utils.document_title import DocumentTitle
 from reactpy_utils.dynamic_context import (
