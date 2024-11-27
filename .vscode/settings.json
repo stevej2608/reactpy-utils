@@ -6,4 +6,7 @@
         ".venv/**/*.py",
         ".venv/**/*.pyi"
     ],
+    "mypy-type-checker.path": [
+        "src", "tests", "docs/examples/python"
+    ],
 }

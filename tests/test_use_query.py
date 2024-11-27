@@ -12,9 +12,8 @@ from reactpy_utils import use_params, use_search_params
 if TYPE_CHECKING:
     from reactpy.testing import DisplayFixture
 
-pytestmark = pytest.mark.anyio
 
-
+@pytest.mark.anyio
 async def test_use_params(display: DisplayFixture):
     class MyParams(BaseModel):
         first: int = cast(int, None)
@@ -57,6 +56,7 @@ async def test_use_params(display: DisplayFixture):
         await display.page.wait_for_selector("#success")
 
 
+@pytest.mark.anyio
 async def test_search_params(display: DisplayFixture):
     class MyParams(BaseModel):
         hello: str | None = None
