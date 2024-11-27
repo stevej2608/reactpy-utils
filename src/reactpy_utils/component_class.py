@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import inspect
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any, cast, TypeVar, Type
 
 from reactpy.core.component import Component
 
@@ -20,8 +20,10 @@ class _ComponentClass(Component):
     def render(self) -> VdomDict:
         raise NotImplementedError
 
+ClassComponent = TypeVar("ClassComponent", bound=object)
 
-def class_component(comp: type):
+
+def class_component(comp: Type[ClassComponent]) -> Type[ClassComponent]:
     """ReactPy ComponentClass decorator
 
     Args:
@@ -42,13 +44,14 @@ def class_component(comp: type):
     ```
     """
 
-    comp = type(comp.__name__, (comp, _ComponentClass), {})
+    comp = type(comp.__name__, (comp, _ComponentClass), {}) # type: ignore
     sig = inspect.signature(comp)
 
-    def create_component(*args: Any, key: Any | None = None, **kwargs: Any) -> Component:
+    def create_component(*args: Any, key: Any | None = None, **kwargs: Any):
         _comp = comp(*args, **kwargs)
+        _comp = cast(_ComponentClass, _comp)
         _comp._sig = sig  # pylint: disable=protected-access
         _comp.key = key
         return _comp
 
-    return create_component
+    return create_component # type: ignore
