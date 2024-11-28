@@ -1,20 +1,21 @@
 ---
 nav:
-  - Get Started:
-      - Overview: index.md
-  - Components:
-      - Clipboard: components/clipboard.md
-      - Document Title: components/document_title.md
-      - Dynamic Context: components/dynamic_context.md
-      - Local Storage: components/local_storage.md
-      - Script Templates: components/script.md
-  - Helpers:
-      - class_component: reference/class_component.md
-      - URL params: reference/params.md
-  - About:
-      - Changelog: about/changelog.md
-      - Contributor Guide: about/contributing.md
-      - License: about/license.md
+  # - Get Started:
+  #     - Overview: index.md
+  # - Components:
+  #     - Clipboard: components/clipboard.md
+  #     - Document Title: components/document_title.md
+  #     - Dynamic Context: components/dynamic_context.md
+  #     - Local Storage: components/local_storage.md
+  #     - Script Templates: components/script.md
+  - Reference:
+      # - class_component: reference/class_component.md
+      # - URL params: reference/params.md
+      - Other: reference/other.md
+  # - About:
+  #     - Changelog: about/changelog.md
+  #     - Contributor Guide: about/contributing.md
+  #     - License: about/license.md
 
 theme:
   name: material

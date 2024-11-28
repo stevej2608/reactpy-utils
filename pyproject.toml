@@ -78,7 +78,7 @@ dependencies = [
 ]
 
 [tool.hatch.envs.docs.scripts]
-serve = ["cd docs && mkdocs serve"]
+serve = ["cd docs && mkdocs -v serve"]
 build = ["cd docs && mkdocs build --strict"]
 linkcheck = [
   "linkcheckMarkdown docs/ -v -r",
@@ -106,6 +106,7 @@ lint.extend-ignore = [
   "N806",    # Variable  in function should be lowercase
   "PLR2004", # Magic value used in comparison
   "PLW2901", # for loop variableoverwritten by assignment target
+  "PLR6301", # Method `could be a function, class method, or static method
   "SIM115",  # Use context handler for opening files
   "SLF001",  # Private member accessed
   "TID252"   # Prefer absolute imports over relative imports

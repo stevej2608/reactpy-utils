@@ -12,23 +12,12 @@ above or below the table body and a summary view on the
 dashboard for instance. Each of these views would be implemented in the methods of the 
 Table class.
 
-```
-@class_component
-class MyTable:
+A comprehensive implementation of a table base class containing the carefully 
+honed logic for pagination, search & filtering, say, could then be subclassed to
+provide various UI implementations or override aspects of the table logic.
 
-    def __init__(self, table_data):
-        ...
+=== "class_component.py"
 
-    def search(self, test:str):
-        ...
-
-    def paginator(self, test:str):
-        ...
-
-    def summary(self, test:str):
-        ...       
-
-    def render(self):
-        """The default view"""
-        ...
-```
+    ```python
+    {% include "../../examples/python/class_component.py" %}
+    ```

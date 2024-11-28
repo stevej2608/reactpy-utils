@@ -6,7 +6,9 @@ from typing import Any, cast
 
 
 def props(include: str | None = None, exclude: str | None = None) -> dict[str, Any]:
-    """Convert the caller functions arguments into a props dict
+    """Convert the caller functions arguments into a props dict. Include the arguments named
+    in the include string. Exclude those named in the exclude string. If nether include or
+    exclude are defined all the arguments are added to the props dict.
 
     Args:
         include (str, optional): Arguments to include in the returned props. Defaults to None.

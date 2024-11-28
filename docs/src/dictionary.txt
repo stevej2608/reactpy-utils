@@ -23,9 +23,12 @@ pytest
 reactpy
 reactpy_router
 stringified
+static_counter
 sublicense
+subclassed
 un
 unencrypted
+unique_sequence
 use_params
 use_search_params
 utils
