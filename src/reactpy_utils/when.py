@@ -1,10 +1,17 @@
 from reactpy import component, html
+from reactpy.core.types import VdomChild
 from reactpy.core.component import Component
 
 
 @component
-def When(test: bool, *children: tuple[Component]):
+def When(test: bool, *children: tuple[Component]) -> VdomChild:
     """Render children when test is True
+
+    Args:
+        test (bool): _description_
+
+    Returns:
+        Component: Return a fragment containing the child components
 
     Returns:
         Component: Return a fragment containing the child components

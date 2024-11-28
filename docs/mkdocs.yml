@@ -8,11 +8,11 @@ nav:
       - Dynamic Context: components/dynamic_context.md
       - Local Storage: components/local_storage.md
       - Script Templates: components/script.md
-  - Reference:
-      - class_component: reference/class_component.md
-      - URL params: reference/params.md
+  - Helpers:
+      - Class Component: reference/class_component.md
       - Other: reference/other.md
       - Types: reference/types.md
+      - URL params: reference/params.md
   - About:
       - Changelog: about/changelog.md
       - Contributor Guide: about/contributing.md
