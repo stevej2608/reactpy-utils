@@ -1,5 +1,5 @@
 Custom versions of reactpy_router use_search_params that return parameters as a 
-Pydantic data class. All fields in the Pydantic model must have
+[Pydantic] data class.
 
 
 ## use_search_params 
@@ -28,3 +28,6 @@ def App():
 ```
 
 # use_params 
+
+
+[Pydantic]: https://docs.pydantic.dev/latest/

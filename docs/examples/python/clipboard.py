@@ -9,4 +9,7 @@ TEXT = lorem.paragraph()
 
 @component
 def App():
-    return html._(html.button({"id": BUTTON_ID}, "Copy to Clipboard"), CopyToClipboard(button_id=BUTTON_ID, text=TEXT))
+    return html._(
+        html.button({"id": BUTTON_ID}, "Copy to Clipboard"), 
+        CopyToClipboard(button_id=BUTTON_ID, text=TEXT)
+    )

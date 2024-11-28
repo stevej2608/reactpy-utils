@@ -5,4 +5,4 @@ from reactpy_utils import DocumentTitle
 
 @component
 def App():
-    return html._(DocumentTitle("My Website"))
+    return DocumentTitle("My Website")

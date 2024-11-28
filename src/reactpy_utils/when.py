@@ -4,10 +4,19 @@ from reactpy.core.component import Component
 
 @component
 def When(test: bool, *children: tuple[Component]):
-    """Show children when test is true
+    """Render children when test is True
 
     Returns:
-        html._(): Return a fragment containing the children
+        Component: Return a fragment containing the child components
+
+    Example
+    ```
+    @component
+    def App():
+        return AppContext(
+            When(app_state.is_valid, MainPage())
+        )
+    ```
     """
 
     if test:

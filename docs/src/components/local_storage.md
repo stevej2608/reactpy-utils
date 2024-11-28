@@ -2,7 +2,7 @@ A browser local storage provider. Synchronizes the given context model with the 
 provider blocks the rendering of any child components until the the model has been 
 synchronized with the browser.
 
-The context model is stored in the browser's local storage as unencrypted stringified json.
+The context model is stored in the browser's local storage as unencrypted stringified json (see encryption example below).
 
 === "local_storage.py"
 

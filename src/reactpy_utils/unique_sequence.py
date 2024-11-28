@@ -21,6 +21,11 @@ def UID(prefix: str = "") -> str:
 
     Returns:
         str: The unique ID, eg (user-da80b519)
+
+    Example:
+    ```
+    user_ids = [UID(prefix="user") for i in range(1000)]
+    ```
     """
     prefix = f"{prefix}-" if prefix else "I"
     return f"{prefix}{hex(next(unique_sequence))[2:]}"

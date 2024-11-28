@@ -1,21 +1,22 @@
 ---
 nav:
-  # - Get Started:
-  #     - Overview: index.md
-  # - Components:
-  #     - Clipboard: components/clipboard.md
-  #     - Document Title: components/document_title.md
-  #     - Dynamic Context: components/dynamic_context.md
-  #     - Local Storage: components/local_storage.md
-  #     - Script Templates: components/script.md
+  - Get Started:
+      - Overview: index.md
+  - Components:
+      - Clipboard: components/clipboard.md
+      - Document Title: components/document_title.md
+      - Dynamic Context: components/dynamic_context.md
+      - Local Storage: components/local_storage.md
+      - Script Templates: components/script.md
   - Reference:
-      # - class_component: reference/class_component.md
-      # - URL params: reference/params.md
+      - class_component: reference/class_component.md
+      - URL params: reference/params.md
       - Other: reference/other.md
-  # - About:
-  #     - Changelog: about/changelog.md
-  #     - Contributor Guide: about/contributing.md
-  #     - License: about/license.md
+      - Types: reference/types.md
+  - About:
+      - Changelog: about/changelog.md
+      - Contributor Guide: about/contributing.md
+      - License: about/license.md
 
 theme:
   name: material
@@ -85,10 +86,10 @@ plugins:
       default_handler: python
       handlers:
         python:
-          paths: ["../"]
-          import:
-            - https://reactpy.dev/docs/objects.inv
-            - https://installer.readthedocs.io/en/stable/objects.inv
+          paths: ["../src"]
+          # import:
+          #   - https://reactpy.dev/docs/objects.inv
+          #   - https://installer.readthedocs.io/en/stable/objects.inv
           options:
             signature_crossrefs: true
             scoped_crossrefs: true
@@ -135,7 +136,7 @@ watch:
 
 site_name: ReactPy Utils
 site_author: Steve Jones
-site_description: It's React-Router, but in Python.
+site_description: Reactpy Helper Components.
 copyright: '&copy;<div id="year"> </div> <script> document.getElementById("year").innerHTML = new Date().getFullYear(); </script>Reactive Python and affiliates.<div class="legal-footer-right">This project has no affiliation to ReactJS or Meta Platforms, Inc.</div>'
 repo_url: https://github.com/jonesst2608/reactpy-utils
 site_url: https://jonesst2608.github.io/reactpy-utils

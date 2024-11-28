@@ -4,11 +4,11 @@ of website design with [RectPy].
 
 The following list gives a flavour of the type features that are available:
 
-* Minified JavaScript templates
-* Copy to clipboard
-* Dynamic Context Models
-* Read/write the Browser local storage 
-* Set the page title
+* [Minified JavaScript templates](components/script.md)
+* [Copy to clipboard](components/clipboard.md)
+* [Dynamic Context Models](components/dynamic_context.md)
+* [Read/write the Browser local storage](components/local_storage.md) 
+* [Set the document title](components/document_title.md)
 
 ### Install from PyPI
 

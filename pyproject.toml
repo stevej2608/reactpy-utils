@@ -78,7 +78,7 @@ dependencies = [
 ]
 
 [tool.hatch.envs.docs.scripts]
-serve = ["cd docs && mkdocs -v serve"]
+serve = ["cd docs && mkdocs serve"]
 build = ["cd docs && mkdocs build --strict"]
 linkcheck = [
   "linkcheckMarkdown docs/ -v -r",

@@ -22,7 +22,7 @@ def static_vars(**kwargs: Any) -> Callable[[T], T]:
 
 
 @static_vars(counter=0)
-def id() -> int:
+def ID() -> int:
     """An immutable counter. Returns  0, 1, 2 ... on each successive call
 
     Returns:
