@@ -28,5 +28,5 @@ def ID() -> int:
     Returns:
         int: count 0, 1, 2 ...
     """
-    id.counter += 1  # type: ignore
-    return id.counter  # type: ignore
+    ID.counter += 1  # type: ignore
+    return ID.counter  # type: ignore

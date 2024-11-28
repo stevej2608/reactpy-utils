@@ -3,7 +3,7 @@ from reactpy import component, event, html, use_context, use_state
 from reactpy.testing import DisplayFixture
 
 from docs.examples.python.app_context import AppContext, AppState
-from reactpy_utils import EventArgs
+from reactpy_utils.types import EventArgs
 
 from .tooling import page_stable
 

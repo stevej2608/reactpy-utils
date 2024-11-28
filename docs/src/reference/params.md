@@ -4,7 +4,7 @@ Custom versions of reactpy_router use_search_params that return parameters as a
 
 ## use_search_params 
 
-The following search params can be converted into a Pydantic model 
+The following search params can be converted into a fully typed [Pydantic] model 
 as follows.
 
     ?hello=world&thing=1&thing=2
@@ -28,6 +28,10 @@ def App():
 ```
 
 # use_params 
+
+The following params can be converted into a fully typed [Pydantic] model 
+as follows.
+
 
 
 [Pydantic]: https://docs.pydantic.dev/latest/

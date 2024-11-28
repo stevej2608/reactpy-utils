@@ -5,7 +5,8 @@ from pydantic import BaseModel
 from reactpy import component, event, html, run, use_state
 from reactpy.core.types import VdomDict
 
-from reactpy_utils import EventArgs, class_component
+from reactpy_utils import class_component
+from reactpy_utils.types import EventArgs
 
 TData = TypeVar("TData", bound=Any)
 

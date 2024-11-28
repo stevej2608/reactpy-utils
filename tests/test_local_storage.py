@@ -3,7 +3,8 @@ from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
 from docs.examples.python.local_storage import App
-from reactpy_utils import DynamicContextModel, EventArgs, LocalStorageAgent, create_dynamic_context
+from reactpy_utils import DynamicContextModel, LocalStorageAgent, create_dynamic_context
+from reactpy_utils.types import EventArgs
 
 from .tooling import page_stable, read_local_storage
 

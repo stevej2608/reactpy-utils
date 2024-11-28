@@ -1,6 +1,6 @@
 from reactpy import component, event, html, use_context, use_state
 
-from reactpy_utils import EventArgs
+from reactpy_utils.types import EventArgs
 
 from .app_context import AppContext, AppState
 

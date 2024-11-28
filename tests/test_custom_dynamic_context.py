@@ -2,7 +2,8 @@ import pytest
 from reactpy import component, event, html, use_context, use_state
 from reactpy.testing import DisplayFixture
 
-from reactpy_utils import CustomDynamicContextModel, EventArgs, create_dynamic_context
+from reactpy_utils import CustomDynamicContextModel, create_dynamic_context
+from reactpy_utils.types import EventArgs
 
 
 class CurrentUserState(CustomDynamicContextModel):

@@ -3,7 +3,8 @@ from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
 from docs.examples.python.document_title import App
-from reactpy_utils import DocumentTitle, EventArgs
+from reactpy_utils import DocumentTitle
+from reactpy_utils.types import EventArgs
 
 from .tooling import get_document_title, page_stable
 

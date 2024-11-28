@@ -1,8 +1,8 @@
-from reactpy_utils.static_counter import id
+from reactpy_utils.static_counter import ID
 
 
 def test_static_counter():
-    assert id() == 1
-    assert id() == 2
-    assert id() == 3
-    assert id() == 4
+    assert ID() == 1
+    assert ID() == 2
+    assert ID() == 3
+    assert ID() == 4
