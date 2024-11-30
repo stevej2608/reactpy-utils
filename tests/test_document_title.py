@@ -44,7 +44,7 @@ async def test_document_title(display: DisplayFixture):
 
 
 @pytest.mark.anyio
-async def test_example(display: DisplayFixture):
+async def test_docs_example_document_title(display: DisplayFixture):
     """Just confirm that the docs example builds & runs"""
     await display.show(App)
     await page_stable(display.page)

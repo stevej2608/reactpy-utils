@@ -5,7 +5,7 @@ from docs.examples.python.clipboard import BUTTON_ID, TEXT, App
 
 
 @pytest.mark.anyio
-async def test_example(display: DisplayFixture):
+async def test_docs_example_copy_to_clipboard(display: DisplayFixture):
     """Just confirm that the docs example builds & runs"""
     await display.show(App)
 
