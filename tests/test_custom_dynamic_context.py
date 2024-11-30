@@ -5,6 +5,8 @@ from reactpy.testing import DisplayFixture
 from reactpy_utils import CustomDynamicContextModel, create_dynamic_context
 from reactpy_utils.types import EventArgs
 
+from .tooling import page_stable
+
 
 class CurrentUserState(CustomDynamicContextModel):
     def __init__(self, user_name: str, password: str, dark_mode: bool = True):
@@ -45,6 +47,7 @@ async def test_custom_dynamic_context(display: DisplayFixture):
         return AppContext(Child(), value=(state, set_state))
 
     await display.show(TestApp)
+    await page_stable(display.page)
 
     assert test_app_render_count == 1
     assert child_render_count == 1
