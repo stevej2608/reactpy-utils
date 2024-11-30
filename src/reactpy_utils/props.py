@@ -28,10 +28,7 @@ def props(include: str | None = None, exclude: str | None = None) -> dict[str, A
         value: str | None = None,
     ):
         _input_props = props(include="id, name, placeholder, value")
-        return html.div(
-            html.h2(label),
-            html.input(_input_props)
-            )
+        return html.div(html.h2(label), html.input(_input_props))
     ```
     """
 

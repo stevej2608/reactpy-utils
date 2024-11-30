@@ -1,6 +1,6 @@
 from reactpy import component, html
-from reactpy.core.types import VdomChild
 from reactpy.core.component import Component
+from reactpy.core.types import VdomChild
 
 
 @component
@@ -20,9 +20,7 @@ def When(test: bool, *children: tuple[Component]) -> VdomChild:
     ```
     @component
     def App():
-        return AppContext(
-            When(app_state.is_valid, MainPage())
-        )
+        return AppContext(When(app_state.is_valid, MainPage()))
     ```
     """
 

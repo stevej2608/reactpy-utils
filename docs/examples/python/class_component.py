@@ -18,7 +18,6 @@ class TableState(BaseModel, Generic[TData]):
 
 @class_component
 class BasicTable(Generic[TData]):
-
     def __init__(self, rows: list[TData]):
         super().__init__()
         self._table, self._set_table = use_state(TableState(rows=rows))
