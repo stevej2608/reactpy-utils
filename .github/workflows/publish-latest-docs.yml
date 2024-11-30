@@ -1,4 +1,5 @@
 name: Publish Latest Docs
+
 on:
   release:
     types: [published]
