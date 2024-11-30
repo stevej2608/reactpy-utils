@@ -1,5 +1,4 @@
-A collection of type definitions.
-
+A collection of type definition helpers.
 
 ::: reactpy_utils.types
 

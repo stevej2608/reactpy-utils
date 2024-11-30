@@ -9,8 +9,8 @@ If you plan to make code changes to this repository, you will need to install th
 Once you finish installing these dependencies, you can clone this repository:
 
 ```shell
-git clone https://github.com/reactive-python/reactpy-router.git
-cd reactpy-router
+git clone https://github.com/reactive-python/reactpy-utils.git
+cd reactpy-utils
 ```
 
 ## Executing test environment commands
@@ -24,7 +24,7 @@ By utilizing `hatch`, the following commands are available to manage the develop
 | `hatch test` | Run Python tests using the current environment's Python version |
 | `hatch test --all` | Run tests using all compatible Python versions |
 | `hatch test --python 3.9` | Run tests using a specific Python version |
-| `hatch test -k test_navigate_with_link` | Run only a specific test |
+| `hatch test -k test_script_minified` | Run only a specific test |
 
 ??? question "What other arguments are available to me?"
 
