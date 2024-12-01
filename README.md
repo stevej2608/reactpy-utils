@@ -1,4 +1,4 @@
-# <img src="docs/src/assets/image/logo-toolbox.svg" align="left" height="45"/> ReactPy Utils
+# <img src="https://raw.githubusercontent.com//stevej2608/reactpy-utils/main/docs/src/assets/image/logo-toolbox.svg" align="left" height="45"/> ReactPy Utils
 
 <p>
     <a href="https://github.com/stevej2608/reactpy-utils/actions/workflows/test-src.yml">
