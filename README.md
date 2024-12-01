@@ -33,7 +33,7 @@ Run the following command to install [reactpy-utils] in your Python environment.
 pip install reactpy-utils
 ```
 
-More information about this package can be found on [the documentation](https://stevej2608.github.io/reactpy-utils/develop/).
+More information about this package can be found on [the documentation](https://stevej2608.github.io/reactpy-utils/latest/).
 
 ## 🙏 Credits
 
@@ -41,7 +41,7 @@ In order to maintain consistency within the [ReactPy] ecosystem, the Hatch build
 configurations and the project documentation layout conform those of the [reactpy-utils]. Many thanks to 
 all those involved.
 
-[reactpy-utils]: https://pypi.org/stevej2608/reactpy-utils/
+[reactpy-utils]: https://pypi.org/project/reactpy-utils/
 [reactpy-router]: https://github.com/stevej2608/reactpy-router
 [ReactPy]: https://reactpy.dev/docs/index.html
 
