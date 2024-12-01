@@ -1,62 +1,54 @@
+import os
 import subprocess
 
 import pytest
-from playwright.async_api import Browser, Page, async_playwright
-from reactpy.config import REACTPY_TESTING_DEFAULT_TIMEOUT
+from playwright.async_api import async_playwright
 from reactpy.testing import BackendFixture, DisplayFixture
 
 from .tooling import update_vscode_env
 
-
-@pytest.fixture(scope="session")
-def anyio_backend():
-    return "asyncio"
+GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS", "").lower() == "true"
 
 
-def pytest_addoption(parser: pytest.Parser) -> None:
+def pytest_addoption(parser) -> None:
     parser.addoption(
-        "--headed",
-        dest="headed",
+        "--headless",
+        dest="headless",
         action="store_true",
-        help="Open a browser window when running web-based tests",
+        help="Hide the browser window when running web-based tests",
     )
 
 
 def pytest_sessionstart(session):
     """Rebuild the project before running the tests to get the latest JavaScript"""
-
     # subprocess.run(["hatch", "build", "--clean"], check=True)
-
     update_vscode_env(".env")
     subprocess.run(["playwright", "install", "chromium"], check=True)
 
 
 @pytest.fixture(scope="session")
-def display(server: BackendFixture, page: Page):
-    # async with DisplayFixture(server, page) as display:
-    #     yield display
-
-    return DisplayFixture(server, page)
-
-
-@pytest.fixture(scope="session")
-async def server():
-    async with BackendFixture() as server:
-        yield server
+async def display(backend, browser):
+    async with DisplayFixture(backend, browser) as display_fixture:
+        display_fixture.page.set_default_timeout(10000)
+        yield display_fixture
 
 
 @pytest.fixture(scope="session")
-async def page(browser: Browser):
-    context = await browser.new_context(permissions=["clipboard-read", "clipboard-write"])
-    pg = await context.new_page()
-    pg.set_default_timeout(REACTPY_TESTING_DEFAULT_TIMEOUT.current * 1000)
-    try:
-        yield pg
-    finally:
-        await pg.close()
+async def backend():
+    async with BackendFixture() as backend_fixture:
+        yield backend_fixture
 
 
 @pytest.fixture(scope="session")
-async def browser(pytestconfig: pytest.Config):
+async def browser(pytestconfig):
     async with async_playwright() as pw:
-        yield await pw.chromium.launch(headless=not bool(pytestconfig.option.headed))
+        browser = await pw.chromium.launch(headless=True if GITHUB_ACTIONS else pytestconfig.getoption("headless"))
+        context = await browser.new_context(permissions=["clipboard-read", "clipboard-write"])
+        yield context
+        await context.close()
+        await browser.close()
+
+
+@pytest.fixture(scope="session")
+def anyio_backend():
+    return "asyncio"
