@@ -42,6 +42,7 @@ async def test_dynamic_context(display: DisplayFixture):
         return AppContext(Child(), value=(state, set_state))
 
     await display.show(TestApp)
+    await page_stable(display.page)
 
     assert test_app_render_count == 1
     assert child_render_count == 1
@@ -51,6 +52,7 @@ async def test_dynamic_context(display: DisplayFixture):
     assert text == ["dark_mode=True"]
 
     await btn.click()
+    await page_stable(display.page)
 
     text = await btn.all_inner_texts()
     assert text == ["dark_mode=False"]
