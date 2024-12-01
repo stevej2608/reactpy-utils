@@ -35,7 +35,9 @@ async def test_custom_dynamic_context(display: DisplayFixture):
 
         child_render_count += 1
 
-        return html.button({"id": "toggle_btn", "on_click": on_click}, f"dark_mode={context.dark_mode}")
+        return html.button(
+            {"id": "toggle_btn", "on_click": on_click}, f"dark_mode={context.dark_mode}, is_valid={context.is_valid}"
+        )
 
     @component
     def TestApp():
@@ -54,12 +56,12 @@ async def test_custom_dynamic_context(display: DisplayFixture):
 
     btn = display.page.locator("id=toggle_btn")
     text = await btn.all_inner_texts()
-    assert text == ["dark_mode=True"]
+    assert text == ["dark_mode=True, is_valid=False"]
 
     await btn.click()
 
     text = await btn.all_inner_texts()
-    assert text == ["dark_mode=False"]
+    assert text == ["dark_mode=False, is_valid=True"]
 
     assert test_app_render_count == 2
     assert child_render_count == 2

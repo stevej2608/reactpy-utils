@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast, Union
+from typing import TYPE_CHECKING, cast
 
 import pytest
 from pydantic import BaseModel
@@ -59,8 +59,9 @@ async def test_use_params(display: DisplayFixture):
 @pytest.mark.anyio
 async def test_search_params(display: DisplayFixture):
     class MyParams(BaseModel):
-        hello: Union[str, None] = None
-        thing: Union[list[int], None] = None
+        hello: str = cast(str, None)
+        thing: list[int] = cast(list[int], None)
+        other: list[int] = cast(list[int], None)
 
     expected_query: MyParams = MyParams()
 
@@ -75,6 +76,6 @@ async def test_search_params(display: DisplayFixture):
 
     await display.show(sample)
 
-    expected_query = MyParams(hello="world", thing=[1, 2])
-    await display.goto("?hello=world&thing=1&thing=2")
+    expected_query = MyParams(hello="world", thing=[1, 2], other=[1, 2])
+    await display.goto("?hello=world&thing=1&thing=2&other=1 2")
     await display.page.wait_for_selector("#success")

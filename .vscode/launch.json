@@ -162,7 +162,7 @@
     },
 
     {
-      "name": "2j. PyTest (tests/test_component_class.py)",
+      "name": "2j. PyTest (tests/test_class_component.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
@@ -170,7 +170,7 @@
       "cwd": "${workspaceRoot}",
       "args": [
         "--headed",
-        "tests/test_component_class.py"
+        "tests/test_class_component.py"
       ],
       "envFile": "${workspaceRoot}/.env",
       "console": "internalConsole",
@@ -193,8 +193,27 @@
       "internalConsoleOptions": "openOnSessionStart",
       "justMyCode": false
     },
+
     {
-      "name": "2l. PyTest (tests/test_encrypted_local_storage.py)",
+      "name": "2l. PyTest (tests/test_custom_dynamic_context.py)",
+      "type": "debugpy",
+      "request": "launch",
+      "stopOnEntry": false,
+      "module": "pytest",
+      "cwd": "${workspaceRoot}",
+      "args": [
+        "--headed",
+        "tests/test_custom_dynamic_context.py"
+      ],
+      "envFile": "${workspaceRoot}/.env",
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "justMyCode": false
+    },
+
+
+    {
+      "name": "2m. PyTest (tests/test_encrypted_local_storage.py)",
       "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,

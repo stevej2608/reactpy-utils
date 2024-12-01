@@ -8,6 +8,12 @@ from reactpy_utils.types import EventArgs
 from .tooling import page_stable
 
 
+def test_repr_and_str():
+    state = AppState()
+    assert repr(state) == 'AppState, {"is_valid": false, "state": {"dark_mode": true}}'
+    assert str(state) == '{"is_valid": false, "state": {"dark_mode": true}}'
+
+
 @pytest.mark.anyio
 async def test_dynamic_context(display: DisplayFixture):
     test_app_render_count = 0

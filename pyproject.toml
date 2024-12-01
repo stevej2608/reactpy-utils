@@ -136,6 +136,7 @@ addopts = """\
 # log_cli_level = "INFO"
 filterwarnings = "ignore::DeprecationWarning"
 
+
 [tool.coverage.run]
 branch = true
 parallel = true

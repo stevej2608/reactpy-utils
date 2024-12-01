@@ -5,7 +5,7 @@ import pytest
 from dotenv import get_key, set_key
 
 
-def update_vscode_env(env_file_path: str) -> None:
+def update_vscode_env(env_file_path: str) -> None:  # pragma: no cover
     """
     Create/update the .env file PATH entry. The entry is prefixed with the 'hatch
     test' path of the currently executing test session.
