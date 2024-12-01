@@ -9,7 +9,7 @@ If you plan to make code changes to this repository, you will need to install th
 Once you finish installing these dependencies, you can clone this repository:
 
 ```shell
-git clone https://github.com/jonesst2608/reactpy-utils.git
+git clone https://github.com/stevej2608/reactpy-utils.git
 cd reactpy-utils
 ```
 

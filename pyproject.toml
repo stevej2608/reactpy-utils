@@ -31,7 +31,7 @@ dependencies = ["reactpy>=1.0.0", "reactpy_router>=1.0.3", "typing_extensions", 
 dynamic = ["version"]
 
 [project.urls]
-Changelog = "https://jonesst2608.github.io/reactpy-utils/latest/about/changelog/"
+Changelog = "https://stevej2608.github.io/reactpy-utils/latest/about/changelog/"
 Documentation = "https://github.com/jonesst2609/reactpy-utils#readme"
 Source = "https://github.com/jonesst2609/reactpy-utils"
 

@@ -18,5 +18,5 @@ Run the following command to install [reactpy-utils] in your Python environment.
 pip install reactpy-utils
 ```
 
-[reactpy-utils]: https://pypi.org/jonesst2608/reactpy-utils/
+[reactpy-utils]: https://pypi.org/stevej2608/reactpy-utils/
 [RectPy]: https://reactpy.dev/docs/index.html
