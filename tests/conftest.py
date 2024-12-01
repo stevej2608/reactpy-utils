@@ -32,9 +32,11 @@ def pytest_sessionstart(session):
 
 
 @pytest.fixture(scope="session")
-async def display(server: BackendFixture, page: Page):
-    async with DisplayFixture(server, page) as display:
-        yield display
+def display(server: BackendFixture, page: Page):
+    # async with DisplayFixture(server, page) as display:
+    #     yield display
+
+    return DisplayFixture(server, page)
 
 
 @pytest.fixture(scope="session")
