@@ -22,7 +22,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "${file}"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -39,7 +39,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -55,7 +55,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_script.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -72,7 +72,7 @@
       "cwd": "${workspaceRoot}",
       "envFile": "${workspaceRoot}/.env",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_local_storage.py"
       ],
       // "envFile": "${workspaceRoot}/.env",
@@ -88,7 +88,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_dynamic_context.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -104,7 +104,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_copy_to_clipboard.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -120,7 +120,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_document_title.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -136,7 +136,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_use_query.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -152,7 +152,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_props.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -169,7 +169,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_class_component.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -185,7 +185,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_dynamic_context.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -202,7 +202,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_custom_dynamic_context.py"
       ],
       "envFile": "${workspaceRoot}/.env",
@@ -220,7 +220,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headed",
+        "--headless",
         "tests/test_encrypted_local_storage.py"
       ],
       "envFile": "${workspaceRoot}/.env",

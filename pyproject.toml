@@ -129,7 +129,6 @@ max-line-length=120
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = """\
-    --headless
     --strict-config
     --strict-markers
     """
