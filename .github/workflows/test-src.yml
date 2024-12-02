@@ -1,8 +1,7 @@
 name: Test Source
 on:
   push:
-    branches:
-      - [ main, dev ]
+    branches: [ dev, master ]
   pull_request:
     branches:
       - main
