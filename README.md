@@ -38,10 +38,10 @@ More information about this package can be found on [the documentation](https://
 ## 🙏 Credits
 
 In order to maintain consistency within the [ReactPy] ecosystem, the Hatch build and GitHub workflow 
-configurations and the project documentation layout conform those of the [reactpy-utils]. Many thanks to 
+configurations and the project documentation layout conform those of the [reactpy-router]. Many thanks to 
 all those involved.
 
 [reactpy-utils]: https://pypi.org/project/reactpy-utils/
-[reactpy-router]: https://github.com/stevej2608/reactpy-router
+[reactpy-router]: https://github.com/reactive-python/reactpy-router
 [ReactPy]: https://reactpy.dev/docs/index.html
 
