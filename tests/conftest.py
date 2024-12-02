@@ -19,10 +19,13 @@ def pytest_addoption(parser) -> None:
     )
 
 
-def pytest_sessionstart(session):
+def pytest_sessionstart(session):  # pragma: no cover
     """Rebuild the project before running the tests to get the latest JavaScript"""
     # subprocess.run(["hatch", "build", "--clean"], check=True)
-    update_vscode_env(".env")
+
+    if not GITHUB_ACTIONS:
+        update_vscode_env(".env")
+
     subprocess.run(["playwright", "install", "chromium"], check=True)
 
 
