@@ -30,6 +30,7 @@ def pytest_sessionstart(session):
 async def display(backend, browser):
     async with DisplayFixture(backend, browser) as display_fixture:
         display_fixture.page.set_default_timeout(10000)
+        display_fixture.page.set_default_navigation_timeout(10000)
         yield display_fixture
 
 

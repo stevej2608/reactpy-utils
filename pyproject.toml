@@ -50,7 +50,7 @@ installer = "uv"
 # >>> Hatch Tests <<<
 
 [tool.hatch.envs.hatch-test]
-extra-dependencies = ["pytest-sugar", "pytest-cov", "anyio", "reactpy[testing,starlette]", "cryptography", "python-dotenv", "lorem"]
+extra-dependencies = ["pytest-sugar", "pytest-cov", "anyio", "reactpy[testing,starlette]", "cryptography", "python-dotenv", "lorem", "pytz"]
 randomize = true
 matrix-name-format = "{variable}-{value}"
 
@@ -129,6 +129,7 @@ max-line-length=120
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = """\
+    --headless
     --strict-config
     --strict-markers
     """
