@@ -32,8 +32,8 @@ dynamic = ["version"]
 
 [project.urls]
 Changelog = "https://stevej2608.github.io/reactpy-utils/latest/about/changelog/"
-Documentation = "https://github.com/jonesst2609/reactpy-utils#readme"
-Source = "https://github.com/jonesst2609/reactpy-utils"
+Documentation = "https://github.com/stevej2608/reactpy-utils#readme"
+Source = "https://github.com/stevej2608/reactpy-utils"
 
 [tool.hatch.version]
 path = "src/reactpy_utils/__init__.py"
