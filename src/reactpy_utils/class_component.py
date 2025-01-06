@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import inspect
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast, Callable
 
 from reactpy.core.component import Component
+from reactpy.core.types import ComponentType
 
 if TYPE_CHECKING:
     from reactpy.core.types import VdomDict
@@ -53,6 +54,13 @@ def class_component(comp: type[ClassComponent]) -> type[ClassComponent]:
         _comp = cast(_ComponentClass, _comp)
         _comp._sig = sig  # pylint: disable=protected-access
         _comp.key = key
+
+        _comp._args = args
+        _comp._kwargs = kwargs
+
+        _comp.type = cast(Callable[..., ComponentType],comp)
+
+
         return _comp
 
     return create_component  # type: ignore

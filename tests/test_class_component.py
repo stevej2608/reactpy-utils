@@ -1,4 +1,6 @@
 import pytest
+from reactpy import html
+from reactpy.core.types import VdomDict
 from reactpy.testing import DisplayFixture
 
 from docs.examples.python.class_component import App
@@ -7,18 +9,36 @@ from reactpy_utils import class_component
 from .tooling import page_stable
 
 
-@class_component
-class RenderMissing:
-    def __init__(self):
-        super().__init__()
-
-
 def test_render_missing(display: DisplayFixture):
+
+    @class_component
+    class RenderMissing:
+        """Class must have a render() method"""
+
+        def __init__(self):
+            super().__init__()
+
     try:
         component = RenderMissing()
         component.render()  # type: ignore
     except NotImplementedError:
         assert True
+
+def test_str(display: DisplayFixture):
+
+    @class_component
+    class TitleComponent:
+
+        def __init__(self, title:str):
+            super().__init__()
+            self.title = title
+
+        def render(self) -> VdomDict:
+            return html.h2(self.title)
+
+    component = TitleComponent(title="Main Page")
+    assert f"{component}" == f"TitleComponent({id(component):02x}, title='Main Page')"
+
 
 
 @pytest.mark.anyio
