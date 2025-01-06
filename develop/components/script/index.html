@@ -17,9 +17,9 @@
 <span class=normal>17</span>
 <span class=normal>18</span>
 <span class=normal>19</span>
-<span class=normal>20</span></pre></div></td><td class=code><div><pre><span></span><code><span class=kn>from</span> <span class=nn>reactpy_utils</span> <span class=kn>import</span> <span class=n>Script</span><span class=p>,</span> <span class=n>IDynamicContextModel</span>
+<span class=normal>20</span></pre></div></td><td class=code><div><pre><span></span><code><span class=kn>from</span><span class=w> </span><span class=nn>reactpy_utils</span><span class=w> </span><span class=kn>import</span> <span class=n>Script</span><span class=p>,</span> <span class=n>IDynamicContextModel</span>
 
-<span class=k>def</span> <span class=nf>save_state</span><span class=p>(</span><span class=n>storage_id</span><span class=p>:</span><span class=nb>str</span><span class=p>,</span> <span class=n>state</span><span class=p>:</span> <span class=n>IDynamicContextModel</span><span class=p>):</span>
+<span class=k>def</span><span class=w> </span><span class=nf>save_state</span><span class=p>(</span><span class=n>storage_id</span><span class=p>:</span><span class=nb>str</span><span class=p>,</span> <span class=n>state</span><span class=p>:</span> <span class=n>IDynamicContextModel</span><span class=p>):</span>
     <span class=n>ctx</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&quot;local_storage_id&quot;</span><span class=p>:</span> <span class=n>storage_id</span><span class=p>,</span> <span class=s2>&quot;values&quot;</span><span class=p>:</span> <span class=n>state</span><span class=o>.</span><span class=n>dumps</span><span class=p>()}</span>
     <span class=k>return</span> <span class=n>Script</span><span class=p>(</span><span class=n>LOCAL_STORAGE_WRITE_JS</span><span class=p>,</span> <span class=n>ctx</span><span class=p>,</span> <span class=n>minify</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
 

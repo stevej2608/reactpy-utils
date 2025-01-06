@@ -27,16 +27,16 @@
 <span class=normal>27</span>
 <span class=normal>28</span>
 <span class=normal>29</span>
-<span class=normal>30</span></pre></div></td><td class=code><div><pre><span></span><code><span class=kn>from</span> <span class=nn>reactpy</span> <span class=kn>import</span> <span class=n>component</span><span class=p>,</span> <span class=n>event</span><span class=p>,</span> <span class=n>html</span><span class=p>,</span> <span class=n>use_context</span><span class=p>,</span> <span class=n>use_state</span>
+<span class=normal>30</span></pre></div></td><td class=code><div><pre><span></span><code><span class=kn>from</span><span class=w> </span><span class=nn>reactpy</span><span class=w> </span><span class=kn>import</span> <span class=n>component</span><span class=p>,</span> <span class=n>event</span><span class=p>,</span> <span class=n>html</span><span class=p>,</span> <span class=n>use_context</span><span class=p>,</span> <span class=n>use_state</span>
 
-<span class=kn>from</span> <span class=nn>reactpy_utils</span> <span class=kn>import</span> <span class=n>LocalStorageProvider</span>
-<span class=kn>from</span> <span class=nn>reactpy_utils.types</span> <span class=kn>import</span> <span class=n>EventArgs</span>
+<span class=kn>from</span><span class=w> </span><span class=nn>reactpy_utils</span><span class=w> </span><span class=kn>import</span> <span class=n>LocalStorageProvider</span>
+<span class=kn>from</span><span class=w> </span><span class=nn>reactpy_utils.types</span><span class=w> </span><span class=kn>import</span> <span class=n>EventArgs</span>
 
-<span class=kn>from</span> <span class=nn>.app_context</span> <span class=kn>import</span> <span class=n>AppContext</span><span class=p>,</span> <span class=n>AppState</span>
+<span class=kn>from</span><span class=w> </span><span class=nn>.app_context</span><span class=w> </span><span class=kn>import</span> <span class=n>AppContext</span><span class=p>,</span> <span class=n>AppState</span>
 
 
 <span class=nd>@component</span>
-<span class=k>def</span> <span class=nf>App</span><span class=p>():</span>
+<span class=k>def</span><span class=w> </span><span class=nf>App</span><span class=p>():</span>
     <span class=n>app_state</span><span class=p>,</span> <span class=n>set_app_state</span> <span class=o>=</span> <span class=n>use_state</span><span class=p>(</span><span class=n>AppState</span><span class=p>())</span>
 
     <span class=k>return</span> <span class=n>AppContext</span><span class=p>(</span>
@@ -46,11 +46,11 @@
 
 
 <span class=nd>@component</span>
-<span class=k>def</span> <span class=nf>ExamplePage</span><span class=p>():</span>
+<span class=k>def</span><span class=w> </span><span class=nf>ExamplePage</span><span class=p>():</span>
     <span class=n>app_state</span><span class=p>,</span> <span class=n>set_app_state</span> <span class=o>=</span> <span class=n>use_context</span><span class=p>(</span><span class=n>AppContext</span><span class=p>)</span>
 
     <span class=nd>@event</span>
-    <span class=k>def</span> <span class=nf>on_click</span><span class=p>(</span><span class=n>_evt</span><span class=p>:</span> <span class=n>EventArgs</span><span class=p>):</span>
+    <span class=k>def</span><span class=w> </span><span class=nf>on_click</span><span class=p>(</span><span class=n>_evt</span><span class=p>:</span> <span class=n>EventArgs</span><span class=p>):</span>
         <span class=n>set_app_state</span><span class=p>(</span><span class=n>app_state</span><span class=o>.</span><span class=n>update</span><span class=p>(</span><span class=n>dark_mode</span><span class=o>=</span><span class=ow>not</span> <span class=n>app_state</span><span class=o>.</span><span class=n>dark_mode</span><span class=p>))</span>
 
     <span class=k>return</span> <span class=n>html</span><span class=o>.</span><span class=n>div</span><span class=p>(</span>
@@ -64,10 +64,10 @@
 <span class=normal>5</span>
 <span class=normal>6</span>
 <span class=normal>7</span>
-<span class=normal>8</span></pre></div></td><td class=code><div><pre><span></span><code><span class=kn>from</span> <span class=nn>reactpy_utils</span> <span class=kn>import</span> <span class=n>DynamicContextModel</span><span class=p>,</span> <span class=n>create_dynamic_context</span>
+<span class=normal>8</span></pre></div></td><td class=code><div><pre><span></span><code><span class=kn>from</span><span class=w> </span><span class=nn>reactpy_utils</span><span class=w> </span><span class=kn>import</span> <span class=n>DynamicContextModel</span><span class=p>,</span> <span class=n>create_dynamic_context</span>
 
 
-<span class=k>class</span> <span class=nc>AppState</span><span class=p>(</span><span class=n>DynamicContextModel</span><span class=p>):</span>
+<span class=k>class</span><span class=w> </span><span class=nc>AppState</span><span class=p>(</span><span class=n>DynamicContextModel</span><span class=p>):</span>
     <span class=n>dark_mode</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=kc>True</span>
 
 
@@ -121,13 +121,13 @@
 <span class=normal>47</span>
 <span class=normal>48</span>
 <span class=normal>49</span>
-<span class=normal>50</span></pre></div></td><td class=code><div><pre><span></span><code><span class=kn>import</span> <span class=nn>base64</span>
-<span class=kn>import</span> <span class=nn>json</span>
+<span class=normal>50</span></pre></div></td><td class=code><div><pre><span></span><code><span class=kn>import</span><span class=w> </span><span class=nn>base64</span>
+<span class=kn>import</span><span class=w> </span><span class=nn>json</span>
 
-<span class=kn>from</span> <span class=nn>cryptography.fernet</span> <span class=kn>import</span> <span class=n>Fernet</span>
-<span class=kn>from</span> <span class=nn>typing_extensions</span> <span class=kn>import</span> <span class=n>Self</span>
+<span class=kn>from</span><span class=w> </span><span class=nn>cryptography.fernet</span><span class=w> </span><span class=kn>import</span> <span class=n>Fernet</span>
+<span class=kn>from</span><span class=w> </span><span class=nn>typing_extensions</span><span class=w> </span><span class=kn>import</span> <span class=n>Self</span>
 
-<span class=kn>from</span> <span class=nn>reactpy_utils</span> <span class=kn>import</span> <span class=n>DynamicContextModel</span><span class=p>,</span> <span class=n>create_dynamic_context</span>
+<span class=kn>from</span><span class=w> </span><span class=nn>reactpy_utils</span><span class=w> </span><span class=kn>import</span> <span class=n>DynamicContextModel</span><span class=p>,</span> <span class=n>create_dynamic_context</span>
 
 <span class=c1># Use Fernet.generate_key() to create keys. The key remains on</span>
 <span class=c1># the server, only encrypted data is sent to the browser.</span>
@@ -135,29 +135,29 @@
 <span class=n>fernet</span> <span class=o>=</span> <span class=n>Fernet</span><span class=p>(</span><span class=sa>b</span><span class=s2>&quot;3qgHqyfztBTIDpPc1AFYt9vPXQ1Ni5lF4vwfhaMzWBs=&quot;</span><span class=p>)</span>
 
 
-<span class=k>def</span> <span class=nf>decode</span><span class=p>(</span><span class=n>data</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>dict</span><span class=p>:</span>
+<span class=k>def</span><span class=w> </span><span class=nf>decode</span><span class=p>(</span><span class=n>data</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>dict</span><span class=p>:</span>
 <span class=w>    </span><span class=sd>&quot;&quot;&quot;Decode encrypted json data to a json object&quot;&quot;&quot;</span>
     <span class=n>encMessage</span> <span class=o>=</span> <span class=n>base64</span><span class=o>.</span><span class=n>b64decode</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
     <span class=n>plane</span> <span class=o>=</span> <span class=n>fernet</span><span class=o>.</span><span class=n>decrypt</span><span class=p>(</span><span class=n>encMessage</span><span class=p>)</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span>
     <span class=k>return</span> <span class=n>json</span><span class=o>.</span><span class=n>loads</span><span class=p>(</span><span class=n>plane</span><span class=p>)</span>
 
 
-<span class=k>def</span> <span class=nf>encode</span><span class=p>(</span><span class=n>plain_text</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+<span class=k>def</span><span class=w> </span><span class=nf>encode</span><span class=p>(</span><span class=n>plain_text</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
 <span class=w>    </span><span class=sd>&quot;&quot;&quot;Encode the plain_text stringified json object to an encrypted, base64, stringified json object&quot;&quot;&quot;</span>
     <span class=n>encMessage</span> <span class=o>=</span> <span class=n>fernet</span><span class=o>.</span><span class=n>encrypt</span><span class=p>(</span><span class=n>plain_text</span><span class=o>.</span><span class=n>encode</span><span class=p>())</span>
     <span class=n>encMessage64</span> <span class=o>=</span> <span class=n>base64</span><span class=o>.</span><span class=n>b64encode</span><span class=p>(</span><span class=n>encMessage</span><span class=p>)</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s2>&quot;utf-8&quot;</span><span class=p>)</span>
     <span class=k>return</span> <span class=n>json</span><span class=o>.</span><span class=n>dumps</span><span class=p>({</span><span class=s2>&quot;data&quot;</span><span class=p>:</span> <span class=n>encMessage64</span><span class=p>})</span>
 
 
-<span class=k>class</span> <span class=nc>EncryptedDynamicContextBase</span><span class=p>(</span><span class=n>DynamicContextModel</span><span class=p>):</span>
+<span class=k>class</span><span class=w> </span><span class=nc>EncryptedDynamicContextBase</span><span class=p>(</span><span class=n>DynamicContextModel</span><span class=p>):</span>
 <span class=w>    </span><span class=sd>&quot;&quot;&quot;Fernet encryption base class. The fields of all models derived from this</span>
 <span class=sd>    class will be stored in an a encrypted form in the browser&quot;&quot;&quot;</span>
 
-    <span class=k>def</span> <span class=nf>update</span><span class=p>(</span><span class=bp>self</span><span class=p>:</span> <span class=n>Self</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Self</span><span class=p>:</span>
+    <span class=k>def</span><span class=w> </span><span class=nf>update</span><span class=p>(</span><span class=bp>self</span><span class=p>:</span> <span class=n>Self</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Self</span><span class=p>:</span>
         <span class=n>kwargs</span> <span class=o>=</span> <span class=n>decode</span><span class=p>(</span><span class=o>**</span><span class=n>kwargs</span><span class=p>)</span>
         <span class=k>return</span> <span class=nb>super</span><span class=p>()</span><span class=o>.</span><span class=n>update</span><span class=p>(</span><span class=o>**</span><span class=n>kwargs</span><span class=p>)</span>
 
-    <span class=k>def</span> <span class=nf>dumps</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>sort_keys</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+    <span class=k>def</span><span class=w> </span><span class=nf>dumps</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>sort_keys</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
         <span class=n>plane_text</span> <span class=o>=</span> <span class=nb>super</span><span class=p>()</span><span class=o>.</span><span class=n>dumps</span><span class=p>(</span><span class=n>sort_keys</span><span class=o>=</span><span class=n>sort_keys</span><span class=p>)</span>
         <span class=k>return</span> <span class=n>encode</span><span class=p>(</span><span class=n>plane_text</span><span class=p>)</span>
 
@@ -165,7 +165,7 @@
 <span class=c1># Example usage of defining an encrypted user model &amp; context</span>
 
 
-<span class=k>class</span> <span class=nc>UserState</span><span class=p>(</span><span class=n>EncryptedDynamicContextBase</span><span class=p>):</span>
+<span class=k>class</span><span class=w> </span><span class=nc>UserState</span><span class=p>(</span><span class=n>EncryptedDynamicContextBase</span><span class=p>):</span>
     <span class=n>user_name</span><span class=p>:</span> <span class=nb>str</span>
     <span class=n>password</span><span class=p>:</span> <span class=nb>str</span>
 
