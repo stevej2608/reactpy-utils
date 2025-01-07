@@ -1,7 +1,7 @@
 # pyright: reportUnusedImport=false
 # ruff: noqa: F401
 
-__version__ = "0.0.32"
+__version__ = "0.0.33"
 
 from reactpy_utils.class_component import class_component
 from reactpy_utils.copy_to_clipboard import CopyToClipboard
@@ -21,20 +21,20 @@ from reactpy_utils.use_query import use_params, use_search_params
 from reactpy_utils.when import When
 
 __all__ = [
-  "class_component",
-  "CopyToClipboard",
-  "create_dynamic_context",
-  "CustomDynamicContextModel",
-  "DocumentTitle",
-  "DynamicContextModel",
-  "ID",
-  "IDynamicContextModel",
-  "LocalStorageAgent", 
-  "LocalStorageProvider",
-  "props",
-  "Script",
-  "UID",
-  "use_params",
-  "use_search_params",
-  "When"
+    "ID",
+    "UID",
+    "CopyToClipboard",
+    "CustomDynamicContextModel",
+    "DocumentTitle",
+    "DynamicContextModel",
+    "IDynamicContextModel",
+    "LocalStorageAgent",
+    "LocalStorageProvider",
+    "Script",
+    "When",
+    "class_component",
+    "create_dynamic_context",
+    "props",
+    "use_params",
+    "use_search_params",
 ]

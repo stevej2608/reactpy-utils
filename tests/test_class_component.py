@@ -10,7 +10,6 @@ from .tooling import page_stable
 
 
 def test_render_missing(display: DisplayFixture):
-
     @class_component
     class RenderMissing:
         """Class must have a render() method"""
@@ -24,12 +23,11 @@ def test_render_missing(display: DisplayFixture):
     except NotImplementedError:
         assert True
 
-def test_str(display: DisplayFixture):
 
+def test_str(display: DisplayFixture):
     @class_component
     class TitleComponent:
-
-        def __init__(self, title:str):
+        def __init__(self, title: str):
             super().__init__()
             self.title = title
 
@@ -38,7 +36,6 @@ def test_str(display: DisplayFixture):
 
     component = TitleComponent(title="Main Page")
     assert f"{component}" == f"TitleComponent({id(component):02x}, title='Main Page')"
-
 
 
 @pytest.mark.anyio

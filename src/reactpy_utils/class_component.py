@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import inspect
-from typing import TYPE_CHECKING, Any, TypeVar, cast, Callable
+from typing import TYPE_CHECKING, Any, Callable, TypeVar, cast
 
 from reactpy.core.component import Component
 from reactpy.core.types import ComponentType
@@ -58,8 +58,7 @@ def class_component(comp: type[ClassComponent]) -> type[ClassComponent]:
         _comp._args = args
         _comp._kwargs = kwargs
 
-        _comp.type = cast(Callable[..., ComponentType],comp)
-
+        _comp.type = cast(Callable[..., ComponentType], comp)
 
         return _comp
 
