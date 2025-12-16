@@ -50,7 +50,16 @@ installer = "uv"
 # >>> Hatch Tests <<<
 
 [tool.hatch.envs.hatch-test]
-extra-dependencies = ["pytest-sugar", "anyio", "reactpy[testing,starlette]", "pytest-cov", "cryptography", "python-dotenv", "lorem"]
+extra-dependencies = [
+  "pytest-sugar", 
+  "anyio", 
+  "reactpy[testing,starlette]==1.1.0", 
+  "pytest-cov", 
+  "cryptography", 
+  "python-dotenv", 
+  "uvicorn>=0.19.0,<0.36.0",
+  "lorem"]
+
 randomize = true
 matrix-name-format = "{variable}-{value}"
 

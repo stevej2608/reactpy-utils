@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING, Callable, Union, cast
+from typing import TYPE_CHECKING, Callable, Union, cast, Any
 
 from pydantic import BaseModel
 from reactpy import create_context as reactpy_create_context
@@ -26,7 +26,7 @@ class DynamicContextModel(BaseModel):
 
         return self._update_count > 0
 
-    def update(self: Self, **kwargs) -> Self:
+    def update(self: Self, **kwargs: Any) -> Self:
         """Return a new model instance based on the current model with the field changes defined in **kwargs"""
         values = {**self.model_dump(), **kwargs}
         model = type(self)(**values)
