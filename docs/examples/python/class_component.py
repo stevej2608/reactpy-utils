@@ -8,6 +8,8 @@ from reactpy.types import VdomDict
 from reactpy_utils import class_component
 from reactpy_utils.types import EventArgs
 
+from utils.runner import run
+
 TData = TypeVar("TData", bound=Any)
 
 
@@ -18,9 +20,9 @@ class TableState(BaseModel, Generic[TData]):
 
 @class_component
 class BasicTable(Generic[TData]):
-    def __init__(self, rows: list[TData]):
+    def __init__(self, table_state):
         super().__init__()
-        self._table, self._set_table = use_state(TableState(rows=rows))
+        self._table, self._set_table = table_state
 
     @property
     def rows(self) -> list[TData]:
@@ -56,6 +58,9 @@ class BasicTable(Generic[TData]):
 
 @component
 def App():
+
+    table_state = use_state(TableState(rows=[f"user-{i}" for i in range(50)]))
+
     @component
     def PaginatorUI(table: BasicTable):
         @event
@@ -79,10 +84,13 @@ def App():
     def PageFooter(user_table: BasicTable):
         return html.h2(f"Footer: table size = {len(user_table.rows)}")
 
-    table = BasicTable(rows=[f"user-{i}" for i in range(50)])
+    table = BasicTable(table_state=table_state)
+
+
     return html.div(PageHeader(table), PageContent(table), PageFooter(table))
 
 
 # python -m docs.examples.python.class_component
-# Note: In ReactPy v2, use a backend-specific runner instead of the removed 'run' function
-# Example: from reactpy.backends.fastapi import configure; configure(...)
+
+if __name__ == "__main__":
+    run(App)
