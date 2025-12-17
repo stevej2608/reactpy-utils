@@ -30,7 +30,11 @@ class _ComponentClass(Component):
                 self._user_init(*self._init_args, **self._init_kwargs)
             return self.render()
 
-        super().__init__(function=_render_with_init, key=NONE, args=args, kwargs=kwargs, sig=NONE)
+        # Get the signature of the wrapped class for proper argument binding
+        sig = inspect.signature(self.__class__)
+
+        # V2 Component.__init__ uses positional arguments: (function, key, args, kwargs, sig)
+        super().__init__(_render_with_init, None, args, kwargs, sig)
 
     def _user_init(self, *args: Any, **kwargs: Any) -> None:
         """User's __init__ logic - to be overridden"""
