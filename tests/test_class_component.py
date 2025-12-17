@@ -1,6 +1,6 @@
 import pytest
 from reactpy import html
-from reactpy.core.types import VdomDict
+from reactpy.types import VdomDict
 from reactpy.testing import DisplayFixture
 
 from docs.examples.python.class_component import App
@@ -38,7 +38,6 @@ def test_str(display: DisplayFixture):
     assert f"{component}" == f"TitleComponent({id(component):02x}, title='Main Page')"
 
 
-@pytest.mark.anyio
 async def test_component_class_new(display: DisplayFixture):
     await display.show(App)
     await page_stable(display.page)

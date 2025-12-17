@@ -170,7 +170,7 @@
       "cwd": "${workspaceRoot}",
       "args": [
         "--headless",
-        "tests/test_class_component.py"
+        "tests/test_class_component.py::test_component_class_new"
       ],
       "envFile": "${workspaceRoot}/.env",
       "console": "internalConsole",

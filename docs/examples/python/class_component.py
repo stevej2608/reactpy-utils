@@ -2,8 +2,8 @@ import copy
 from typing import Any, Generic, TypeVar
 
 from pydantic import BaseModel
-from reactpy import component, event, html, run, use_state
-from reactpy.core.types import VdomDict
+from reactpy import component, event, html, use_state
+from reactpy.types import VdomDict
 
 from reactpy_utils import class_component
 from reactpy_utils.types import EventArgs
@@ -84,6 +84,5 @@ def App():
 
 
 # python -m docs.examples.python.class_component
-
-if __name__ == "__main__":
-    run(App)
+# Note: In ReactPy v2, use a backend-specific runner instead of the removed 'run' function
+# Example: from reactpy.backends.fastapi import configure; configure(...)

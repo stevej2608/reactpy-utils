@@ -1,10 +1,9 @@
 from reactpy import component, html
-from reactpy.core.component import Component
-from reactpy.core.types import VdomChild
+from reactpy.types import VdomChild, VdomChildren
 
 
 @component
-def When(test: bool, *children: tuple[Component]) -> VdomChild:
+def When(test: bool, *children: VdomChildren) -> VdomChild:
     """Render children when test is True
 
     Args:

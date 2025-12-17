@@ -4,10 +4,10 @@ import inspect
 from typing import TYPE_CHECKING, Any, Callable, TypeVar, cast
 
 from reactpy.core.component import Component
-from reactpy.core.types import ComponentType
+from reactpy.types import ComponentType
 
 if TYPE_CHECKING:
-    from reactpy.core.types import VdomDict
+    from reactpy.types import VdomDict
 
 NONE = cast(Any, None)
 

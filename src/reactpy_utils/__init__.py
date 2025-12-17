@@ -1,7 +1,7 @@
 # pyright: reportUnusedImport=false
 # ruff: noqa: F401
 
-__version__ = "0.0.33"
+__version__ = "0.0.34b4"
 
 from reactpy_utils.class_component import class_component
 from reactpy_utils.copy_to_clipboard import CopyToClipboard

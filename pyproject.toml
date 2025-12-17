@@ -27,7 +27,12 @@ classifiers = [
   "Typing :: Typed",
 ]
 
-dependencies = ["reactpy>=1.0.0", "reactpy_router>=1.0.3", "typing_extensions", "pydantic"]
+dependencies = [
+  "reactpy==2.0.0b4", 
+  "reactpy_router @ file:///{root}/../reactpy-router", 
+  "typing_extensions", "pydantic"
+  ]
+
 dynamic = ["version"]
 
 [project.urls]
@@ -43,6 +48,7 @@ include = ["/src"]
 
 [tool.hatch.metadata]
 license-files = { paths = ["LICENSE.md"] }
+allow-direct-references = true
 
 [tool.hatch.envs.default]
 installer = "uv"
@@ -51,15 +57,21 @@ installer = "uv"
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
-  "pytest-sugar", 
-  "anyio", 
-  "reactpy[testing,starlette]==1.1.0", 
-  "pytest-cov", 
-  "cryptography", 
-  "python-dotenv", 
-  "uvicorn>=0.19.0,<0.36.0",
-  "lorem"]
-
+  "pytest-sugar",
+  "pytest-asyncio",
+  "anyio",
+  "pytest-cov",
+  "cryptography",
+  "python-dotenv",
+  "playwright==1.41.1",
+  "uvicorn>=0.36.0",
+  "lorem",
+  "asgiref",
+  "asgi-tools",
+  "servestatic",
+  "orjson"
+]
+  
 randomize = true
 matrix-name-format = "{variable}-{value}"
 
@@ -144,6 +156,8 @@ addopts = """\
 # log_cli = true
 # log_cli_level = "INFO"
 filterwarnings = "ignore::DeprecationWarning"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
 
 
 [tool.coverage.run]
