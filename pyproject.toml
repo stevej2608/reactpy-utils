@@ -28,8 +28,8 @@ classifiers = [
 ]
 
 dependencies = [
-  "reactpy==2.0.0b4", 
-  "reactpy_router @ file:///{root}/../reactpy-router", 
+  "reactpy==2.0.0b4",
+  "reactpy_router @ file:///{root}/../reactpy-router",
   "typing_extensions", "pydantic"
   ]
 

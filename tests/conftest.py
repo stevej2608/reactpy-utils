@@ -111,8 +111,11 @@ def event_loop_policy():
         return asyncio.DefaultEventLoopPolicy()
 
 
-@pytest.fixture(autouse=True)
-def clear_web_modules_dir_after_test():
+@pytest.fixture(autouse=True, scope="session")
+def clear_web_modules_dir_after_session():
+    """Clear web modules after the test session to clean up."""
+    yield
+    # Only clear after all tests complete
     clear_reactpy_web_modules_dir()
 
 
