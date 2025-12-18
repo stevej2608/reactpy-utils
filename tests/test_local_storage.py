@@ -1,4 +1,3 @@
-import pytest
 from reactpy import component, event, html, use_state
 from reactpy.testing import DisplayFixture
 
@@ -16,7 +15,6 @@ class AppState(DynamicContextModel):
 AppContext = create_dynamic_context(AppState)
 
 
-@pytest.mark.anyio
 async def test_local_storage(display: DisplayFixture):
     """Test the the AppContext is synchronized with the browser local
     storage and that the context is re-loaded from local storage on a
@@ -98,7 +96,6 @@ async def test_local_storage(display: DisplayFixture):
     assert text == ["dark_mode=False"]
 
 
-@pytest.mark.anyio
 async def test_docs_example_local_storage(display: DisplayFixture):
     """Just confirm that the docs example builds & runs"""
     await display.show(App)

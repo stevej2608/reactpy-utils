@@ -1,4 +1,3 @@
-import pytest
 from reactpy import component, event, html, use_context, use_state
 from reactpy.testing import DisplayFixture
 
@@ -14,7 +13,7 @@ def test_repr_and_str():
     assert str(state) == '{"is_valid": false, "state": {"dark_mode": true}}'
 
 
-@pytest.mark.anyio
+
 async def test_dynamic_context(display: DisplayFixture):
     test_app_render_count = 0
     child_render_count = 0
@@ -61,7 +60,7 @@ async def test_dynamic_context(display: DisplayFixture):
     assert child_render_count == 2
 
 
-@pytest.mark.anyio
+
 async def test_nested_dynamic_context(display: DisplayFixture):
     """Confirm the same context can be instantiated at several levels in the
     component tree. A context update should only update & force a re-rendering of

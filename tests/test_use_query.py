@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, cast
 
-import pytest
 from pydantic import BaseModel
 from reactpy import component, html
 from reactpy_router import browser_router, route
@@ -13,7 +12,7 @@ if TYPE_CHECKING:
     from reactpy.testing import DisplayFixture
 
 
-@pytest.mark.anyio
+
 async def test_use_params(display: DisplayFixture):
     class MyParams(BaseModel):
         first: int = cast(int, None)
@@ -56,7 +55,6 @@ async def test_use_params(display: DisplayFixture):
         await display.page.wait_for_selector("#success")
 
 
-@pytest.mark.anyio
 async def test_search_params(display: DisplayFixture):
     class MyParams(BaseModel):
         hello: str = cast(str, None)

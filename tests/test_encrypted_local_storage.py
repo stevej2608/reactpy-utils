@@ -30,7 +30,7 @@ def ExamplePage():
     )
 
 
-@pytest.mark.anyio
+
 async def test_example(display: DisplayFixture):
     """Confirm local storage holds encrypted value"""
 

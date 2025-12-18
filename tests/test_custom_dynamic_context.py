@@ -19,7 +19,6 @@ class CurrentUserState(CustomDynamicContextModel):
 AppContext = create_dynamic_context(CurrentUserState)
 
 
-@pytest.mark.anyio
 async def test_custom_dynamic_context(display: DisplayFixture):
     test_app_render_count = 0
     child_render_count = 0
