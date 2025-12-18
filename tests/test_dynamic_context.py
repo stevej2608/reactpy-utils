@@ -30,7 +30,7 @@ async def test_dynamic_context(display: DisplayFixture):
 
         child_render_count += 1
 
-        return html.button({"id": "toggle_btn", "on_click": on_click}, f"dark_mode={context.dark_mode}")
+        return html.button({"id": "toggle_btn", "onClick": on_click}, f"dark_mode={context.dark_mode}")
 
     @component
     def TestApp():
@@ -90,7 +90,7 @@ async def test_nested_dynamic_context(display: DisplayFixture):
 
         return html.div(
             html.h2(f"{my_id}: dark_mode={context.dark_mode}"),
-            html.button({"id": f"grandchild_toggle_btn{id}", "on_click": on_click}, f"dark_mode={context.dark_mode}"),
+            html.button({"id": f"grandchild_toggle_btn{id}", "onClick": on_click}, f"dark_mode={context.dark_mode}"),
         )
 
     @component
@@ -113,7 +113,7 @@ async def test_nested_dynamic_context(display: DisplayFixture):
 
         return AppContext(
             html.h2(f"{my_id}: dark_mode={context.dark_mode}"),
-            html.button({"id": f"child_toggle_btn{id}", "on_click": on_click}, f"dark_mode={context.dark_mode}"),
+            html.button({"id": f"child_toggle_btn{id}", "onClick": on_click}, f"dark_mode={context.dark_mode}"),
             *[GrandchildChild(f"{id}-{i}") for i in range(3)],
             value=(state, set_state),
         )

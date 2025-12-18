@@ -38,7 +38,7 @@ async def test_local_storage(display: DisplayFixture):
         return AppContext(
             html._(
                 html.h2({"id": "h2"}, f"dark_mode={app_state.dark_mode}"),
-                html.button({"id": "toggle_btn", "on_click": on_click}, "Toggle Dark Mode"),
+                html.button({"id": "toggle_btn", "onClick": on_click}, "Toggle Dark Mode"),
                 LocalStorageAgent(ctx=AppContext, storage_key="local-storage-test"),
             ),
             value=(app_state, set_app_state),

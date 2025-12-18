@@ -21,7 +21,7 @@ async def test_document_title(display: DisplayFixture):
             set_title(t)
 
         return html._(
-            DocumentTitle(title), html.button({"id": "toggle_btn", "on_click": on_click}, "Toggle Document Title")
+            DocumentTitle(title), html.button({"id": "toggle_btn", "onClick": on_click}, "Toggle Document Title")
         )
 
     await display.show(TestApp)

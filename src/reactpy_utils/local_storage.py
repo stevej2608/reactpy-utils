@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 
 LOCAL_STORAGE_READ_JS = """
-    () => {
+    (() => {
         const storage = document.querySelector('#{local_storage_id}');
 
         if (!storage) {
@@ -35,7 +35,7 @@ LOCAL_STORAGE_READ_JS = """
 
         storage.click();
 
-    }
+    })();
 """
 
 
@@ -72,13 +72,13 @@ def _LocalStorageReader(ctx, storage_id: str):
     # log.info('LocalStorageReader.render() %s', id)
 
     return html._(
-        html.textarea({"hidden": True, "id": storage_id, "value": storage.dumps(), "on_click": on_click}),
+        html.textarea({"hidden": True, "id": storage_id, "value": storage.dumps(), "onClick": on_click}),
         When(not storage.is_valid, Script(LOCAL_STORAGE_READ_JS, {"local_storage_id": storage_id}, minify=True)),
     )
 
 
 LOCAL_STORAGE_WRITE_JS = """
-    () => {
+    (() => {
         // Write values to localStorage
 
         try {
@@ -89,7 +89,7 @@ LOCAL_STORAGE_WRITE_JS = """
             // Handle potential localStorage errors (e.g., storage quota exceeded, private browsing)
             console.error('Error writing to localStorage({local_storage_id}):', error);
         }
-    }
+    })();
 """
 
 

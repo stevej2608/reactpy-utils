@@ -22,7 +22,7 @@
       "module": "pytest",
       "cwd": "${workspaceRoot}",
       "args": [
-        "--headless",
+        // "--headless",
         "${file}"
       ],
       "envFile": "${workspaceRoot}/.env",

@@ -36,4 +36,4 @@ def DarkModeButton():
     def on_click(_evt: EventArgs):
         set_app_state(app_state.update(dark_mode=not app_state.dark_mode))
 
-    return html.button({"on_click": on_click}, "Toggle Dark Mode")
+    return html.button({"onClick": on_click}, "Toggle Dark Mode")

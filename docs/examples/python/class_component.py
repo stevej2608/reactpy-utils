@@ -67,7 +67,7 @@ def App():
         def on_click(_evt: EventArgs):
             table.page_next()
 
-        return html.button({"id": "next-page", "on_click": on_click}, "Next Page")
+        return html.button({"id": "next-page", "onClick": on_click}, "Next Page")
 
     @component
     def PageHeader(user_table: BasicTable):

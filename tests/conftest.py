@@ -83,12 +83,14 @@ async def server():
 
 @pytest.fixture
 async def page(browser):
-    pg = await browser.new_page()
+    context = await browser.new_context(permissions=["clipboard-read", "clipboard-write"])
+    pg = await context.new_page()
     pg.set_default_timeout(REACTPY_TESTS_DEFAULT_TIMEOUT.current * 1000)
     try:
         yield pg
     finally:
         await pg.close()
+        await context.close()
 
 
 @pytest.fixture

@@ -26,5 +26,5 @@ def ExamplePage():
 
     return html.div(
         html.h2({"id": "h2"}, f"dark_mode={app_state.dark_mode}"),
-        html.button({"id": "toggle_btn", "on_click": on_click}, "Toggle Dark Mode"),
+        html.button({"id": "toggle_btn", "onClick": on_click}, "Toggle Dark Mode"),
     )
