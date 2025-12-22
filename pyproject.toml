@@ -2,176 +2,100 @@
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
+##############################
+# >>> Hatch Build Config <<< #
+##############################
+
 [project]
 name = "reactpy_utils"
 description = "A collection of utilities for ReactPy."
 readme = "README.md"
-keywords = ["React", "ReactJS", "ReactPy", "components"]
+keywords = ["React", "ReactJS", "ReactPy", "forms", "components"]
 license = "MIT"
 authors = [{ name = "Steve Jones", email = "jonesst2608@gmail.com" }]
 requires-python = ">=3.9"
-
 classifiers = [
-  "Development Status :: 4 - Beta",
-  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Operating System :: OS Independent",
-  "Intended Audience :: Developers",
-  "Intended Audience :: Science/Research",
-  "Topic :: Multimedia :: Graphics",
-  "Topic :: Software Development :: Widget Sets",
-  "Topic :: Software Development :: User Interfaces",
-  "Environment :: Web Environment",
-  "Typing :: Typed",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
 ]
-
-dependencies = [
-  "reactpy==2.0.0b4",
-  "reactpy_router @ file:///{root}/../reactpy-router",
-  "typing_extensions", "pydantic"
-  ]
-
+dependencies = ["reactpy==2.0.0b4"]
 dynamic = ["version"]
-
-[project.urls]
-Changelog = "https://stevej2608.github.io/reactpy-utils/latest/about/changelog/"
-Documentation = "https://github.com/stevej2608/reactpy-utils#readme"
-Source = "https://github.com/stevej2608/reactpy-utils"
+urls.Homepage = "https://github.com/stevej2608/reactpy-utils"
+urls.Repository = "https://github.com/stevej2608/reactpy-utils"
 
 [tool.hatch.version]
 path = "src/reactpy_utils/__init__.py"
 
 [tool.hatch.build.targets.sdist]
-include = ["/src"]
+include = ["/src", "/tests", "/examples", "/utils"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/reactpy_utils"]
 
 [tool.hatch.metadata]
-license-files = { paths = ["LICENSE.md"] }
-allow-direct-references = true
+license-files = { paths = ["LICENSE"] }
 
 [tool.hatch.envs.default]
 installer = "uv"
 
-# >>> Hatch Tests <<<
+#############################
+# >>> Hatch Test Runner <<< #
+#############################
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
-  "pytest-sugar",
-  "pytest-asyncio",
-  "anyio",
-  "pytest-cov",
-  "cryptography",
-  "python-dotenv",
-  "playwright==1.41.1",
-  "uvicorn>=0.36.0",
-  "lorem",
   "asgiref",
-  "asgi-tools",
-  "servestatic",
-  "orjson",
-  "websockets"
+  "exceptiongroup",
+  "playwright",
+  "pydantic>=2.5.3",
+  "pyright",
+  "pytest-asyncio",
+  "pytest-sugar",
+  "uvicorn[standard]",
 ]
-  
 randomize = true
 matrix-name-format = "{variable}-{value}"
 
 [[tool.hatch.envs.hatch-test.matrix]]
-python = ["3.9", "3.10", "3.11", "3.12"]
-
-# >>> Hatch Documentation Scripts <<<
-
-[tool.hatch.envs.docs]
-template = "docs"
-detached = true
-dependencies = [
-  "mkdocs",
-  "mkdocs-git-revision-date-localized-plugin",
-  "mkdocs-material==9.4.0",
-  "mkdocs-include-markdown-plugin",
-  "linkcheckmd",
-  "mkdocs-spellcheck[all]",
-  "mkdocs-git-authors-plugin",
-  "mkdocs-minify-plugin",
-  "mike",
-  "mkdocstrings[python]",
-  "black",
-  "reactpy_utils @ {root:uri}",
-]
-
-[tool.hatch.envs.docs.scripts]
-serve = ["cd docs && mkdocs serve"]
-build = ["cd docs && mkdocs build --strict"]
-linkcheck = [
-  "linkcheckMarkdown docs/ -v -r",
-  "linkcheckMarkdown README.md -v -r",
-  "linkcheckMarkdown CHANGELOG.md -v -r",
-]
-deploy_latest = ["cd docs && mike deploy --push --update-aliases {args} latest"]
-deploy_develop = ["cd docs && mike deploy --push develop"]
-
-# >>> Generic Tools <<<
-
-[tool.ruff]
-line-length = 120
-format.preview = true
-lint.extend-ignore = [
-  "A001",    # Variable is shadowing a Python builtin
-  "A002",    # Argument is shadowing a Python builtin
-  "ARG001",  # Unused function argument
-  "ARG002",  # Unused method argument
-  "ARG004",  # Unused static method argument
-  "FBT001",  # Boolean-typed positional argument in function definition
-  "FBT002",  # Boolean default positional argument in function definition
-  "FURB116", # Replace `hex` call with f-string
-  "N802",    # Function name should be lowercase
-  "N806",    # Variable  in function should be lowercase
-  "PLR2004", # Magic value used in comparison
-  "PLW2901", # for loop variableoverwritten by assignment target
-  "PLR6301", # Method `could be a function, class method, or static method
-  "SIM115",  # Use context handler for opening files
-  "SLF001",  # Private member accessed
-  "TID252"   # Prefer absolute imports over relative imports
-]
-lint.preview = true
-extend-exclude = [".venv/*", ".eggs/*", "build/*"]
-
-
-[tool.pylint.master]
-init-hook = 'import sys; sys.path.append(".")'
-disable = [
-    "C0114", # missing-module-docstring
-    "C0103", # invalid-name
-    "C0115", # missing-class-docstring
-    "C0116", # missing-function-docstring
-    "W0622", # redefined-builtin"
-]
-max-line-length=120
+python = ["3.10", "3.11", "3.12", "3.13"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = """\
-    --strict-config
-    --strict-markers
-    """
-# log_cli = true
-# log_cli_level = "INFO"
+testpaths = "tests"
+log_cli_level = "INFO"
 filterwarnings = "ignore::DeprecationWarning"
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 
+################################
+# >>> Hatch Python Scripts <<< #
+################################
 
-[tool.coverage.run]
-branch = true
-parallel = true
-source = ["src/", "tests/"]
+[tool.hatch.envs.python]
+extra-dependencies = ["pyright"]
 
-[tool.coverage.paths]
-source = ["src/"]
+[tool.hatch.envs.python.scripts]
+type_check = ["pyright reactpy_table"]
 
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
+[tool.hatch.envs.javascript]
+detached = true
+#########################
+# >>> Generic Tools <<< #
+#########################
+
+[tool.ruff]
+# https://docs.astral.sh/ruff/configuration/
+# https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
+
+line-length = 120
+
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md#sample-pyprojecttoml-file
+typeCheckingMode = "strict"
+pythonVersion = "3.11"
+
+
