@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import inspect
-from typing import TYPE_CHECKING, Any, Callable, TypeVar, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
-from reactpy.core.component import Component
+from reactpy.types import Component
 
 if TYPE_CHECKING:
     from reactpy.types import VdomDict
@@ -106,8 +106,6 @@ def class_component(comp: type[ClassComponent]) -> type[ClassComponent]:
     # Create new class with modified initialization and render
     new_class_dict = {'_user_init': _user_init, '_user_render': _user_render}
     comp = type(comp.__name__, (comp, _ComponentClass), new_class_dict)  # type: ignore
-    # Use the original signature, not the wrapped one
-    sig = original_sig
 
     def create_component(*args: Any, key: Any | None = None, **kwargs: Any):
         # Create instance using __new__ to avoid calling __init__ yet

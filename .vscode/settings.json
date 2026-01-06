@@ -4,14 +4,6 @@
     "python.defaultInterpreterPath": ".venv/hatch-test.py3.11/bin/python",
 
     "python.analysis.diagnosticMode": "workspace",
-    "python.analysis.typeCheckingMode": "strict",
-    "python.analysis.exclude": [
-        ".venv"
-    ],
-
-    "python.analysis.extraPaths": [
-        "${workspaceFolder}/src"
-    ],
 
     // Run pytest with hatch
     "python.testing.pytestEnabled": true,

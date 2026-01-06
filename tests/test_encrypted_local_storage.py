@@ -1,6 +1,5 @@
 import json
 
-import pytest
 from reactpy import component, html, use_context, use_state
 from reactpy.testing import DisplayFixture
 

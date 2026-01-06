@@ -1,4 +1,3 @@
-import pytest
 from reactpy import html
 from reactpy.types import VdomDict
 from reactpy.testing import DisplayFixture
