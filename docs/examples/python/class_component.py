@@ -8,7 +8,7 @@ from reactpy.types import VdomDict
 from reactpy_utils import class_component
 from reactpy_utils.types import EventArgs
 
-from utils.runner import run
+from utils.pico_run import run
 
 TData = TypeVar("TData", bound=Any)
 

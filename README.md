@@ -1,47 +1,25 @@
-# <img src="https://raw.githubusercontent.com//stevej2608/reactpy-utils/main/docs/src/assets/image/logo-toolbox.svg" align="left" height="45"/> ReactPy Utils
+# ReactPy Utils
 
-<p>
-    <a href="https://github.com/stevej2608/reactpy-utils/actions/workflows/test-src.yml">
-        <img src="https://github.com/stevej2608/reactpy-utils/actions/workflows/test-src.yml/badge.svg">
-    </a>
-    <a href="https://pypi.python.org/pypi/reactpy-utils">
-        <img src="https://img.shields.io/pypi/v/reactpy-utils.svg?label=PyPI">
-    </a>
-    <a href="https://github.com/stevej2608/reactpy-utils/blob/main/LICENSE.md">
-        <img src="https://img.shields.io/badge/License-MIT-purple.svg">
-    </a>
-    <a href="https://stevej2608.github.io/reactpy-utils/develop">
-        <img src="https://img.shields.io/website?down_message=offline&label=Docs&logo=read%20the%20docs&logoColor=white&up_message=online&url=https%3A%2F%2Fstevej2608.github.io%2Freactpy-utils%2F">
-    </a>
-</p>
+A ReactPy component package
 
-The **[reactpy-utils]** project is a collection of utilities and components that target the more obscure aspects
-of website design with [ReactPy]. 
+## Installation
 
-The following list gives a flavour of the type of features that are available:
-
-- [X] Copy to clipboard
-- [X] Set the page title
-- [X] Read/write the Browser local storage 
-- [X] Minified JavaScript code templates
-
-### Install from PyPI
-
-Run the following command to install [reactpy-utils] in your Python environment.
-
-```bash linenums="0"
+```bash
 pip install reactpy-utils
 ```
 
-More information about this package can be found on [the documentation](https://stevej2608.github.io/reactpy-utils/latest/).
+## Usage
 
-## 🙏 Credits
+```python
+from reactpy_utils import YourComponent
 
-In order to maintain consistency within the [ReactPy] ecosystem, the Hatch build and GitHub workflow 
-configurations and the project documentation layout conform those of the [reactpy-router]. Many thanks to 
-all those involved.
+# Add usage examples here
+```
 
-[reactpy-utils]: https://pypi.org/project/reactpy-utils/
-[reactpy-router]: https://github.com/reactive-python/reactpy-router
-[ReactPy]: https://reactpy.dev/docs/index.html
+## License
 
+MIT License - see LICENSE file for details
+
+## Author
+
+Steve Jones (jonesst2608@gmail.com)
