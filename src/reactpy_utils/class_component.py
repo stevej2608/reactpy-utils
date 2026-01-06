@@ -87,7 +87,7 @@ def class_component(comp: type[ClassComponent]) -> type[ClassComponent]:
 
     # Store the original __init__ and render methods
     original_init = comp.__init__ if hasattr(comp, '__init__') else None
-    original_render = comp.render if hasattr(comp, 'render') else None
+    original_render = getattr(comp, 'render', None)
 
     # Store the original signature BEFORE wrapping
     original_sig = inspect.signature(comp)
@@ -109,11 +109,9 @@ def class_component(comp: type[ClassComponent]) -> type[ClassComponent]:
 
     def create_component(*args: Any, key: Any | None = None, **kwargs: Any):
         # Create instance using __new__ to avoid calling __init__ yet
-        _comp = comp.__new__(comp)
+        _comp = cast(_ComponentClass, comp.__new__(comp))
         # Call our custom __init__ which defers user initialization
         _ComponentClass.__init__(_comp, *args, **kwargs)
-
-        _comp = cast(_ComponentClass, _comp)
         # Component.__init__ already sets these, but we may need to override key
         if key is not None:
             _comp.key = key

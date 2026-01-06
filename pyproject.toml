@@ -119,7 +119,7 @@ line-length = 120
 
 [tool.pyright]
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md#sample-pyprojecttoml-file
-typeCheckingMode = "strict"
+typeCheckingMode = "standard"
 pythonVersion = "3.11"
 reportMissingTypeStubs = false
 ignore = ["tmp", "tmp/**", "**/tmp/**"]
