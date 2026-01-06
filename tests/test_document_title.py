@@ -5,7 +5,7 @@ from docs.examples.python.document_title import App
 from reactpy_utils import DocumentTitle
 from reactpy_utils.types import EventArgs
 
-from .tooling import get_document_title, page_stable
+from .tooling import get_document_title, wait_page_stable
 
 
 async def test_document_title(display: DisplayFixture):
@@ -23,7 +23,7 @@ async def test_document_title(display: DisplayFixture):
         )
 
     await display.show(TestApp)
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Confirm the initial title
 
@@ -33,7 +33,7 @@ async def test_document_title(display: DisplayFixture):
     # Toggle the title
 
     await display.page.locator("id=toggle_btn").click()
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Confirm the new title
 
@@ -44,6 +44,6 @@ async def test_document_title(display: DisplayFixture):
 async def test_docs_example_document_title(display: DisplayFixture):
     """Just confirm that the docs example builds & runs"""
     await display.show(App)
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
     title = await get_document_title(display.page)
     assert title == "My Website"

@@ -7,7 +7,7 @@ from reactpy.testing import DisplayFixture
 from docs.examples.python.encrypted_app_context import UserContext, UserState, decode
 from reactpy_utils import LocalStorageProvider
 
-from .tooling import page_stable, read_local_storage
+from .tooling import wait_page_stable, read_local_storage
 
 
 @component
@@ -35,7 +35,7 @@ async def test_example(display: DisplayFixture):
     """Confirm local storage holds encrypted value"""
 
     await display.show(App)
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Read the encrypted context from local storage
 

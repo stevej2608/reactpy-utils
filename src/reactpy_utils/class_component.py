@@ -4,7 +4,6 @@ import inspect
 from typing import TYPE_CHECKING, Any, Callable, TypeVar, cast
 
 from reactpy.core.component import Component
-from reactpy.types import ComponentType
 
 if TYPE_CHECKING:
     from reactpy.types import VdomDict

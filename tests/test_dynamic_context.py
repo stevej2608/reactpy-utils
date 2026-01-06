@@ -4,7 +4,7 @@ from reactpy.testing import DisplayFixture
 from docs.examples.python.app_context import AppContext, AppState
 from reactpy_utils.types import EventArgs
 
-from .tooling import page_stable
+from .tooling import wait_page_stable
 
 
 def test_repr_and_str():
@@ -41,7 +41,7 @@ async def test_dynamic_context(display: DisplayFixture):
         return AppContext(Child(), value=(state, set_state))
 
     await display.show(TestApp)
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     assert test_app_render_count == 1
     assert child_render_count == 1
@@ -51,7 +51,7 @@ async def test_dynamic_context(display: DisplayFixture):
     assert text == ["dark_mode=True"]
 
     await btn.click()
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     text = await btn.all_inner_texts()
     assert text == ["dark_mode=False"]
@@ -127,7 +127,7 @@ async def test_nested_dynamic_context(display: DisplayFixture):
         return AppContext(*[Child(f"-{i}") for i in range(3)], value=(state, set_state))
 
     await display.show(TestApp)
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Confirm everything has rendered once
 
@@ -141,7 +141,7 @@ async def test_nested_dynamic_context(display: DisplayFixture):
 
     btn = display.page.locator("id=child_toggle_btn-1")
     await btn.click()
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Confirm all children & grandchildren have re-rendered
 
@@ -155,7 +155,7 @@ async def test_nested_dynamic_context(display: DisplayFixture):
 
     btn = display.page.locator("id=grandchild_toggle_btn-1-1")
     await btn.click()
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Confirm only child one and it's children  have re-rendered
 

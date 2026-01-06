@@ -24,7 +24,11 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["reactpy==2.0.0b4"]
+dependencies = [
+  "reactpy==2.0.0b7",
+  "reactpy-router @ https://raw.githubusercontent.com/stevej2608/reactpy-router/2.0.1b7/dist/reactpy_router-2.0.1b7-py3-none-any.whl",
+
+  ]
 dynamic = ["version"]
 urls.Homepage = "https://github.com/stevej2608/reactpy-utils"
 urls.Source = "https://github.com/stevej2608/reactpy-utils"
@@ -40,6 +44,7 @@ packages = ["src/reactpy_utils"]
 
 [tool.hatch.metadata]
 license-files = { paths = ["LICENSE"] }
+allow-direct-references = true
 
 [tool.hatch.envs.default]
 installer = "uv"
@@ -50,13 +55,20 @@ installer = "uv"
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
+  "asgi-tools",
   "asgiref",
+  "cryptography",
   "exceptiongroup",
+  "lorem",
+  "orjson",
+  "pillow",
+  "pixelmatch",
   "playwright",
   "pydantic>=2.5.3",
   "pyright",
   "pytest-asyncio",
   "pytest-sugar",
+  "servestatic",
   "uvicorn[standard]",
 ]
 randomize = true

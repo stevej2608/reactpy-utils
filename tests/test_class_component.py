@@ -6,7 +6,7 @@ from reactpy.testing import DisplayFixture
 from docs.examples.python.class_component import App
 from reactpy_utils import class_component
 
-from .tooling import page_stable
+from .tooling import wait_page_stable
 
 
 def test_render_missing(display: DisplayFixture):
@@ -40,7 +40,7 @@ def test_str(display: DisplayFixture):
 
 async def test_component_class_new(display: DisplayFixture):
     await display.show(App)
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     td = display.page.locator("#app > div > table > tbody > tr:nth-child(1) > td")
 
@@ -49,7 +49,7 @@ async def test_component_class_new(display: DisplayFixture):
 
     btn = display.page.locator("id=next-page")
     await btn.click()
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     text = await td.all_inner_texts()
     assert text == ["user-10"]

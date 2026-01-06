@@ -5,7 +5,7 @@ from docs.examples.python.local_storage import App
 from reactpy_utils import DynamicContextModel, LocalStorageAgent, create_dynamic_context
 from reactpy_utils.types import EventArgs
 
-from .tooling import page_stable, read_local_storage
+from .tooling import wait_page_stable, read_local_storage
 
 
 class AppState(DynamicContextModel):
@@ -43,7 +43,7 @@ async def test_local_storage(display: DisplayFixture):
         )
 
     await display.show(TestApp)
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Confirm the dark_mode has been rendered by the h2 element to the default value
 
@@ -63,7 +63,7 @@ async def test_local_storage(display: DisplayFixture):
     # Toggle the dark mode button
 
     await display.page.locator("id=toggle_btn").click()
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Confirm additional render after button click
 
@@ -82,7 +82,7 @@ async def test_local_storage(display: DisplayFixture):
     # Force a page reload
 
     await display.page.reload()
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     # Confirm the reload has force a re-render and a second render due to
     # local storage synchronization of the context
@@ -99,7 +99,7 @@ async def test_local_storage(display: DisplayFixture):
 async def test_docs_example_local_storage(display: DisplayFixture):
     """Just confirm that the docs example builds & runs"""
     await display.show(App)
-    await page_stable(display.page)
+    await wait_page_stable(display.page)
 
     local_storage = await read_local_storage(display.page, "local-storage-example")
     assert local_storage == '{"dark_mode": true}'

@@ -10,12 +10,12 @@ from typing import Any, List, Optional
 
 import uvicorn
 from reactpy import component, html
-from reactpy.types import ComponentType, VdomDict
+from reactpy.types import ComponentConstructor, VdomDict
 from reactpy.executors.asgi import ReactPy
 
 
 def run(
-    app_main: ComponentType,
+    app_main: ComponentConstructor,
     host: str = "127.0.0.1",
     port: int = 8000,
     title: str = "ReactPy App",
@@ -83,7 +83,7 @@ def run(
 
 
 def pico_run(
-    app: ComponentType,
+    app: ComponentConstructor,
     host: str = "127.0.0.1",
     port: int = 8000,
     title: str = "ReactPy Table",
