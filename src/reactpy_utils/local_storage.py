@@ -3,7 +3,7 @@ import logging
 from typing import cast
 
 from reactpy import component, event, html, use_context
-from reactpy.types import VdomChildren
+from reactpy.types import VdomChildren, VdomDict
 
 from reactpy_utils.dynamic_context import DynamicContextModel
 from reactpy_utils.script import Script
@@ -109,7 +109,7 @@ def _LocalStorageWriter(ctx, storage_id: str):
 
 
 @component
-def LocalStorageAgent(ctx: DynamicContextModel, storage_key: str):
+def LocalStorageAgent(ctx: DynamicContextModel, storage_key: str) -> VdomDict:
     """Browser local storage agent. Synchronies the given model
     with the browser local storage
 
@@ -118,7 +118,7 @@ def LocalStorageAgent(ctx: DynamicContextModel, storage_key: str):
         storage_key (str): The browser local storage key
 
     Returns:
-        Component: The local storage agent
+        VdomDict: The local storage agent component
     """
     return html._(
         _LocalStorageWriter(ctx, storage_key),
@@ -127,7 +127,7 @@ def LocalStorageAgent(ctx: DynamicContextModel, storage_key: str):
 
 
 @component
-def LocalStorageProvider(*children: VdomChildren, ctx: DynamicContextModel, storage_key: str):
+def LocalStorageProvider(*children: VdomChildren, ctx: DynamicContextModel, storage_key: str) -> VdomDict:
     """Wrapper for LocalStorageAgent component. Children are not rendered until the
     given context has been synchronized with the browser local storage.
 
@@ -136,7 +136,7 @@ def LocalStorageProvider(*children: VdomChildren, ctx: DynamicContextModel, stor
         storage_key (str): The browser local storage key
 
     Returns:
-        Component: The local storage provider
+        VdomDict: The local storage provider component
     """
     storage, _ = use_context(ctx)  # type: ignore
     return html._(

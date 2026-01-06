@@ -1,4 +1,5 @@
 from reactpy import component, html
+from reactpy.types import VdomDict
 
 from reactpy_utils.script import Script
 
@@ -41,7 +42,7 @@ COPY_TO_CLIPBOARD_JS = """
 
 
 @component
-def CopyToClipboard(button_id: str, text: str):
+def CopyToClipboard(button_id: str, text: str) -> VdomDict:
     """Attach copy-to-clipboard' action to button of given 'button_id' that, when clicked, will copy the given text to the clipboard.
 
     Args:
@@ -49,7 +50,7 @@ def CopyToClipboard(button_id: str, text: str):
         text (str): The text to be copied
 
     Returns:
-        _type_: _description_
+        VdomDict: A ReactPy component that handles clipboard operations
 
     Example:
     ```
