@@ -8,7 +8,7 @@ from reactpy.types import VdomDict
 from reactpy_utils import class_component
 from reactpy_utils.types import EventArgs
 
-from utils.pico_run import run
+from utils.app_runner import PicoRunner
 
 TData = TypeVar("TData", bound=Any)
 
@@ -93,4 +93,4 @@ def App():
 # python -m docs.examples.python.class_component
 
 if __name__ == "__main__":
-    run(App)
+    PicoRunner.run(App)

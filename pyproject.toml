@@ -52,7 +52,7 @@ installer = "uv"
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
-  "asgi-tools",
+  "asgi_tools",
   "asgiref",
   "cryptography",
   "exceptiongroup",
@@ -97,7 +97,6 @@ type_check = ["pyright reactpy_utils"]
 
 [tool.hatch.envs.docs]
 template = "docs"
-detached = true
 dependencies = [
   "mkdocs",
   "mkdocs-git-revision-date-localized-plugin",
@@ -107,10 +106,8 @@ dependencies = [
   "mkdocs-spellcheck[all]",
   "mkdocs-git-authors-plugin",
   "mkdocs-minify-plugin",
-  "mike",
   "mkdocstrings[python]",
-  "black",
-  "reactpy_utils @ {root:uri}",
+  "black",  # Used by mkdocstrings for auto formatting
 ]
 
 [tool.hatch.envs.docs.scripts]

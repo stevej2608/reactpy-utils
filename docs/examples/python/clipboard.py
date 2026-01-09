@@ -3,7 +3,7 @@ from reactpy import component, html
 
 from reactpy_utils import CopyToClipboard
 
-from utils.pico_run import run
+from utils.app_runner import PicoRunner
 
 BUTTON_ID = "test-copy-btn"
 TEXT = lorem.paragraph()
@@ -14,5 +14,5 @@ def App():
 
 # python -m docs.examples.python.clipboard
 if __name__ == "__main__":
-    run(App)
+    PicoRunner.run(App)
 
