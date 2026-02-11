@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import cast
+from typing import Callable, cast
 
 from reactpy import component, event, html, use_context
 from reactpy.types import VdomChildren, VdomDict
@@ -64,9 +64,10 @@ def _LocalStorageReader(ctx, storage_id: str):
 
     @event(stop_propagation=True, prevent_default=True)
     def on_click(_evt: EventArgs):
-        data = _evt["target"]["value"].replace("-", "_")
-        data = json.dumps(json.loads(data))
+        data = _evt["target"]["value"]
         values = json.loads(data)
+        # Convert only keys from kebab-case to snake_case, not values
+        values = {k.replace("-", "_"): v for k, v in values.items()}
         set_storage(storage.update(**values))
 
     # log.info('LocalStorageReader.render() %s', id)
@@ -92,16 +93,30 @@ LOCAL_STORAGE_WRITE_JS = """
     })();
 """
 
+def default_storage_mask(attribute_name:str) -> bool:
+    """Default storage, don't mask anything, all attributes will be saved to local storage"""
+    return True
 
 @component
-def _LocalStorageWriter(ctx, storage_id: str):
+def _LocalStorageWriter(ctx, 
+                        storage_id: str,
+                        storage_mask: Callable[[str], bool]=default_storage_mask
+                        ):
     storage, _ = use_context(ctx)
 
     @component
     def write_script(state: DynamicContextModel):
         if state.is_valid:
             # log.info('Write id=%s, ctx=%s', id, state.dumps())
-            ctx = {"local_storage_id": storage_id, "values": state.dumps()}
+
+            # Create dict of only those value to be saved to the browsers local storage
+
+            values = {k: v for k, v in state.model_dump().items() if storage_mask(k)} 
+
+            # Create dict to be saved (the remaining k,v pairs are saves as a string)
+
+            ctx = {"local_storage_id": storage_id, "values": json.dumps(values)}
+
             return Script(LOCAL_STORAGE_WRITE_JS, ctx, minify=True)
         return None
 
@@ -109,37 +124,45 @@ def _LocalStorageWriter(ctx, storage_id: str):
 
 
 @component
-def LocalStorageAgent(ctx: DynamicContextModel, storage_key: str) -> VdomDict:
+def LocalStorageAgent(ctx: DynamicContextModel, 
+                      storage_key: str,
+                      storage_mask: Callable[[str], bool]=default_storage_mask
+                      ) -> VdomDict:
     """Browser local storage agent. Synchronies the given model
     with the browser local storage
 
     Args:
         ctx (DynamicContextModel): The values to be stored
         storage_key (str): The browser local storage key
+        storage_mask (Callable[[str], bool]): Return true if context element is to be save to the browsers local storage
 
     Returns:
         VdomDict: The local storage agent component
     """
     return html._(
-        _LocalStorageWriter(ctx, storage_key),
+        _LocalStorageWriter(ctx, storage_key, storage_mask=storage_mask),
         _LocalStorageReader(ctx, storage_key),
     )
 
-
 @component
-def LocalStorageProvider(*children: VdomChildren, ctx: DynamicContextModel, storage_key: str) -> VdomDict:
+def LocalStorageProvider(*children: VdomChildren, 
+                         ctx: DynamicContextModel, 
+                         storage_key: str,
+                         storage_mask: Callable[[str], bool]=default_storage_mask
+                         ) -> VdomDict:
     """Wrapper for LocalStorageAgent component. Children are not rendered until the
     given context has been synchronized with the browser local storage.
 
     Args:
         ctx (DynamicContextModel): The model to be synchronized with local storage
         storage_key (str): The browser local storage key
+        storage_mask (Callable[[str], bool]): Return true if context element is to be save to the browsers local storage
 
     Returns:
         VdomDict: The local storage provider component
     """
     storage, _ = use_context(ctx)  # type: ignore
     return html._(
-        LocalStorageAgent(ctx=ctx, storage_key=storage_key),
+        LocalStorageAgent(ctx=ctx, storage_key=storage_key,storage_mask=storage_mask),
         When(storage.is_valid, *children),
     )
